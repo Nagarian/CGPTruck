@@ -42,7 +42,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -78,6 +87,7 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -89,6 +99,10 @@
     <ProjectReference Include="..\CGPTruck.BLL\CGPTruck.BLL.csproj">
       <Project>{9a88eaf0-ef67-4a0f-9e45-04f4fcdd8212}</Project>
       <Name>CGPTruck.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CGPTruck.DAL.Configuration\CGPTruck.DAL.Configuration.csproj">
+      <Project>{ff33e4eb-ec28-43fa-a47c-63df0bc015aa}</Project>
+      <Name>CGPTruck.DAL.Configuration</Name>
     </ProjectReference>
     <ProjectReference Include="..\CGPTruck.DAL.Entities\CGPTruck.DAL.Entities.csproj">
       <Project>{06442589-2d81-4950-acd6-32d16d6ef107}</Project>

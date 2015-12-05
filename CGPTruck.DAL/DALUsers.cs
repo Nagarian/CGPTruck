@@ -13,7 +13,7 @@ namespace CGPTruck.DAL
         {
             using (CGPTruckEntities context = new CGPTruckEntities())
             {
-                return (from user in context.Users.Include("Credentials")
+                return (from user in context.Users.Include("Credential")
                         where user.Id == id
                         select user).FirstOrDefault();
             }
@@ -23,7 +23,7 @@ namespace CGPTruck.DAL
         {
             using (CGPTruckEntities context = new CGPTruckEntities())
             {
-                return (from user in context.Users//.Include("Credentials")
+                return (from user in context.Users.Include("Credential")
                         where user.Email == email
                         select user).FirstOrDefault();
             }
