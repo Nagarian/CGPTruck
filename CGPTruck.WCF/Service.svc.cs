@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CGPTruck.BLL;
+using CGPTruck.DAL.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -10,24 +12,25 @@ namespace CGPTruck.WCF
 {
     // REMARQUE : vous pouvez utiliser la commande Renommer du menu Refactoriser pour changer le nom de classe "Service1" dans le code, le fichier svc et le fichier de configuration.
     // REMARQUE : pour lancer le client test WCF afin de tester ce service, sélectionnez Service1.svc ou Service1.svc.cs dans l'Explorateur de solutions et démarrez le débogage.
-    public class Service1 : IService1
+    public class Service : IService
     {
-        public string GetData(int value)
+        private Users usersMethods;
+
+        public Service()
         {
-            return string.Format("You entered: {0}", value);
+            usersMethods = new Users();
         }
 
-        public CompositeType GetDataUsingDataContract(CompositeType composite)
+        public string AuthenticateUser(string email, string password)
         {
-            if (composite == null)
+            User user = usersMethods.AuthenticateUser(email, password);
+
+            if (user == null)
             {
-                throw new ArgumentNullException("composite");
+                return null;
             }
-            if (composite.BoolValue)
-            {
-                composite.StringValue += "Suffix";
-            }
-            return composite;
+
+            return usersMethods.GenerateTokenForUser(user.Id);
         }
     }
 }

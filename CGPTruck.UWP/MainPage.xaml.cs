@@ -26,5 +26,11 @@ namespace CGPTruck.UWP
         {
             this.InitializeComponent();
         }
+
+        private async void button_Click(object sender, RoutedEventArgs e)
+        {
+            ServiceReference.ServiceClient client = new ServiceReference.ServiceClient();
+            string token = await client.AuthenticateUserAsync("jean-michel@gros-lourd.fr", "password");
+        }
     }
 }
