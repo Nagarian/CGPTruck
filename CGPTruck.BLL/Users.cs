@@ -1,5 +1,5 @@
 ﻿using CGPTruck.DAL;
-using CGPTruck.DAL.Entities;
+using CGPTruck.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +34,11 @@ namespace CGPTruck.BLL
             string token = Guid.NewGuid().ToString();
             users.UpdateUserToken(userId, token);
             return token;
+        }
+
+        public User GetUserInfo(string userToken)
+        {
+            return users.GetUserByToken(userToken);
         }
 
         private string ComputeHash(string password, string salt)

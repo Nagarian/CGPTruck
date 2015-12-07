@@ -12,7 +12,7 @@ namespace CGPTruck.DAL
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    using CGPTruck.DAL.Entities;
+    using CGPTruck.Entities;
     
     public partial class CGPTruckEntities : DbContext
     {

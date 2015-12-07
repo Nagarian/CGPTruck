@@ -1,4 +1,4 @@
-﻿using CGPTruck.DAL.Entities;
+﻿using CGPTruck.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,13 +9,19 @@ namespace CGPTruck.DAL
 {
     public class DALUsers
     {
-        public User GetUserById(int id)
+        public User GetUserByToken(string token)
         {
             using (CGPTruckEntities context = new CGPTruckEntities())
             {
-                return (from user in context.Users.Include("Credential")
-                        where user.Id == id
-                        select user).FirstOrDefault();
+                User currentUser = (from user in context.Users.Include("Credential")
+                                    where user.Credential.Token == token
+                                    select user).FirstOrDefault();
+                if (currentUser != null)
+                {
+                    currentUser.Credential = null;
+                }
+
+                return currentUser;
             }
         }
 
@@ -34,8 +40,8 @@ namespace CGPTruck.DAL
             using (CGPTruckEntities context = new CGPTruckEntities())
             {
                 var credential = (from cred in context.Credentials
-                                   where cred.UserId == userId
-                                   select cred).FirstOrDefault();
+                                  where cred.UserId == userId
+                                  select cred).FirstOrDefault();
 
                 credential.Token = token;
                 context.SaveChanges();

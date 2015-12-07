@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CGPTruck.Entities;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -31,6 +32,7 @@ namespace CGPTruck.UWP
         {
             ServiceReference.ServiceClient client = new ServiceReference.ServiceClient();
             string token = await client.AuthenticateUserAsync("jean-michel@gros-lourd.fr", "password");
+            User user = await client.GetUserInfoAsync(token);
         }
     }
 }

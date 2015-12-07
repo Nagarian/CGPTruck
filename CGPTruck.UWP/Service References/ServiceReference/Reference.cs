@@ -20,6 +20,9 @@ namespace CGPTruck.UWP.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/AuthenticateUser", ReplyAction="http://tempuri.org/IService/AuthenticateUserResponse")]
         System.Threading.Tasks.Task<string> AuthenticateUserAsync(string email, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService/GetUserInfo", ReplyAction="http://tempuri.org/IService/GetUserInfoResponse")]
+        System.Threading.Tasks.Task<CGPTruck.Entities.User> GetUserInfoAsync(string userToken);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -67,6 +70,10 @@ namespace CGPTruck.UWP.ServiceReference {
         
         public System.Threading.Tasks.Task<string> AuthenticateUserAsync(string email, string password) {
             return base.Channel.AuthenticateUserAsync(email, password);
+        }
+        
+        public System.Threading.Tasks.Task<CGPTruck.Entities.User> GetUserInfoAsync(string userToken) {
+            return base.Channel.GetUserInfoAsync(userToken);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync() {

@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CGPTruck.DAL.Entities
+namespace CGPTruck.Entities
 {
     using System;
     using System.Collections.Generic;

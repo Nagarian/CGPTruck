@@ -10,7 +10,7 @@ namespace CGPTruck.DAL.Tests
         public void TestMethod1()
         {
             CGPTruck.DAL.DALUsers users = new DALUsers();
-            var user = users.GetUserById(1);
+            var user = users.GetUserByEmail("jean-michel@gros-lourd.fr");
             Assert.IsNotNull(user);
         }
     }

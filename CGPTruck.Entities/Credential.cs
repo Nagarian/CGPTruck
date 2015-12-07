@@ -11,14 +11,21 @@ namespace CGPTruck.Entities
 {
     using System;
     using System.Collections.Generic;
+    using System.Runtime.Serialization;
     
+    [DataContract(IsReference = true)]
     public partial class Credential
     {
-        public int UserId { get; set; }
-        public string Hash { get; set; }
-        public string Salt { get; set; }
-        public string Token { get; set; }
+        [DataMember]
+    public int UserId { get; set; }
+        [DataMember]
+    public string Hash { get; set; }
+        [DataMember]
+    public string Salt { get; set; }
+        [DataMember]
+    public string Token { get; set; }
     
-        public virtual User User { get; set; }
+        [DataMember]
+    public virtual User User { get; set; }
     }
 }

@@ -11,13 +11,19 @@ namespace CGPTruck.Entities
 {
     using System;
     using System.Collections.Generic;
+    using System.Runtime.Serialization;
     
+    [DataContract(IsReference = true)]
     public partial class User
     {
-        public int Id { get; set; }
-        public string Email { get; set; }
-        public string Name { get; set; }
+        [DataMember]
+    public int Id { get; set; }
+        [DataMember]
+    public string Email { get; set; }
+        [DataMember]
+    public string Name { get; set; }
     
-        public virtual Credential Credential { get; set; }
+        [DataMember]
+    public virtual Credential Credential { get; set; }
     }
 }
