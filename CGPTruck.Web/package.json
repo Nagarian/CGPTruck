@@ -1,0 +1,15 @@
+{
+  "name": "CGPTruck.Web",
+  "version": "0.0.0",
+  "description": "CGPTruck.Web",
+  "main": "app.js",
+  "author": {
+    "name": "onyx_",
+    "email": ""
+  },
+  "dependencies": {
+    "express": "3.4.4",
+    "jade": "*",
+    "stylus": "*"
+  }
+}
