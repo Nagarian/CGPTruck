@@ -18,7 +18,6 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <FileUpgradeFlags>40</FileUpgradeFlags>
-    <UpgradeBackupLocation>C:\Users\onyx_\Documents\Visual Studio 2015\Projects\CGPTruck\Backup1\</UpgradeBackupLocation>
     <OldToolsVersion>12.0</OldToolsVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
@@ -42,6 +41,7 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <TargetFrameworkProfile />
+    <UpgradeBackupLocation>C:\Users\onyx_\Documents\Visual Studio 2015\Projects\CGPTruck\Backup1\</UpgradeBackupLocation>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
