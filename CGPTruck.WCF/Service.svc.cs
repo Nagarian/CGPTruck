@@ -1,5 +1,5 @@
 ﻿using CGPTruck.BLL;
-using CGPTruck.DAL.Entities;
+using CGPTruck.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
