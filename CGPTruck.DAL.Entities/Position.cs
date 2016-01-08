@@ -14,18 +14,23 @@ namespace CGPTruck.Entities
     using System.Runtime.Serialization;
     
     [DataContract(IsReference = true)]
-    public partial class Credential
+    public partial class Position
     {
-        [DataMember]
-    public int UserId { get; set; }
-        [DataMember]
-    public string Hash { get; set; }
-        [DataMember]
-    public string Salt { get; set; }
-        [DataMember]
-    public string Token { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Position()
+        {
+            this.Places = new HashSet<Place>();
+        }
     
         [DataMember]
-    public virtual User User { get; set; }
+    public int Id { get; set; }
+        [DataMember]
+    public double Latitude { get; set; }
+        [DataMember]
+    public double Longitude { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [DataMember]
+    public virtual ICollection<Place> Places { get; set; }
     }
 }

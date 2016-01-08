@@ -14,16 +14,21 @@ namespace CGPTruck.Entities
     using System.Runtime.Serialization;
     
     [DataContract(IsReference = true)]
-    public partial class User
+    public partial class Vehicule
     {
         [DataMember]
     public int Id { get; set; }
         [DataMember]
-    public string Email { get; set; }
+    public string Brand { get; set; }
         [DataMember]
-    public string Name { get; set; }
-    
+    public string Model { get; set; }
         [DataMember]
-    public virtual Credential Credential { get; set; }
+    public string Description { get; set; }
+        [DataMember]
+    public int Vehicule_State { get; set; }
+        [DataMember]
+    public int Position_Id { get; set; }
+        [DataMember]
+    public int Vehicule_Type { get; set; }
     }
 }

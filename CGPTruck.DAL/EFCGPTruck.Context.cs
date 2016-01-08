@@ -12,7 +12,7 @@ namespace CGPTruck.DAL
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    using CGPTruck.Entities;
+    using CGPTruck.DAL.Entities;
     
     public partial class CGPTruckEntities : DbContext
     {
@@ -26,7 +26,9 @@ namespace CGPTruck.DAL
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Credential> Credentials { get; set; }
-        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Event> Events { get; set; }
+        public virtual DbSet<Place> Places { get; set; }
+        public virtual DbSet<Position> Positions { get; set; }
+        public virtual DbSet<Vehicule> Vehicules { get; set; }
     }
 }

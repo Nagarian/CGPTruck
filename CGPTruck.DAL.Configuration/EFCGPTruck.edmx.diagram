@@ -5,9 +5,11 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="353d26f83d7d4adb868d87c78e22880a" Name="Diagram1">
-        <EntityTypeShape EntityType="CGPTruckModels.Credential" Width="1.5" PointX="3" PointY="0.875" />
-        <EntityTypeShape EntityType="CGPTruckModels.User" Width="1.5" PointX="0.75" PointY="0.875" />
-        <AssociationConnector Association="CGPTruckModels.FK_User_Credential" />
+        <EntityTypeShape EntityType="CGPTruckModels.Event" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="CGPTruckModels.Place" Width="1.5" PointX="3.25" PointY="2.625" />
+        <EntityTypeShape EntityType="CGPTruckModels.Position" Width="1.5" PointX="0.75" PointY="4.125" />
+        <EntityTypeShape EntityType="CGPTruckModels.Vehicule" Width="1.5" PointX="5.75" PointY="3.75" />
+        <AssociationConnector Association="CGPTruckModels.FK_Places_Postion" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
