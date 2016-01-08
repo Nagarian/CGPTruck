@@ -13,6 +13,7 @@ using CGPTruck.Entities;
 
 namespace CGPTruck.WebAPI.Controllers
 {
+    [Authorize]
     public class UsersController : ApiController
     {
         private CGPTruckEntities db = new CGPTruckEntities();

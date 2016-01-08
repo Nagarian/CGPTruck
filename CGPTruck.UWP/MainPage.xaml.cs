@@ -33,7 +33,7 @@ namespace CGPTruck.UWP
             //ServiceReference.ServiceClient client = new ServiceReference.ServiceClient();
             //string token = await client.AuthenticateUserAsync("jean-michel@gros-lourd.fr", "password");
             //User user = await client.GetUserInfoAsync(token);
-            await WebApiService.Authenticate("toto@lala.fr", "LALA");
+            bool result = await WebApiService.Current.Authenticate("lala", "tototutu");
         }
     }
 }

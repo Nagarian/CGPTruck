@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -8,9 +9,13 @@ using System.Threading.Tasks;
 
 namespace CGPTruck.UWP
 {
-    public static class WebApiService
+    public class WebApiService
     {
-        private static HttpClient GetClient()
+        public static WebApiService Current { get; set; } = new WebApiService();
+
+        private string token;
+
+        private HttpClient GetClient()
         {
             return new HttpClient()
             {
@@ -20,20 +25,29 @@ namespace CGPTruck.UWP
                     Accept =
                     {
                         new MediaTypeWithQualityHeaderValue("application/json")
-                    }
+                    },
+                    Authorization = string.IsNullOrEmpty(token)? null : new AuthenticationHeaderValue("Bearer", token)
                 }
             };
         }
 
-        public static async Task Authenticate(string username, string password)
+        public async Task<bool> Authenticate(string username, string password)
         {
             using (var client = GetClient())
             {
-                HttpResponseMessage response = await client.PostAsJsonAsync("api/auth", new { Email = username, Password = password });
+                HttpResponseMessage response = await client.PostAsync("/token", new System.Net.Http.FormUrlEncodedContent(new Dictionary<string, string>
+                {
+                    ["grant_type"] = "password",
+                    ["username"] = username,
+                    ["password"] = password
+                }));
+
                 if (response.IsSuccessStatusCode)
                 {
-
+                    this.token = (JsonConvert.DeserializeObject(await response.Content.ReadAsStringAsync()) as dynamic).access_token.ToString();
                 }
+
+                return response.IsSuccessStatusCode;
             }
         }
 
