@@ -30,9 +30,10 @@ namespace CGPTruck.UWP
 
         private async void button_Click(object sender, RoutedEventArgs e)
         {
-            ServiceReference.ServiceClient client = new ServiceReference.ServiceClient();
-            string token = await client.AuthenticateUserAsync("jean-michel@gros-lourd.fr", "password");
-            User user = await client.GetUserInfoAsync(token);
+            //ServiceReference.ServiceClient client = new ServiceReference.ServiceClient();
+            //string token = await client.AuthenticateUserAsync("jean-michel@gros-lourd.fr", "password");
+            //User user = await client.GetUserInfoAsync(token);
+            await WebApiService.Authenticate("toto@lala.fr", "LALA");
         }
     }
 }
