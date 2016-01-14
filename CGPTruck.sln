@@ -12,6 +12,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CGPTruck.WebAPI", "CGPTruck
 EndProject
 Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "CGPTruck.Web", "CGPTruck.Web\CGPTruck.Web.njsproj", "{FB9AD01C-AB15-4515-B77A-066A840FD5A0}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SQL", "SQL", "{7F3B8514-F0FE-4F3D-B0BD-C584D82E8681}"
+	ProjectSection(SolutionItems) = preProject
+		SQL\01 - CREATE TABLE.sql = SQL\01 - CREATE TABLE.sql
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
