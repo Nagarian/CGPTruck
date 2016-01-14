@@ -1,0 +1,581 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CGPTruckModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Attachments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Mission_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Events">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="90" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Mission_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Missions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Vehicule_Id" Type="int" Nullable="false" />
+          <Property Name="Driver_Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Shipment" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="Phones">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" />
+          <Property Name="Serial_Code" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone_State" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Places">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Position_Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Place_Type" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Positions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Latitude" Type="float" Nullable="false" />
+          <Property Name="Longitude" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Step">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="StepType_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StepTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Vehicules">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Brand" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Model" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Vehicule_State" Type="int" Nullable="false" />
+          <Property Name="Position_Id" Type="int" Nullable="false" />
+          <Property Name="Vehicule_Type" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Attachments_Mission">
+          <End Role="Missions" Type="Self.Missions" Multiplicity="1" />
+          <End Role="Attachments" Type="Self.Attachments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Missions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Attachments">
+              <PropertyRef Name="Mission_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Events_Mission">
+          <End Role="Missions" Type="Self.Missions" Multiplicity="1" />
+          <End Role="Events" Type="Self.Events" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Missions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Events">
+              <PropertyRef Name="Mission_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Missions_Phone">
+          <End Role="Phones" Type="Self.Phones" Multiplicity="0..1" />
+          <End Role="Missions" Type="Self.Missions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Phones">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Missions">
+              <PropertyRef Name="Phone_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Missions_Vehicule">
+          <End Role="Vehicules" Type="Self.Vehicules" Multiplicity="1" />
+          <End Role="Missions" Type="Self.Missions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehicules">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Missions">
+              <PropertyRef Name="Vehicule_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Places_Postion">
+          <End Role="Positions" Type="Self.Positions" Multiplicity="1" />
+          <End Role="Places" Type="Self.Places" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Positions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Places">
+              <PropertyRef Name="Position_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Step_StepType">
+          <End Role="StepTypes" Type="Self.StepTypes" Multiplicity="1" />
+          <End Role="Step" Type="Self.Step" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StepTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Step">
+              <PropertyRef Name="StepType_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vehicules_Position">
+          <End Role="Positions" Type="Self.Positions" Multiplicity="1" />
+          <End Role="Vehicules" Type="Self.Vehicules" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Positions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Vehicules">
+              <PropertyRef Name="Position_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CGPTruckModelStoreContainer">
+          <EntitySet Name="Attachments" EntityType="Self.Attachments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Events" EntityType="Self.Events" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Missions" EntityType="Self.Missions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Phones" EntityType="Self.Phones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Places" EntityType="Self.Places" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Positions" EntityType="Self.Positions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Step" EntityType="Self.Step" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StepTypes" EntityType="Self.StepTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vehicules" EntityType="Self.Vehicules" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Attachments_Mission" Association="Self.FK_Attachments_Mission">
+            <End Role="Missions" EntitySet="Missions" />
+            <End Role="Attachments" EntitySet="Attachments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Events_Mission" Association="Self.FK_Events_Mission">
+            <End Role="Missions" EntitySet="Missions" />
+            <End Role="Events" EntitySet="Events" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Missions_Phone" Association="Self.FK_Missions_Phone">
+            <End Role="Phones" EntitySet="Phones" />
+            <End Role="Missions" EntitySet="Missions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Missions_Vehicule" Association="Self.FK_Missions_Vehicule">
+            <End Role="Vehicules" EntitySet="Vehicules" />
+            <End Role="Missions" EntitySet="Missions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Places_Postion" Association="Self.FK_Places_Postion">
+            <End Role="Positions" EntitySet="Positions" />
+            <End Role="Places" EntitySet="Places" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Step_StepType" Association="Self.FK_Step_StepType">
+            <End Role="StepTypes" EntitySet="StepTypes" />
+            <End Role="Step" EntitySet="Step" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vehicules_Position" Association="Self.FK_Vehicules_Position">
+            <End Role="Positions" EntitySet="Positions" />
+            <End Role="Vehicules" EntitySet="Vehicules" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CGPTruckModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="CGPTruckEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Events" EntityType="CGPTruckModel.Event" />
+          <EntitySet Name="Phones" EntityType="CGPTruckModel.Phone" />
+          <EntitySet Name="Places" EntityType="CGPTruckModel.Place" />
+          <EntitySet Name="Positions" EntityType="CGPTruckModel.Position" />
+          <EntitySet Name="Steps" EntityType="CGPTruckModel.Step" />
+          <EntitySet Name="StepTypes" EntityType="CGPTruckModel.StepType" />
+          <EntitySet Name="Vehicules" EntityType="CGPTruckModel.Vehicule" />
+          <AssociationSet Name="FK_Places_Postion" Association="CGPTruckModel.FK_Places_Postion">
+            <End Role="Position" EntitySet="Positions" />
+            <End Role="Place" EntitySet="Places" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vehicules_Position" Association="CGPTruckModel.FK_Vehicules_Position">
+            <End Role="Position" EntitySet="Positions" />
+            <End Role="Vehicule" EntitySet="Vehicules" />
+          </AssociationSet>
+          <EntitySet Name="Attachments" EntityType="CGPTruckModel.Attachment" />
+          <AssociationSet Name="FK_Step_StepType" Association="CGPTruckModel.FK_Step_StepType">
+            <End EntitySet="StepTypes" Role="StepType" />
+            <End EntitySet="Steps" Role="Step" />
+          </AssociationSet>
+          <EntitySet Name="Missions" EntityType="CGPTruckModel.Mission" />
+          <AssociationSet Name="FK_Attachments_Mission" Association="CGPTruckModel.FK_Attachments_Mission">
+            <End Role="Mission" EntitySet="Missions" />
+            <End Role="Attachment" EntitySet="Attachments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Events_Mission" Association="CGPTruckModel.FK_Events_Mission">
+            <End Role="Mission" EntitySet="Missions" />
+            <End Role="Event" EntitySet="Events" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Missions_Phone" Association="CGPTruckModel.FK_Missions_Phone">
+            <End Role="Phone" EntitySet="Phones" />
+            <End Role="Mission" EntitySet="Missions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Missions_Vehicule" Association="CGPTruckModel.FK_Missions_Vehicule">
+            <End Role="Vehicule" EntitySet="Vehicules" />
+            <End Role="Mission" EntitySet="Missions" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="90" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Mission_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Mission" Relationship="CGPTruckModel.FK_Events_Mission" FromRole="Event" ToRole="Mission" />
+        </EntityType>
+        <EntityType Name="Phone">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Serial_Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone_State" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Missions" Relationship="CGPTruckModel.FK_Missions_Phone" FromRole="Phone" ToRole="Mission" />
+        </EntityType>
+        <EntityType Name="Place">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Position_Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Place_Type" Type="CGPTruckModel.PlaceType" Nullable="false" />
+          <NavigationProperty Name="Position" Relationship="CGPTruckModel.FK_Places_Postion" FromRole="Place" ToRole="Position" />
+        </EntityType>
+        <EntityType Name="Position">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Latitude" Type="Double" Nullable="false" />
+          <Property Name="Longitude" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Places" Relationship="CGPTruckModel.FK_Places_Postion" FromRole="Position" ToRole="Place" />
+          <NavigationProperty Name="Vehicules" Relationship="CGPTruckModel.FK_Vehicules_Position" FromRole="Position" ToRole="Vehicule" />
+        </EntityType>
+        <EntityType Name="Step">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <Property Name="Name" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="Description" MaxLength="Max" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="StepType_Id" Nullable="false" Type="Int32" />
+          <NavigationProperty Name="StepType" Relationship="CGPTruckModel.FK_Step_StepType" FromRole="Step" ToRole="StepType" />
+        </EntityType>
+        <EntityType Name="StepType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <Property Name="Name" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="Description" MaxLength="Max" FixedLength="false" Unicode="true" Type="String" />
+          <NavigationProperty Name="Steps" Relationship="CGPTruckModel.FK_Step_StepType" FromRole="StepType" ToRole="Step" />
+        </EntityType>
+        <EntityType Name="Vehicule">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Brand" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Model" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Vehicule_State" Type="CGPTruckModel.VehiculeState" Nullable="false" />
+          <Property Name="Position_Id" Type="Int32" Nullable="false" />
+          <Property Name="Vehicule_Type" Type="CGPTruckModel.VehiculeType" Nullable="false" />
+          <NavigationProperty Name="Position" Relationship="CGPTruckModel.FK_Vehicules_Position" FromRole="Vehicule" ToRole="Position" />
+          <NavigationProperty Name="Missions" Relationship="CGPTruckModel.FK_Missions_Vehicule" FromRole="Vehicule" ToRole="Mission" />
+        </EntityType>
+        <Association Name="FK_Places_Postion">
+          <End Type="CGPTruckModel.Position" Role="Position" Multiplicity="1" />
+          <End Type="CGPTruckModel.Place" Role="Place" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Position">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Place">
+              <PropertyRef Name="Position_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vehicules_Position">
+          <End Type="CGPTruckModel.Position" Role="Position" Multiplicity="1" />
+          <End Type="CGPTruckModel.Vehicule" Role="Vehicule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Position">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Vehicule">
+              <PropertyRef Name="Position_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Attachment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Mission_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Mission" Relationship="CGPTruckModel.FK_Attachments_Mission" FromRole="Attachment" ToRole="Mission" />
+        </EntityType>
+        <Association Name="FK_Step_StepType">
+          <End Type="CGPTruckModel.StepType" Multiplicity="1" Role="StepType" />
+          <End Type="CGPTruckModel.Step" Multiplicity="*" Role="Step" />
+          <ReferentialConstraint>
+            <Principal Role="StepType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Step">
+              <PropertyRef Name="StepType_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Mission">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Vehicule_Id" Type="Int32" Nullable="false" />
+          <Property Name="Driver_Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Shipment" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone_Id" Type="Int32" />
+          <NavigationProperty Name="Attachments" Relationship="CGPTruckModel.FK_Attachments_Mission" FromRole="Mission" ToRole="Attachment" />
+          <NavigationProperty Name="Events" Relationship="CGPTruckModel.FK_Events_Mission" FromRole="Mission" ToRole="Event" />
+          <NavigationProperty Name="Phone" Relationship="CGPTruckModel.FK_Missions_Phone" FromRole="Mission" ToRole="Phone" />
+          <NavigationProperty Name="Vehicule" Relationship="CGPTruckModel.FK_Missions_Vehicule" FromRole="Mission" ToRole="Vehicule" />
+        </EntityType>
+        <Association Name="FK_Attachments_Mission">
+          <End Type="CGPTruckModel.Mission" Role="Mission" Multiplicity="1" />
+          <End Type="CGPTruckModel.Attachment" Role="Attachment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mission">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Attachment">
+              <PropertyRef Name="Mission_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Events_Mission">
+          <End Type="CGPTruckModel.Mission" Role="Mission" Multiplicity="1" />
+          <End Type="CGPTruckModel.Event" Role="Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mission">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="Mission_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Missions_Phone">
+          <End Type="CGPTruckModel.Phone" Role="Phone" Multiplicity="0..1" />
+          <End Type="CGPTruckModel.Mission" Role="Mission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Phone">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Mission">
+              <PropertyRef Name="Phone_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Missions_Vehicule">
+          <End Type="CGPTruckModel.Vehicule" Role="Vehicule" Multiplicity="1" />
+          <End Type="CGPTruckModel.Mission" Role="Mission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehicule">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Mission">
+              <PropertyRef Name="Vehicule_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EnumType Name="VehiculeType">
+          <Member Name="Truck" Value="0" />
+          <Member Name="Car" Value="1" />
+          <Member Name="RepairTruck" Value="2" />
+        </EnumType>
+        <EnumType Name="PlaceType">
+          <Member Name="Garage" Value="0" />
+          <Member Name="RepairCenter" Value="1" />
+          <Member Name="GasStation" Value="2" />
+          <Member Name="Restaurant" Value="3" />
+        </EnumType>
+        <EnumType Name="VehiculeState">
+          <Member Name="Running" Value="0" />
+          <Member Name="Reparing" Value="1" />
+          <Member Name="OutOfService" Value="2" />
+        </EnumType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CGPTruckModelStoreContainer" CdmEntityContainer="CGPTruckEntities1">
+          <EntitySetMapping Name="Events">
+            <EntityTypeMapping TypeName="CGPTruckModel.Event">
+              <MappingFragment StoreEntitySet="Events">
+                <ScalarProperty Name="Mission_Id" ColumnName="Mission_Id" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Phones">
+            <EntityTypeMapping TypeName="CGPTruckModel.Phone">
+              <MappingFragment StoreEntitySet="Phones">
+                <ScalarProperty Name="Phone_State" ColumnName="Phone_State" />
+                <ScalarProperty Name="Serial_Code" ColumnName="Serial_Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Places">
+            <EntityTypeMapping TypeName="CGPTruckModel.Place">
+              <MappingFragment StoreEntitySet="Places">
+                <ScalarProperty Name="Place_Type" ColumnName="Place_Type" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Position_Id" ColumnName="Position_Id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Positions">
+            <EntityTypeMapping TypeName="CGPTruckModel.Position">
+              <MappingFragment StoreEntitySet="Positions">
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Steps">
+            <EntityTypeMapping TypeName="CGPTruckModel.Step">
+              <MappingFragment StoreEntitySet="Step">
+                <ScalarProperty Name="StepType_Id" ColumnName="StepType_Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StepTypes">
+            <EntityTypeMapping TypeName="CGPTruckModel.StepType">
+              <MappingFragment StoreEntitySet="StepTypes">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vehicules">
+            <EntityTypeMapping TypeName="CGPTruckModel.Vehicule">
+              <MappingFragment StoreEntitySet="Vehicules">
+                <ScalarProperty Name="Vehicule_Type" ColumnName="Vehicule_Type" />
+                <ScalarProperty Name="Position_Id" ColumnName="Position_Id" />
+                <ScalarProperty Name="Vehicule_State" ColumnName="Vehicule_State" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="Brand" ColumnName="Brand" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Attachments">
+            <EntityTypeMapping TypeName="CGPTruckModel.Attachment">
+              <MappingFragment StoreEntitySet="Attachments">
+                <ScalarProperty Name="Mission_Id" ColumnName="Mission_Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Missions">
+            <EntityTypeMapping TypeName="CGPTruckModel.Mission">
+              <MappingFragment StoreEntitySet="Missions">
+                <ScalarProperty Name="Phone_Id" ColumnName="Phone_Id" />
+                <ScalarProperty Name="Shipment" ColumnName="Shipment" />
+                <ScalarProperty Name="Driver_Id" ColumnName="Driver_Id" />
+                <ScalarProperty Name="Vehicule_Id" ColumnName="Vehicule_Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -7,15 +7,14 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CGPTruck.WebAPI
+namespace CGPTruck.WebAPI.Entities
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Events
+    public enum VehiculeType : int
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public System.DateTime Date { get; set; }
+        Truck = 0,
+        Car = 1,
+        RepairTruck = 2
     }
 }

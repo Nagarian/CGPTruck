@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CGPTruck.WebAPI
+namespace CGPTruck.WebAPI.Entities.Entities
 {
     using System;
     using System.Data.Entity;
@@ -25,9 +25,14 @@ namespace CGPTruck.WebAPI
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Events> Events { get; set; }
-        public virtual DbSet<Places> Places { get; set; }
-        public virtual DbSet<Positions> Positions { get; set; }
-        public virtual DbSet<Vehicules> Vehicules { get; set; }
+        public virtual DbSet<Event> Events { get; set; }
+        public virtual DbSet<Phone> Phones { get; set; }
+        public virtual DbSet<Place> Places { get; set; }
+        public virtual DbSet<Position> Positions { get; set; }
+        public virtual DbSet<Step> Steps { get; set; }
+        public virtual DbSet<StepType> StepTypes { get; set; }
+        public virtual DbSet<Vehicule> Vehicules { get; set; }
+        public virtual DbSet<Attachment> Attachments { get; set; }
+        public virtual DbSet<Mission> Missions { get; set; }
     }
 }

@@ -7,24 +7,25 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CGPTruck.UWP
+namespace CGPTruck.UWP.Entities.Entities
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Positions
+    public partial class Phone
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Positions()
+        public Phone()
         {
-            this.Places = new HashSet<Places>();
+            this.Missions = new HashSet<Mission>();
         }
     
         public int Id { get; set; }
-        public double Latitude { get; set; }
-        public double Longitude { get; set; }
+        public string Name { get; set; }
+        public string Serial_Code { get; set; }
+        public int Phone_State { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Places> Places { get; set; }
+        public virtual ICollection<Mission> Missions { get; set; }
     }
 }

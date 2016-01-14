@@ -7,15 +7,24 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CGPTruck.UWP
+namespace CGPTruck.UWP.Entities.Entities
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Events
+    public partial class StepType
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public StepType()
+        {
+            this.Steps = new HashSet<Step>();
+        }
+    
         public int Id { get; set; }
         public string Name { get; set; }
-        public System.DateTime Date { get; set; }
+        public string Description { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Step> Steps { get; set; }
     }
 }

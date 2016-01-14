@@ -7,19 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CGPTruck.UWP
+namespace CGPTruck.WebAPI.Entities
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Vehicules
+    public partial class Event
     {
         public int Id { get; set; }
-        public string Brand { get; set; }
-        public string Model { get; set; }
-        public string Description { get; set; }
-        public int Vehicule_State { get; set; }
-        public int Position_Id { get; set; }
-        public int Vehicule_Type { get; set; }
+        public string Name { get; set; }
+        public System.DateTime Date { get; set; }
+        public int Mission_Id { get; set; }
+    
+        public virtual Mission Mission { get; set; }
     }
 }

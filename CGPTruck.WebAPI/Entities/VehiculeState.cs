@@ -7,19 +7,14 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CGPTruck.WebAPI
+namespace CGPTruck.WebAPI.Entities
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Places
+    public enum VehiculeState : int
     {
-        public int Id { get; set; }
-        public int Position_Id { get; set; }
-        public string Nom { get; set; }
-        public string Description { get; set; }
-        public int Place_Type { get; set; }
-    
-        public virtual Positions Positions { get; set; }
+        Running = 0,
+        Reparing = 1,
+        OutOfService = 2
     }
 }

@@ -97,25 +97,49 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="EFCGPTruck.cs">
+    <Compile Include="Entities\Attachment.cs">
+      <DependentUpon>EFCGPTruck.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\EFCGPTruck.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>EFCGPTruck.tt</DependentUpon>
     </Compile>
-    <Compile Include="Events.cs">
+    <Compile Include="Entities\Event.cs">
       <DependentUpon>EFCGPTruck.tt</DependentUpon>
     </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Places.cs">
+    <Compile Include="Entities\Mission.cs">
       <DependentUpon>EFCGPTruck.tt</DependentUpon>
     </Compile>
-    <Compile Include="Positions.cs">
+    <Compile Include="Entities\Phone.cs">
+      <DependentUpon>EFCGPTruck.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Place.cs">
+      <DependentUpon>EFCGPTruck.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\PlaceType.cs">
+      <DependentUpon>EFCGPTruck.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Position.cs">
       <DependentUpon>EFCGPTruck.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Vehicules.cs">
+    <Compile Include="Entities\Step.cs">
+      <DependentUpon>EFCGPTruck.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\StepType.cs">
+      <DependentUpon>EFCGPTruck.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Vehicule.cs">
+      <DependentUpon>EFCGPTruck.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\VehiculeState.cs">
+      <DependentUpon>EFCGPTruck.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\VehiculeType.cs">
       <DependentUpon>EFCGPTruck.tt</DependentUpon>
     </Compile>
     <Compile Include="WebApiService.cs" />
@@ -127,7 +151,7 @@
     <None Include="CGPTruck.UWP_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="EFCGPTruck.tt">
+    <Content Include="Entities\EFCGPTruck.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>EFCGPTruck.cs</LastGenOutput>
     </Content>

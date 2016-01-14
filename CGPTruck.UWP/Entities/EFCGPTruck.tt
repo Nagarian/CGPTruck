@@ -2,7 +2,7 @@
 <#@ include file="EF6.Utility.CS.ttinclude"#><#@ 
  output extension=".cs"#><#
 
-const string inputFile = @"../CGPTruck.WebAPI/EFCGPTruck.edmx";
+const string inputFile = @"../../CGPTruck.WebAPI/Entities/EFCGPTruck.edmx";
 var textTransform = DynamicTextTransformation.Create(this);
 var code = new CodeGenerationTools(this);
 var ef = new MetadataTools(this);
@@ -244,11 +244,19 @@ public void BeginNamespace(CodeGenerationTools code)
     if (!String.IsNullOrEmpty(codeNamespace))
     {
 #>
-namespace <#=code.EscapeNamespace(codeNamespace)#>
+namespace <#=code.EscapeNamespace(codeNamespace)#>.Entities
 {
 <#+
-        PushIndent("    ");
+	}
+	else
+	{
+#>
+namespace CGPTruck.UWP.Entities
+{
+<#+
     }
+
+    PushIndent("    ");
 }
 
 public void EndNamespace(CodeGenerationTools code)

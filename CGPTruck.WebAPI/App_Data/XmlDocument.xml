@@ -481,6 +481,11 @@
             </summary>
             <param name="documentPath">The physical path to XML document.</param>
         </member>
+        <member name="T:CGPTruck.WebAPI.Entities.Vehicule">
+            <summary>
+            Objet réprésentant un véhicule
+            </summary>
+        </member>
         <member name="T:CGPTruck.WebAPI.Models.AuthCredentialsModel">
             <summary>
             Informations nécessaire à l'authentification

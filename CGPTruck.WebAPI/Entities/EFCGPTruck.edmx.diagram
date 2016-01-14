@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="679c99bd4a69463b88fe4501a75be7b5" Name="Diagram1">
+        <EntityTypeShape EntityType="CGPTruckModel.Event" Width="1.5" PointX="4.75" PointY="3.875" />
+        <EntityTypeShape EntityType="CGPTruckModel.Phone" Width="1.5" PointX="11.875" PointY="2.125" />
+        <EntityTypeShape EntityType="CGPTruckModel.Place" Width="1.5" PointX="4.5" PointY="0.5" />
+        <EntityTypeShape EntityType="CGPTruckModel.Position" Width="1.5" PointX="1.625" PointY="0.5" />
+        <EntityTypeShape EntityType="CGPTruckModel.Step" PointX="9.75" PointY="6.25" Width="1.5" />
+        <EntityTypeShape EntityType="CGPTruckModel.StepType" PointX="12" PointY="6.625" Width="1.5" />
+        <EntityTypeShape EntityType="CGPTruckModel.Vehicule" Width="1.5" PointX="1.75" PointY="5.625" />
+        <AssociationConnector Association="CGPTruckModel.FK_Places_Postion" />
+        <AssociationConnector Association="CGPTruckModel.FK_Vehicules_Position" />
+        <EntityTypeShape EntityType="CGPTruckModel.Attachment" Width="1.5" PointX="11.875" PointY="4.25" />
+        <AssociationConnector Association="CGPTruckModel.FK_Step_StepType" />
+        <EntityTypeShape EntityType="CGPTruckModel.Mission" Width="1.5" PointX="8.25" PointY="2.625" />
+        <AssociationConnector Association="CGPTruckModel.FK_Attachments_Mission" />
+        <AssociationConnector Association="CGPTruckModel.FK_Events_Mission" />
+        <AssociationConnector Association="CGPTruckModel.FK_Missions_Phone" />
+        <AssociationConnector Association="CGPTruckModel.FK_Missions_Vehicule" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

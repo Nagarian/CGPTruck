@@ -1,4 +1,4 @@
-﻿// La génération de code T4 est activée pour le modèle 'C:\Users\onyx_\Documents\Visual Studio 2015\Projects\CGPTruck\CGPTruck.WebAPI\EFCGPTruck.edmx'. 
+﻿// La génération de code T4 est activée pour le modèle 'C:\Users\onyx_\Documents\Visual Studio 2015\Projects\CGPTruck\CGPTruck.WebAPI\Entities\EFCGPTruck.edmx'. 
 // Pour activer la génération de code héritée, définissez la valeur de la propriété
 // du concepteur 'Stratégie de génération de code' sur 'ObjectContext hérité'. Cette propriété est disponible dans la fenêtre Propriétés lorsque le modèle
 //  est ouvert dans le concepteur.

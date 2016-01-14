@@ -33,7 +33,7 @@ var codeNamespace = code.VsNamespaceSuggestion();
 if (!String.IsNullOrEmpty(codeNamespace))
 {
 #>
-namespace <#=code.EscapeNamespace(codeNamespace)#>
+namespace <#=code.EscapeNamespace(codeNamespace)#>.Entities
 {
 <#
     PushIndent("    ");

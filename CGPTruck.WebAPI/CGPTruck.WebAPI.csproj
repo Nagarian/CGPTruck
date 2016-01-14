@@ -182,11 +182,11 @@
     <Content Include="Areas\HelpPage\TestClient.css" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\TestClientReferences.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\TestClientDialogs.cshtml" />
-    <EntityDeploy Include="EFCGPTruck.edmx">
+    <EntityDeploy Include="Entities\EFCGPTruck.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>EFCGPTruck.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="EFCGPTruck.edmx.diagram">
+    <Content Include="Entities\EFCGPTruck.edmx.diagram">
       <DependentUpon>EFCGPTruck.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-2.2.0.intellisense.js" />
@@ -223,12 +223,12 @@
     <Content Include="Content\themes\base\tabs.css" />
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
-    <Content Include="EFCGPTruck.Context.tt">
+    <Content Include="Entities\EFCGPTruck.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>EFCGPTruck.edmx</DependentUpon>
       <LastGenOutput>EFCGPTruck.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="EFCGPTruck.tt">
+    <Content Include="Entities\EFCGPTruck.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>EFCGPTruck.edmx</DependentUpon>
       <LastGenOutput>EFCGPTruck.cs</LastGenOutput>
@@ -275,39 +275,64 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Entities\Attachment.cs">
+      <DependentUpon>EFCGPTruck.tt</DependentUpon>
+    </Compile>
     <Compile Include="AuthContext.cs" />
     <Compile Include="AuthRepository.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="EFCGPTruck.Context.cs">
+    <Compile Include="Entities\EFCGPTruck.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>EFCGPTruck.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="EFCGPTruck.cs">
+    <Compile Include="Entities\EFCGPTruck.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>EFCGPTruck.tt</DependentUpon>
     </Compile>
-    <Compile Include="EFCGPTruck.Designer.cs">
+    <Compile Include="Entities\EFCGPTruck.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>EFCGPTruck.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Events.cs">
+    <Compile Include="Entities\Event.cs">
+      <DependentUpon>EFCGPTruck.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Mission.cs">
+      <DependentUpon>EFCGPTruck.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\partial\Vehicule.cs" />
+    <Compile Include="Entities\VehiculeState.cs">
       <DependentUpon>EFCGPTruck.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AuthCredentialsModel.cs" />
     <Compile Include="Models\UserModel.cs" />
-    <Compile Include="Places.cs">
+    <Compile Include="Entities\Phone.cs">
       <DependentUpon>EFCGPTruck.tt</DependentUpon>
     </Compile>
-    <Compile Include="Positions.cs">
+    <Compile Include="Entities\Place.cs">
+      <DependentUpon>EFCGPTruck.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\PlaceType.cs">
+      <DependentUpon>EFCGPTruck.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Position.cs">
       <DependentUpon>EFCGPTruck.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\SimpleAuthorizationServerProvider.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="Vehicules.cs">
+    <Compile Include="Entities\Step.cs">
+      <DependentUpon>EFCGPTruck.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\StepType.cs">
+      <DependentUpon>EFCGPTruck.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Vehicule.cs">
+      <DependentUpon>EFCGPTruck.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\VehiculeType.cs">
       <DependentUpon>EFCGPTruck.tt</DependentUpon>
     </Compile>
   </ItemGroup>
