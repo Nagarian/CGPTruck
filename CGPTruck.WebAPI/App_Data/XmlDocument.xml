@@ -481,24 +481,6 @@
             </summary>
             <param name="documentPath">The physical path to XML document.</param>
         </member>
-        <member name="T:CGPTruck.WebAPI.Controllers.AuthController">
-            <summary>
-            Controller permettant de gérer toute l'authentification
-            </summary>
-        </member>
-        <member name="M:CGPTruck.WebAPI.Controllers.AuthController.PostAuth(CGPTruck.WebAPI.Models.AuthCredentialsModel)">
-            <summary>
-            Permet d'authentifier un utilisateur
-            </summary>
-            <param name="credentials"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CGPTruck.WebAPI.Controllers.UsersController.GetUsers">
-            <summary>
-            Permet d'obtenir la liste complète de tout les utilisateurs
-            </summary>
-            <returns></returns>
-        </member>
         <member name="T:CGPTruck.WebAPI.Models.AuthCredentialsModel">
             <summary>
             Informations nécessaire à l'authentification
