@@ -1,14 +1,64 @@
 ﻿<Page
-    x:Class="CGPTruck.UWP.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:CGPTruck.UWP"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Maps="using:Windows.UI.Xaml.Controls.Maps"
+    x:Class="CGPTruck.UWP.MainPage"
     mc:Ignorable="d">
 
-    <Grid>
-        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Click="button_Click"/>
+    <SplitView x:Name="MySplitView" DisplayMode="CompactOverlay"  IsPaneOpen="False" CompactPaneLength="50" OpenPaneLength="200">
+        <SplitView.Pane>
+            <StackPanel Background="#343434">
+                <Button Height="50" Width="200" Tapped="HamburgerButton_Tapped">
+                    <StackPanel Background="#33000000" Margin="-15,-7" Height="50" Width="200" Orientation="Horizontal" IsHitTestVisible="False">
+                        <Button x:Name="MenuButtonBurger" FontSize="28" FontWeight="Bold" FontFamily="Segoe MDL2 Assets" Content="&#xE700;" Width="50" Height="50" Background="Transparent" Foreground="White"/>
+                        <TextBlock Text="CGPTruck" FontSize="25" FontWeight="Bold" FontStyle="Italic"  VerticalAlignment="Center" Foreground="White"/>
+                    </StackPanel>
+                </Button>
+                <StackPanel Height="10"/>
+                <Button Height="50" Width="200">
+                    <StackPanel Background="#33000000" Margin="-15,-7" Height="50" Width="200" Orientation="Horizontal" IsHitTestVisible="False">
+                        <Button x:Name="MenuButtonHome" FontSize="28" FontFamily="Segoe MDL2 Assets" Content="&#xE80F;" Width="50" Height="50" Background="Transparent" Foreground="White"/>
+                        <TextBlock Text="Acceuil" FontSize="18" VerticalAlignment="Center" Foreground="White"/>
+                    </StackPanel>
+                </Button>
+                <Button Height="50" Width="200" Background="#00000000" Tapped="TrajetTest">
+                    <StackPanel IsHitTestVisible="False" Margin="-15,-7" Height="50" Width="200" Orientation="Horizontal">
+                        <Button x:Name="MenuButtonProfile" FontSize="28" FontFamily="Segoe MDL2 Assets" Content="&#xE8D4;" Width="50" Height="50" Background="Transparent" Foreground="White"/>
+                        <TextBlock Text="Mon Profil" FontSize="18" VerticalAlignment="Center" Foreground="White"/>
+                    </StackPanel>
+                </Button>
+                <Button Height="50" Width="200" Background="#00000000" Tapped="MissionButton_Tapped">
+                    <StackPanel IsHitTestVisible="False" Margin="-15,-7" Height="50" Width="200" Orientation="Horizontal">
+                        <Button x:Name="MenuButtonMission" FontFamily="Segoe MDL2 Assets" FontSize="28" Content="&#xE12A;" Width="50" Height="50" Background="Transparent" Foreground="White"/>
+                        <TextBlock Text="Mes Missions" FontSize="18" VerticalAlignment="Center" Foreground="White"/>
+                    </StackPanel>
+                </Button>
+                <Button Height="50" Width="200" Background="#00000000" Tapped="MissionButton_Tapped" VerticalAlignment="Center">
+                    <StackPanel IsHitTestVisible="False" Margin="-15,-7" Height="50" Width="200" Orientation="Horizontal">
+                        <Button x:Name="MenuButtonListEtablissement" FontFamily="Segoe MDL2 Assets" FontSize="28" Content="" Width="50" Height="50" Background="Transparent" Foreground="White"/>
+                        <TextBlock Text="Etablissements" FontSize="18" VerticalAlignment="Center" Foreground="White"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </SplitView.Pane>
+        <SplitView.Content>
+            <Grid>
+    
+                
+                
+                <Maps:MapControl x:Name="Map" 
+            MapServiceToken="vnevem6H-MEWqD795TAckw"
+                                 
+            ZoomInteractionMode="GestureAndControl" 
+            LandmarksVisible="True" 
+            IsRightTapEnabled="true" />
+                <Frame x:Name="frame" Content="Frame" HorizontalAlignment="Left" VerticalAlignment="Top" Height="467" Width="645"/>
 
-    </Grid>
+            </Grid>
+        </SplitView.Content>
+
+    </SplitView>
 </Page>
