@@ -7,12 +7,21 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" Loaded="Page_Loaded">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Background="#59000000">
         <TextBlock x:Name="textBlock" HorizontalAlignment="Center" Margin="10,10,0,0" TextWrapping="Wrap" Text="Missions" VerticalAlignment="Top" FontSize="48"/>
         <Border BorderBrush="Black" BorderThickness="1" Height="172" Margin="10,79,10,0" VerticalAlignment="Top">
-            <Grid>
-                <TextBlock x:Name="Title" TextWrapping="Wrap" Text="En cours" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="16"/>
-                <TextBlock x:Name="textBlock1" Margin="10,26,10,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="93"/>
+            <Grid Margin="10">
+                <TextBlock x:Name="Title" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16">
+                    <Underline>Actuelle : </Underline>
+                </TextBlock>
+                <ScrollViewer Margin="0,26,0,48">
+                    <TextBlock x:Name="textBlock1"  TextWrapping="Wrap" Text="TextBlock" Height="auto"/>
+                </ScrollViewer>
+                <StackPanel Height="37" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                    <Button HorizontalAlignment="Center" Content="Destination" Height="37"/>
+                    <Button Margin="10,0,0,0" Height="37" Content="Annuler" Foreground="Red" />
+
+                </StackPanel>
             </Grid>
         </Border>
 

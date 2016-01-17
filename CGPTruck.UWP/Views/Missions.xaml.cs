@@ -30,6 +30,7 @@ namespace CGPTruck.UWP.Views
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             textBlock1.Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempor mattis porttitor. In hac habitasse platea dictumst. Nam eu mollis leo, quis ultricies neque. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Curabitur pharetra, magna et volutpat maximus, orci sapien tincidunt magna, nec molestie risus ante et nibh. Maecenas volutpat ullamcorper iaculis. Nunc tristique ex eu nisl luctus vestibulum. Praesent placerat velit eget hendrerit sollicitudin. Aenean et lacus eu nisi bibendum bibendum. Aenean in auctor nunc, quis vulputate enim. ";
+            textBlock1.Text += "\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempor mattis porttitor. In hac habitasse platea dictumst. Nam eu mollis leo, quis ultricies neque. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Curabitur pharetra, magna et volutpat maximus, orci sapien tincidunt magna, nec molestie risus ante et nibh. Maecenas volutpat ullamcorper iaculis. Nunc tristique ex eu nisl luctus vestibulum. Praesent placerat velit eget hendrerit sollicitudin. Aenean et lacus eu nisi bibendum bibendum. Aenean in auctor nunc, quis vulputate enim. ";
         }
     }
 }
