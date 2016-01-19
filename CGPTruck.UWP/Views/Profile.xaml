@@ -8,7 +8,7 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <TextBox x:Name="textBox" HorizontalAlignment="Left" Margin="77,117,0,0" TextWrapping="Wrap" Text="Profile Ma gueule" VerticalAlignment="Top" Height="194" Width="319"/>
-
+        <Image x:Name="image" HorizontalAlignment="Left" Height="100" Margin="10,10,0,0" VerticalAlignment="Top" Width="100" Source="ms-appx:///Assets/Square150x150Logo.png"/>
+        <TextBlock x:Name="titleProfile" HorizontalAlignment="Left" Margin="115,53,0,0" TextWrapping="Wrap" Text="Obi Wan Kenobi" VerticalAlignment="Top" FontSize="42.667"/>
     </Grid>
 </Page>

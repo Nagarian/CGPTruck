@@ -67,6 +67,17 @@ namespace CGPTruck.UWP
             mapFrame.Navigate(typeof(Map));
         }
 
+        private void MissionButton_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            if (frame.CurrentSourcePageType != typeof(Missions))
+                frame.Navigate(typeof(Missions));
+
+            if (frame.Visibility == Visibility.Collapsed)
+                frame.Visibility = Visibility.Visible;
+        }
+
+       
+
         //private async void MissionButton_Tapped(object sender, TappedRoutedEventArgs e)
         // {
         //    Map.TrafficFlowVisible = true;

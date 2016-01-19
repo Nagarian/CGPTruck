@@ -30,7 +30,7 @@
                         <TextBlock Text="Mon Profil" FontSize="18" VerticalAlignment="Center" Foreground="White"/>
                     </StackPanel>
                 </Button>
-                <Button Height="50" Width="200" Background="#00000000" >
+                <Button Height="50" Width="200" Background="#00000000" Tapped="MissionButton_Tapped" >
                     <StackPanel IsHitTestVisible="False" Margin="-15,-7" Height="50" Width="200" Orientation="Horizontal">
                         <Button x:Name="MenuButtonMission" FontFamily="Segoe MDL2 Assets" FontSize="28" Content="&#xE12A;" Width="50" Height="50" Background="Transparent" Foreground="White"/>
                         <TextBlock Text="Mes Missions" FontSize="18" VerticalAlignment="Center" Foreground="White"/>
