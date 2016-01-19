@@ -105,7 +105,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EFCGPTruck.tt</DependentUpon>
     </Compile>
-    <Compile Include="Entities\Event.cs">
+    <Compile Include="Entities\Failure.cs">
+      <DependentUpon>EFCGPTruck.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\FailureDetail.cs">
+      <DependentUpon>EFCGPTruck.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\User.cs">
       <DependentUpon>EFCGPTruck.tt</DependentUpon>
     </Compile>
     <Compile Include="MainPage.xaml.cs">

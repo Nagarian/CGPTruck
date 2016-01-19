@@ -15,10 +15,12 @@ namespace CGPTruck.WebAPI.Entities
     public partial class Step
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
+        public int StepNumber { get; set; }
+        public string Informations { get; set; }
         public int StepType_Id { get; set; }
+        public int Mission_Id { get; set; }
     
         public virtual StepType StepType { get; set; }
+        public virtual Mission Mission { get; set; }
     }
 }

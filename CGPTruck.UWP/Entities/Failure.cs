@@ -12,13 +12,21 @@ namespace CGPTruck.UWP.Entities.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class Event
+    public partial class Failure
     {
         public int Id { get; set; }
-        public string Name { get; set; }
         public System.DateTime Date { get; set; }
-        public int Mission_Id { get; set; }
+        public int Vehicule_Id { get; set; }
+        public int State { get; set; }
+        public int Mission_id { get; set; }
+        public Nullable<int> Failure_Detail_Id { get; set; }
+        public Nullable<int> Repairer_Id { get; set; }
+        public Nullable<int> Repairer_Vehicule_Id { get; set; }
     
+        public virtual Vehicule RepairerVehicule { get; set; }
+        public virtual Vehicule Vehicule { get; set; }
+        public virtual FailureDetail FailureDetail { get; set; }
+        public virtual User User { get; set; }
         public virtual Mission Mission { get; set; }
     }
 }

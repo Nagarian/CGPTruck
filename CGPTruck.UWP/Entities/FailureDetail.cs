@@ -12,16 +12,20 @@ namespace CGPTruck.UWP.Entities.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class Attachment
+    public partial class FailureDetail
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public string Path { get; set; }
-        public Nullable<int> Mission_Id { get; set; }
-        public Nullable<int> Failure_Id { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public FailureDetail()
+        {
+            this.Attachments = new HashSet<Attachment>();
+        }
     
-        public virtual FailureDetail FailureDetail { get; set; }
-        public virtual Mission Mission { get; set; }
+        public int Failure_Id { get; set; }
+        public string Description { get; set; }
+        public System.DateTime Write_Date { get; set; }
+    
+        public virtual Failure Failure { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Attachment> Attachments { get; set; }
     }
 }

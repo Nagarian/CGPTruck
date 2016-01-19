@@ -25,14 +25,16 @@ namespace CGPTruck.WebAPI.Entities.Entities
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Event> Events { get; set; }
-        public virtual DbSet<Phone> Phones { get; set; }
         public virtual DbSet<Place> Places { get; set; }
         public virtual DbSet<Position> Positions { get; set; }
-        public virtual DbSet<Step> Steps { get; set; }
         public virtual DbSet<StepType> StepTypes { get; set; }
         public virtual DbSet<Vehicule> Vehicules { get; set; }
+        public virtual DbSet<Failure> Failures { get; set; }
+        public virtual DbSet<FailureDetail> FailureDetails { get; set; }
         public virtual DbSet<Attachment> Attachments { get; set; }
+        public virtual DbSet<Step> Steps { get; set; }
+        public virtual DbSet<Phone> Phones { get; set; }
+        public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Mission> Missions { get; set; }
     }
 }

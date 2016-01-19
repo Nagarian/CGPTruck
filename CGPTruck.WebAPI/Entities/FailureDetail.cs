@@ -12,26 +12,20 @@ namespace CGPTruck.WebAPI.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class Place
+    public partial class FailureDetail
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Place()
+        public FailureDetail()
         {
-            this.DeliveryMissions = new HashSet<Mission>();
-            this.PickupMissions = new HashSet<Mission>();
+            this.Attachments = new HashSet<Attachment>();
         }
     
-        public int Id { get; set; }
-        public int Position_Id { get; set; }
-        public string Name { get; set; }
+        public int Failure_Id { get; set; }
         public string Description { get; set; }
-        public PlaceType Place_Type { get; set; }
-        public bool Active { get; set; }
+        public System.DateTime Write_Date { get; set; }
     
-        public virtual Position Position { get; set; }
+        public virtual Failure Failure { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Mission> DeliveryMissions { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Mission> PickupMissions { get; set; }
+        public virtual ICollection<Attachment> Attachments { get; set; }
     }
 }

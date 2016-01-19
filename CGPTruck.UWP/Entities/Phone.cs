@@ -14,18 +14,11 @@ namespace CGPTruck.UWP.Entities.Entities
     
     public partial class Phone
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Phone()
-        {
-            this.Missions = new HashSet<Mission>();
-        }
-    
-        public int Id { get; set; }
+        public int User_Id { get; set; }
         public string Name { get; set; }
         public string Serial_Code { get; set; }
         public int Phone_State { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Mission> Missions { get; set; }
+        public virtual User User { get; set; }
     }
 }

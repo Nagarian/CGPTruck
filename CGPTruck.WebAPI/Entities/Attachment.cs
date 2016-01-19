@@ -17,8 +17,11 @@ namespace CGPTruck.WebAPI.Entities
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public int Mission_Id { get; set; }
+        public string Path { get; set; }
+        public Nullable<int> Mission_Id { get; set; }
+        public Nullable<int> Failure_Id { get; set; }
     
+        public virtual FailureDetail FailureDetail { get; set; }
         public virtual Mission Mission { get; set; }
     }
 }
