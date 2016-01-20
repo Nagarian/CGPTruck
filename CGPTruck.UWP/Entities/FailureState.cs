@@ -10,15 +10,12 @@
 namespace CGPTruck.UWP.Entities.Entities
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Phone
+    public enum FailureState : int
     {
-        public int User_Id { get; set; }
-        public string Name { get; set; }
-        public string Serial_Code { get; set; }
-        public PhoneState Phone_State { get; set; }
-    
-        public virtual User User { get; set; }
+        Declared = 0,
+        Processing = 1,
+        RepairmanApproaching = 2,
+        Resolved = 3
     }
 }

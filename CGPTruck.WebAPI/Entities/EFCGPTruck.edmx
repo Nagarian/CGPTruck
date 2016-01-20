@@ -544,8 +544,8 @@
           </ReferentialConstraint>
         </Association>
         <EnumType Name="VehiculeType">
-          <Member Name="Truck" Value="0" />
-          <Member Name="Car" Value="1" />
+          <Member Name="Car" Value="0" />
+          <Member Name="Truck" Value="1" />
           <Member Name="RepairTruck" Value="2" />
         </EnumType>
         <EnumType Name="PlaceType">
@@ -566,7 +566,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Vehicule_Id" Type="Int32" Nullable="false" />
-          <Property Name="State" Type="Int32" Nullable="false" />
+          <Property Name="State" Type="CGPTruckModel.FailureState" Nullable="false" />
           <Property Name="Mission_id" Type="Int32" Nullable="false" />
           <Property Name="Failure_Detail_Id" Type="Int32" />
           <Property Name="Repairer_Id" Type="Int32" />
@@ -679,7 +679,7 @@
           <Property Name="User_Id" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="Serial_Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Phone_State" Type="Int32" Nullable="false" />
+          <Property Name="Phone_State" Type="CGPTruckModel.PhoneState" Nullable="false" />
           <NavigationProperty Name="User" Relationship="CGPTruckModel.FK_Phones_User" FromRole="Phone" ToRole="User" />
         </EntityType>
         <EntityType Name="User">
@@ -688,8 +688,8 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="AspNetId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="AccountType" Type="Int32" Nullable="false" />
-          <Property Name="DriverLicenseType" Type="Int32" Nullable="false" />
+          <Property Name="AccountType" Type="CGPTruckModel.AccountType" Nullable="false" />
+          <Property Name="DriverLicenseType" Type="CGPTruckModel.DriverLicenseType" Nullable="false" />
           <Property Name="Active" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Failures" Relationship="CGPTruckModel.FK_Failures_Repairer" FromRole="User" ToRole="Failure" />
           <NavigationProperty Name="Phone" Relationship="CGPTruckModel.FK_Phones_User" FromRole="User" ToRole="Phone" />
@@ -823,6 +823,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EnumType Name="DriverLicenseType">
+          <Member Name="Car" Value="0" />
+          <Member Name="Truck" Value="1" />
+          <Member Name="CarAndTruck" Value="2" />
+        </EnumType>
+        <EnumType Name="AccountType">
+          <Member Name="Driver" Value="0" />
+          <Member Name="Repairer" Value="1" />
+          <Member Name="Administrator" Value="2" />
+          <Member Name="DecisionMaker" Value="3" />
+        </EnumType>
+        <EnumType Name="PhoneState">
+          <Member Name="Running" Value="0" />
+          <Member Name="OutOfService" Value="1" />
+        </EnumType>
+        <EnumType Name="FailureState">
+          <Member Name="Declared" Value="0" />
+          <Member Name="Processing" Value="1" />
+          <Member Name="RepairmanApproaching" Value="2" />
+          <Member Name="Resolved" Value="3" />
+        </EnumType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

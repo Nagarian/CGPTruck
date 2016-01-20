@@ -23,8 +23,8 @@ namespace CGPTruck.WebAPI.Entities
     
         public int Id { get; set; }
         public string AspNetId { get; set; }
-        public int AccountType { get; set; }
-        public int DriverLicenseType { get; set; }
+        public AccountType AccountType { get; set; }
+        public DriverLicenseType DriverLicenseType { get; set; }
         public bool Active { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

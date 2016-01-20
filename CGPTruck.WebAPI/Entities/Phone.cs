@@ -17,7 +17,7 @@ namespace CGPTruck.WebAPI.Entities
         public int User_Id { get; set; }
         public string Name { get; set; }
         public string Serial_Code { get; set; }
-        public int Phone_State { get; set; }
+        public PhoneState Phone_State { get; set; }
     
         public virtual User User { get; set; }
     }

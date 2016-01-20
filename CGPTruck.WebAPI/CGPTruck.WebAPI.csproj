@@ -278,7 +278,13 @@
     <Compile Include="AuthContext.cs" />
     <Compile Include="AuthRepository.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Entities\AccountType.cs">
+      <DependentUpon>EFCGPTruck.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entities\Attachment.cs">
+      <DependentUpon>EFCGPTruck.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\DriverLicenseType.cs">
       <DependentUpon>EFCGPTruck.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\EFCGPTruck.Context.cs">
@@ -302,11 +308,17 @@
     <Compile Include="Entities\FailureDetail.cs">
       <DependentUpon>EFCGPTruck.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\FailureState.cs">
+      <DependentUpon>EFCGPTruck.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entities\Mission.cs">
       <DependentUpon>EFCGPTruck.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\partial\Vehicule.cs" />
     <Compile Include="Entities\Phone.cs">
+      <DependentUpon>EFCGPTruck.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\PhoneState.cs">
       <DependentUpon>EFCGPTruck.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\Place.cs">

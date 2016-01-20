@@ -97,7 +97,13 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Entities\AccountType.cs">
+      <DependentUpon>EFCGPTruck.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entities\Attachment.cs">
+      <DependentUpon>EFCGPTruck.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\DriverLicenseType.cs">
       <DependentUpon>EFCGPTruck.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\EFCGPTruck.cs">
@@ -109,6 +115,12 @@
       <DependentUpon>EFCGPTruck.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\FailureDetail.cs">
+      <DependentUpon>EFCGPTruck.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\FailureState.cs">
+      <DependentUpon>EFCGPTruck.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\PhoneState.cs">
       <DependentUpon>EFCGPTruck.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\User.cs">

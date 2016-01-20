@@ -13,8 +13,8 @@ namespace CGPTruck.UWP.Entities.Entities
     
     public enum VehiculeType : int
     {
-        Truck = 0,
-        Car = 1,
+        Car = 0,
+        Truck = 1,
         RepairTruck = 2
     }
 }

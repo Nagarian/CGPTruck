@@ -7,18 +7,15 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CGPTruck.UWP.Entities.Entities
+namespace CGPTruck.WebAPI.Entities
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Phone
+    public enum AccountType : int
     {
-        public int User_Id { get; set; }
-        public string Name { get; set; }
-        public string Serial_Code { get; set; }
-        public PhoneState Phone_State { get; set; }
-    
-        public virtual User User { get; set; }
+        Driver = 0,
+        Repairer = 1,
+        Administrator = 2,
+        DecisionMaker = 3
     }
 }
