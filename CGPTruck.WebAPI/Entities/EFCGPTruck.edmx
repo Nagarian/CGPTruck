@@ -572,7 +572,7 @@ avertissement 6002: La table/vue 'CGPTruck.dbo.UsersPhones' n'a pas de clé prim
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Vehicule_Id" Type="Int32" Nullable="false" />
-          <Property Name="State" Type="Int32" Nullable="false" />
+          <Property Name="State" Type="CGPTruckModel.FailureState" Nullable="false" />
           <Property Name="Mission_id" Type="Int32" Nullable="false" />
           <Property Name="Failure_Detail_Id" Type="Int32" />
           <Property Name="Repairer_Id" Type="Int32" />

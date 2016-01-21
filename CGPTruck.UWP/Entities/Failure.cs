@@ -17,7 +17,7 @@ namespace CGPTruck.UWP.Entities.Entities
         public int Id { get; set; }
         public System.DateTime Date { get; set; }
         public int Vehicule_Id { get; set; }
-        public int State { get; set; }
+        public FailureState State { get; set; }
         public int Mission_id { get; set; }
         public Nullable<int> Failure_Detail_Id { get; set; }
         public Nullable<int> Repairer_Id { get; set; }
