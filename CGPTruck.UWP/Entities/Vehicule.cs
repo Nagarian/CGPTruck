@@ -23,20 +23,20 @@ namespace CGPTruck.UWP.Entities.Entities
         }
     
         public int Id { get; set; }
+        public int Position_Id { get; set; }
         public string Brand { get; set; }
         public string Model { get; set; }
         public string Description { get; set; }
         public VehiculeState Vehicule_State { get; set; }
-        public int Position_Id { get; set; }
         public VehiculeType Vehicule_Type { get; set; }
         public bool Active { get; set; }
     
-        public virtual Position Position { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Failure> Reparations { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Failure> Failures { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Mission> Missions { get; set; }
+        public virtual Position Position { get; set; }
     }
 }

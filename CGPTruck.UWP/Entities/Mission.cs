@@ -25,7 +25,7 @@ namespace CGPTruck.UWP.Entities.Entities
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public System.DateTime Start_Date { get; set; }
+        public System.DateTime Date { get; set; }
         public int Vehicule_Id { get; set; }
         public int Driver_Id { get; set; }
         public int Pickup_Place_Id { get; set; }

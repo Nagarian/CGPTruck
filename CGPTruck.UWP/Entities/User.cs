@@ -19,6 +19,7 @@ namespace CGPTruck.UWP.Entities.Entities
         {
             this.Failures = new HashSet<Failure>();
             this.Missions = new HashSet<Mission>();
+            this.Phones = new HashSet<Phone>();
         }
     
         public int Id { get; set; }
@@ -29,8 +30,9 @@ namespace CGPTruck.UWP.Entities.Entities
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Failure> Failures { get; set; }
-        public virtual Phone Phone { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Mission> Missions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Phone> Phones { get; set; }
     }
 }

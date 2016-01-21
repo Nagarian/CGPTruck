@@ -10,21 +10,17 @@
 namespace CGPTruck.WebAPI.Entities
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class StepType
+    public enum StepType : int
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public StepType()
-        {
-            this.Steps = new HashSet<Step>();
-        }
-    
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Step> Steps { get; set; }
+        Waiting = 0,
+        PickupProgressing = 1,
+        PickingUp = 2,
+        DeliveryProgressing = 3,
+        Delivering = 4,
+        Returning = 5,
+        Failure = 6,
+        DisasterRecovery = 7,
+        Aborted = 8
     }
 }

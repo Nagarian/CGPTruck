@@ -14,8 +14,10 @@ namespace CGPTruck.WebAPI.Entities
     public enum PlaceType : int
     {
         Garage = 0,
-        RepairCenter = 1,
-        GasStation = 2,
-        Restaurant = 3
+        Warehouse = 1,
+        RepairCenter = 2,
+        Restaurant = 3,
+        GasStation = 4,
+        Client = 5
     }
 }

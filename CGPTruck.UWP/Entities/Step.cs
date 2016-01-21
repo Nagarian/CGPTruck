@@ -16,11 +16,12 @@ namespace CGPTruck.UWP.Entities.Entities
     {
         public int Id { get; set; }
         public int StepNumber { get; set; }
+        public int Position_Id { get; set; }
         public string Informations { get; set; }
-        public int StepType_Id { get; set; }
+        public StepType Step_Type { get; set; }
         public int Mission_Id { get; set; }
     
-        public virtual StepType StepType { get; set; }
         public virtual Mission Mission { get; set; }
+        public virtual Position Position { get; set; }
     }
 }

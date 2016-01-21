@@ -14,20 +14,8 @@ namespace CGPTruck.WebAPI.Entities
     
     public partial class Position
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Position()
-        {
-            this.Places = new HashSet<Place>();
-            this.Vehicules = new HashSet<Vehicule>();
-        }
-    
         public int Id { get; set; }
-        public double Latitude { get; set; }
         public double Longitude { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Place> Places { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Vehicule> Vehicules { get; set; }
+        public double Latitude { get; set; }
     }
 }
