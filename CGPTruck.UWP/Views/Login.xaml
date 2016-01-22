@@ -10,11 +10,12 @@
     <Grid Background="#FF222222">
         <StackPanel Width="350" VerticalAlignment="Center" >
             <TextBlock Foreground="White" FontSize="48" Margin="0,0,0,20" TextAlignment="Center">CGPTruck</TextBlock>
-            <TextBlock Foreground="White" Margin="0,0,0,5"><Underline>Username:</Underline></TextBlock>
+            <TextBlock Foreground="White" Margin="0,0,0,2">Nom d'utilisateur :</TextBlock>
             <TextBox x:Name="Username_TextBox" Margin="0,0,0,10"></TextBox>
-            <TextBlock Foreground="White" Margin="0,0,0,5"><Underline>Password:</Underline></TextBlock>
+            <TextBlock Foreground="White" Margin="0,0,0,2">Mot de passe :</TextBlock>
             <PasswordBox x:Name="Password_PasswordTextBox" Margin="0,0,0,10" KeyUp="PasswordBox_KeyUp"></PasswordBox>
-            <Button HorizontalAlignment="Stretch" Foreground="White" Background="#59657A07" FontWeight="Bold" Click="Button_Click" >Se connecter</Button>
+            <Button HorizontalAlignment="Stretch" Foreground="White" Background="#598AA60A" FontWeight="Bold" Click="Button_Click" >Se connecter</Button>
+            <TextBlock x:Name="Message_TextBlock" Foreground="#FFE20000"></TextBlock>
         </StackPanel>
     </Grid>
 </Page>

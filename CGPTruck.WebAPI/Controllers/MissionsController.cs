@@ -15,7 +15,7 @@ namespace CGPTruck.WebAPI.Controllers
 {
     public class MissionsController : ApiController
     {
-        private CGPTruckEntities1 db = new CGPTruckEntities1();
+        private CGPTruckEntities db = new CGPTruckEntities();
 
         // GET: api/Missions
         public IQueryable<Mission> GetMissions()

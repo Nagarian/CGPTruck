@@ -481,6 +481,13 @@
             </summary>
             <param name="documentPath">The physical path to XML document.</param>
         </member>
+        <member name="M:CGPTruck.WebAPI.Entities.partial.Extension.GetTitle(CGPTruck.WebAPI.Entities.StepType)">
+            <summary>
+            Permet d'obtenir l'intitulé (en Fr) de l'enumération
+            </summary>
+            <param name="step"></param>
+            <returns></returns>
+        </member>
         <member name="T:CGPTruck.WebAPI.Entities.Vehicule">
             <summary>
             Objet réprésentant un véhicule

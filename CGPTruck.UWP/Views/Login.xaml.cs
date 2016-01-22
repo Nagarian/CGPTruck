@@ -35,8 +35,10 @@ namespace CGPTruck.UWP.Views
 
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (await WebApiService.Current.Authenticate(Username_TextBox.Text, Core.Security.HashMD5(Password_PasswordTextBox.Password)))
+            if (await WebApiService.Current.Authenticate(Username_TextBox.Text, Password_PasswordTextBox.Password))
                 Frame.Navigate(typeof(MainPage));
+            else
+                Message_TextBlock.Text = "Identifiant erronés !";
         }
 
 
