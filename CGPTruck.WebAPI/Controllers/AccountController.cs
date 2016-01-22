@@ -1,6 +1,8 @@
 ﻿using CGPTruck.BLL;
+using CGPTruck.WebAPI.Entities.Entities;
 using CGPTruck.WebAPI.Models;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,10 +40,27 @@ namespace CGPTruck.WebAPI.Controllers
                 {
                     return errorResult;
                 }
+
+                var aspUser = await _repo.FindUser(userModel.UserName, userModel.Password);
+                using (CGPTruckEntities context = new CGPTruckEntities())
+                {
+                    context.Users.Add(new Entities.User
+                    {
+                        AspNetId = aspUser.Id,
+                        AccountType = userModel.AccountType,
+                        DriverLicenseType = userModel.DriverLicenseType,
+                        Birthday = userModel.BirthdayDate,
+                        FirstName = userModel.FirstName,
+                        LastName = userModel.LastName,
+                        Sexe = userModel.Sexe,
+                        Active = true,
+                    });
+                    context.SaveChanges();
+                }
+
             }
             catch (Exception)
             {
-
                 throw;
             }
 

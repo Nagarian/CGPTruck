@@ -31,9 +31,9 @@ namespace CGPTruck.WebAPI.Entities.Entities
         public virtual DbSet<Mission> Missions { get; set; }
         public virtual DbSet<Phone> Phones { get; set; }
         public virtual DbSet<Place> Places { get; set; }
+        public virtual DbSet<Position> Positions { get; set; }
         public virtual DbSet<Step> Steps { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Vehicule> Vehicules { get; set; }
-        public virtual DbSet<Position> Positions { get; set; }
     }
 }

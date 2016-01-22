@@ -16,6 +16,7 @@ namespace CGPTruck.WebAPI.Entities
     {
         public int Id { get; set; }
         public int StepNumber { get; set; }
+        public System.DateTime Date { get; set; }
         public int Position_Id { get; set; }
         public string Informations { get; set; }
         public StepType Step_Type { get; set; }

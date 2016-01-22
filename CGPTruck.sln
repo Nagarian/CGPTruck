@@ -15,6 +15,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SQL", "SQL", "{7F3B8514-F0FE-4F3D-B0BD-C584D82E8681}"
 	ProjectSection(SolutionItems) = preProject
 		SQL\01 - CREATE TABLE.sql = SQL\01 - CREATE TABLE.sql
+		SQL\02 - INSERT.sql = SQL\02 - INSERT.sql
+		SQL\03 - UPDATE.sql = SQL\03 - UPDATE.sql
 	EndProjectSection
 EndProject
 Global

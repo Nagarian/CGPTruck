@@ -316,6 +316,7 @@
       <DependentUpon>EFCGPTruck.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\partial\Extension.cs" />
+    <Compile Include="Entities\partial\User.cs" />
     <Compile Include="Entities\partial\Vehicule.cs" />
     <Compile Include="Entities\Phone.cs">
       <DependentUpon>EFCGPTruck.tt</DependentUpon>
@@ -350,7 +351,6 @@
     <Compile Include="Entities\VehiculeType.cs">
       <DependentUpon>EFCGPTruck.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\AuthCredentialsModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\SimpleAuthorizationServerProvider.cs" />

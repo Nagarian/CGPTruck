@@ -493,19 +493,49 @@
             Objet réprésentant un véhicule
             </summary>
         </member>
-        <member name="T:CGPTruck.WebAPI.Models.AuthCredentialsModel">
+        <member name="P:CGPTruck.WebAPI.Models.UserModel.UserName">
             <summary>
-            Informations nécessaire à l'authentification
+            Pseudo de l'utilisateur
             </summary>
         </member>
-        <member name="P:CGPTruck.WebAPI.Models.AuthCredentialsModel.Email">
+        <member name="P:CGPTruck.WebAPI.Models.UserModel.FirstName">
             <summary>
-            Email de l'utilisateur
+            Prénom de l'utilisateur
             </summary>
         </member>
-        <member name="P:CGPTruck.WebAPI.Models.AuthCredentialsModel.Password">
+        <member name="P:CGPTruck.WebAPI.Models.UserModel.LastName">
             <summary>
-            Password de l'utilisateur
+            Nom de l'utilisateur
+            </summary>
+        </member>
+        <member name="P:CGPTruck.WebAPI.Models.UserModel.BirthdayDate">
+            <summary>
+            Date de naissance de l'utilisateur
+            </summary>
+        </member>
+        <member name="P:CGPTruck.WebAPI.Models.UserModel.Sexe">
+            <summary>
+            Sexe de l'utilisateur, Homme : true, Femme : false
+            </summary>
+        </member>
+        <member name="P:CGPTruck.WebAPI.Models.UserModel.AccountType">
+            <summary>
+            Type de compte
+            </summary>
+        </member>
+        <member name="P:CGPTruck.WebAPI.Models.UserModel.DriverLicenseType">
+            <summary>
+            Type de permis de conduire de l'utilisateur
+            </summary>
+        </member>
+        <member name="P:CGPTruck.WebAPI.Models.UserModel.Password">
+            <summary>
+            Mot de passe de l'utilisateur
+            </summary>
+        </member>
+        <member name="P:CGPTruck.WebAPI.Models.UserModel.ConfirmPassword">
+            <summary>
+            Confirmation du mot de passe de l'utilisateur
             </summary>
         </member>
     </members>

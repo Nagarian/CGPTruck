@@ -29,7 +29,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
           <Property Name="Vehicule_Id" Type="int" Nullable="false" />
           <Property Name="State" Type="int" Nullable="false" />
           <Property Name="Mission_id" Type="int" Nullable="false" />
@@ -54,7 +54,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="250" />
           <Property Name="Serial_Code" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Phone_State" Type="int" Nullable="false" />
@@ -84,6 +84,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="StepNumber" Type="int" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
           <Property Name="Position_Id" Type="int" Nullable="false" />
           <Property Name="Informations" Type="nvarchar(max)" />
           <Property Name="Step_Type" Type="int" Nullable="false" />
@@ -95,6 +96,10 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="AspNetId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Birthday" Type="date" Nullable="false" />
+          <Property Name="Sexe" Type="bit" Nullable="false" />
           <Property Name="AccountType" Type="int" Nullable="false" />
           <Property Name="DriverLicenseType" Type="int" Nullable="false" />
           <Property Name="Active" Type="bit" Nullable="false" />
@@ -423,6 +428,7 @@ avertissement 6002: La table/vue 'CGPTruck.dbo.UsersPhones' n'a pas de clé prim
           <EntitySet Name="Missions" EntityType="CGPTruckModel.Mission" />
           <EntitySet Name="Phones" EntityType="CGPTruckModel.Phone" />
           <EntitySet Name="Places" EntityType="CGPTruckModel.Place" />
+          <EntitySet Name="Positions" EntityType="CGPTruckModel.Position" />
           <EntitySet Name="Steps" EntityType="CGPTruckModel.Step" />
           <EntitySet Name="Users" EntityType="CGPTruckModel.User" />
           <EntitySet Name="Vehicules" EntityType="CGPTruckModel.Vehicule" />
@@ -474,11 +480,6 @@ avertissement 6002: La table/vue 'CGPTruck.dbo.UsersPhones' n'a pas de clé prim
             <End Role="Mission" EntitySet="Missions" />
             <End Role="Step" EntitySet="Steps" />
           </AssociationSet>
-          <AssociationSet Name="UsersPhones" Association="CGPTruckModel.UsersPhones">
-            <End Role="Phone" EntitySet="Phones" />
-            <End Role="User" EntitySet="Users" />
-          </AssociationSet>
-          <EntitySet Name="Positions" EntityType="CGPTruckModel.Position" />
           <AssociationSet Name="FK_Places_Position" Association="CGPTruckModel.FK_Places_Position">
             <End Role="Position" EntitySet="Positions" />
             <End Role="Place" EntitySet="Places" />
@@ -490,6 +491,10 @@ avertissement 6002: La table/vue 'CGPTruck.dbo.UsersPhones' n'a pas de clé prim
           <AssociationSet Name="FK_Vehicules_Position" Association="CGPTruckModel.FK_Vehicules_Position">
             <End Role="Position" EntitySet="Positions" />
             <End Role="Vehicule" EntitySet="Vehicules" />
+          </AssociationSet>
+          <AssociationSet Name="UsersPhones" Association="CGPTruckModel.UsersPhones">
+            <End Role="Phone" EntitySet="Phones" />
+            <End Role="User" EntitySet="Users" />
           </AssociationSet>
         </EntityContainer>
         <EnumType Name="VehiculeType">
@@ -571,7 +576,7 @@ avertissement 6002: La table/vue 'CGPTruck.dbo.UsersPhones' n'a pas de clé prim
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Vehicule_Id" Type="Int32" Nullable="false" />
           <Property Name="State" Type="CGPTruckModel.FailureState" Nullable="false" />
           <Property Name="Mission_id" Type="Int32" Nullable="false" />
@@ -608,7 +613,7 @@ avertissement 6002: La table/vue 'CGPTruck.dbo.UsersPhones' n'a pas de clé prim
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="Serial_Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Phone_State" Type="CGPTruckModel.PhoneState" Nullable="false" />
@@ -628,12 +633,21 @@ avertissement 6002: La table/vue 'CGPTruck.dbo.UsersPhones' n'a pas de clé prim
           <NavigationProperty Name="PickupMissions" Relationship="CGPTruckModel.FK_Missions_Pickup_Place" FromRole="Place" ToRole="Mission" />
           <NavigationProperty Name="Position" Relationship="CGPTruckModel.FK_Places_Position" FromRole="Place" ToRole="Position" />
         </EntityType>
+        <EntityType Name="Position">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Longitude" Type="Double" Nullable="false" />
+          <Property Name="Latitude" Type="Double" Nullable="false" />
+          </EntityType>
         <EntityType Name="Step">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="StepNumber" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Position_Id" Type="Int32" Nullable="false" />
           <Property Name="Informations" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Step_Type" Type="CGPTruckModel.StepType" Nullable="false" />
@@ -647,6 +661,10 @@ avertissement 6002: La table/vue 'CGPTruck.dbo.UsersPhones' n'a pas de clé prim
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="AspNetId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Birthday" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Sexe" Type="Boolean" Nullable="false" />
           <Property Name="AccountType" Type="CGPTruckModel.AccountType" Nullable="false" />
           <Property Name="DriverLicenseType" Type="CGPTruckModel.DriverLicenseType" Nullable="false" />
           <Property Name="Active" Type="Boolean" Nullable="false" />
@@ -815,18 +833,6 @@ avertissement 6002: La table/vue 'CGPTruck.dbo.UsersPhones' n'a pas de clé prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="UsersPhones">
-          <End Type="CGPTruckModel.Phone" Role="Phone" Multiplicity="*" />
-          <End Type="CGPTruckModel.User" Role="User" Multiplicity="*" />
-        </Association>
-        <EntityType Name="Position">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Longitude" Type="Double" Nullable="false" />
-          <Property Name="Latitude" Type="Double" Nullable="false" />
-          </EntityType>
         <Association Name="FK_Places_Position">
           <End Type="CGPTruckModel.Position" Role="Position" Multiplicity="1" />
           <End Type="CGPTruckModel.Place" Role="Place" Multiplicity="*" />
@@ -862,6 +868,10 @@ avertissement 6002: La table/vue 'CGPTruck.dbo.UsersPhones' n'a pas de clé prim
               <PropertyRef Name="Position_Id" />
             </Dependent>
           </ReferentialConstraint>
+        </Association>
+        <Association Name="UsersPhones">
+          <End Type="CGPTruckModel.Phone" Role="Phone" Multiplicity="*" />
+          <End Type="CGPTruckModel.User" Role="User" Multiplicity="*" />
         </Association>
         </Schema>
     </edmx:ConceptualModels>
@@ -940,6 +950,15 @@ avertissement 6002: La table/vue 'CGPTruck.dbo.UsersPhones' n'a pas de clé prim
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Positions">
+            <EntityTypeMapping TypeName="CGPTruckModel.Position">
+              <MappingFragment StoreEntitySet="Positions">
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Steps">
             <EntityTypeMapping TypeName="CGPTruckModel.Step">
               <MappingFragment StoreEntitySet="Steps">
@@ -947,6 +966,7 @@ avertissement 6002: La table/vue 'CGPTruck.dbo.UsersPhones' n'a pas de clé prim
                 <ScalarProperty Name="Step_Type" ColumnName="Step_Type" />
                 <ScalarProperty Name="Informations" ColumnName="Informations" />
                 <ScalarProperty Name="Position_Id" ColumnName="Position_Id" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="StepNumber" ColumnName="StepNumber" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
@@ -958,6 +978,10 @@ avertissement 6002: La table/vue 'CGPTruck.dbo.UsersPhones' n'a pas de clé prim
                 <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="DriverLicenseType" ColumnName="DriverLicenseType" />
                 <ScalarProperty Name="AccountType" ColumnName="AccountType" />
+                <ScalarProperty Name="Sexe" ColumnName="Sexe" />
+                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="AspNetId" ColumnName="AspNetId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
@@ -985,15 +1009,6 @@ avertissement 6002: La table/vue 'CGPTruck.dbo.UsersPhones' n'a pas de clé prim
               <ScalarProperty Name="Id" ColumnName="Phone_Id" />
             </EndProperty>
           </AssociationSetMapping>
-          <EntitySetMapping Name="Positions">
-            <EntityTypeMapping TypeName="CGPTruckModel.Position">
-              <MappingFragment StoreEntitySet="Positions">
-                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
-                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

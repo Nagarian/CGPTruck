@@ -24,6 +24,10 @@ namespace CGPTruck.WebAPI.Entities
     
         public int Id { get; set; }
         public string AspNetId { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public System.DateTime Birthday { get; set; }
+        public bool Sexe { get; set; }
         public AccountType AccountType { get; set; }
         public DriverLicenseType DriverLicenseType { get; set; }
         public bool Active { get; set; }

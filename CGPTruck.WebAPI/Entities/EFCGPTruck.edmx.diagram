@@ -4,34 +4,34 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="679c99bd4a69463b88fe4501a75be7b5" Name="Diagram1" ZoomLevel="80">
-        <EntityTypeShape EntityType="CGPTruckModel.Attachment" Width="1.5" PointX="7.75" PointY="6.125" />
-        <EntityTypeShape EntityType="CGPTruckModel.FailureDetail" Width="1.5" PointX="7.375" PointY="9.625" />
-        <EntityTypeShape EntityType="CGPTruckModel.Failure" Width="1.5" PointX="12.25" PointY="9.25" />
-        <EntityTypeShape EntityType="CGPTruckModel.Mission" Width="1.5" PointX="12.125" PointY="5" />
-        <EntityTypeShape EntityType="CGPTruckModel.Phone" Width="1.5" PointX="17.625" PointY="5.75" />
-        <EntityTypeShape EntityType="CGPTruckModel.Place" Width="1.5" PointX="12.125" PointY="1.5" />
-        <EntityTypeShape EntityType="CGPTruckModel.Step" Width="1.5" PointX="8.875" PointY="1.5" />
-        <EntityTypeShape EntityType="CGPTruckModel.User" Width="1.5" PointX="15.25" PointY="5.375" />
-        <EntityTypeShape EntityType="CGPTruckModel.Vehicule" Width="1.5" PointX="20.125" PointY="3.875" />
+      <Diagram DiagramId="679c99bd4a69463b88fe4501a75be7b5" Name="Diagram1" ZoomLevel="78">
+        <EntityTypeShape EntityType="CGPTruckModel.Attachment" Width="1.5" PointX="5.375" PointY="5.625" />
+        <EntityTypeShape EntityType="CGPTruckModel.FailureDetail" Width="1.5" PointX="5.375" PointY="9.25" />
+        <EntityTypeShape EntityType="CGPTruckModel.Failure" Width="1.5" PointX="8.375" PointY="9.375" />
+        <EntityTypeShape EntityType="CGPTruckModel.Mission" Width="1.5" PointX="11.25" PointY="5.625" />
+        <EntityTypeShape EntityType="CGPTruckModel.Phone" Width="1.5" PointX="18.125" PointY="6.75" />
+        <EntityTypeShape EntityType="CGPTruckModel.Place" Width="1.5" PointX="11.5" PointY="2.25" />
+        <EntityTypeShape EntityType="CGPTruckModel.Position" Width="1.5" PointX="16" PointY="0.5" />
+        <EntityTypeShape EntityType="CGPTruckModel.Step" Width="1.5" PointX="8.875" PointY="1.25" />
+        <EntityTypeShape EntityType="CGPTruckModel.User" Width="1.5" PointX="15.25" PointY="6.375" />
+        <EntityTypeShape EntityType="CGPTruckModel.Vehicule" Width="1.5" PointX="20.875" PointY="5.125" />
         <AssociationConnector Association="CGPTruckModel.FK_Attachments_Failure_Detail" />
         <AssociationConnector Association="CGPTruckModel.FK_Attachments_Mission" />
         <AssociationConnector Association="CGPTruckModel.FK_FailureDetails_Failure" />
         <AssociationConnector Association="CGPTruckModel.FK_Failures_Mission" />
         <AssociationConnector Association="CGPTruckModel.FK_Failures_Repairer" />
-        <AssociationConnector Association="CGPTruckModel.FK_Failures_Repairer_Vehicule" ></AssociationConnector>
+        <AssociationConnector Association="CGPTruckModel.FK_Failures_Repairer_Vehicule" />
         <AssociationConnector Association="CGPTruckModel.FK_Failures_Vehicule" />
         <AssociationConnector Association="CGPTruckModel.FK_Missions_Delivery_Place" />
         <AssociationConnector Association="CGPTruckModel.FK_Missions_Driver" />
         <AssociationConnector Association="CGPTruckModel.FK_Missions_Pickup_Place" />
         <AssociationConnector Association="CGPTruckModel.FK_Missions_Vehicule" />
         <AssociationConnector Association="CGPTruckModel.FK_Step_Mission" />
-        <AssociationConnector Association="CGPTruckModel.UsersPhones" />
-        <EntityTypeShape EntityType="CGPTruckModel.Position" Width="1.5" PointX="17" PointY="0.625" />
         <AssociationConnector Association="CGPTruckModel.FK_Places_Position" />
         <AssociationConnector Association="CGPTruckModel.FK_Step_Position" />
         <AssociationConnector Association="CGPTruckModel.FK_Vehicules_Position" />
-        </Diagram>
+        <AssociationConnector Association="CGPTruckModel.UsersPhones" />
+      </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>
