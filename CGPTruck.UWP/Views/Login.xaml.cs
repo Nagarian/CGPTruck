@@ -30,13 +30,13 @@ namespace CGPTruck.UWP.Views
         private void PasswordBox_KeyUp(object sender, KeyRoutedEventArgs e)
         {
             if (e.Key == Windows.System.VirtualKey.Enter)
-                Button_Click(null,null);
+                Button_Click(null, null);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            WebApiService.Current.Authenticate(Username_TextBox.Text, )
-            Frame.Navigate(typeof(MainPage));
+            if (await WebApiService.Current.Authenticate(Username_TextBox.Text, Core.Security.HashMD5(Password_PasswordTextBox.Password)))
+                Frame.Navigate(typeof(MainPage));
         }
 
 
