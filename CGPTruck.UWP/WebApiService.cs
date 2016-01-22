@@ -67,6 +67,25 @@ namespace CGPTruck.UWP
             }
         }
 
+        public async Task<bool?> GetIsDriverUser()
+        {
+            using (var client = GetClient())
+            {
+                HttpResponseMessage response = await client.GetAsync("api/User/GetUser");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    Entities.Entities.User result = (JsonConvert.DeserializeObject(await response.Content.ReadAsStringAsync()) as Entities.Entities.User);
+                    if (result.AccountType == Entities.Entities.AccountType.Driver)
+                        return true;
+                    else
+                        return false;
+                }
+
+                return null;
+            }
+        }
+
         //static async Task RunAsync()
         //{
         //    using (var client = GetClient())

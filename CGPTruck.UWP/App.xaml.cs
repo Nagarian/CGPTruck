@@ -7,6 +7,7 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Services.Maps;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -29,6 +30,7 @@ namespace CGPTruck.UWP
         public App()
         {
             this.InitializeComponent();
+            MapService.ServiceToken = "vnevem6H-MEWqD795TAckw";
             this.Suspending += OnSuspending;
         }
 

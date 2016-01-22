@@ -34,7 +34,6 @@ namespace CGPTruck.UWP
         public MainPage()
         {
             this.InitializeComponent();
-
         }
 
 
@@ -84,7 +83,7 @@ namespace CGPTruck.UWP
         {
             map.TrafficFlowVisible = true;
             map.Style = MapStyle.Road;
-            MapService.ServiceToken = "vnevem6H-MEWqD795TAckw";
+            
 
             Geolocator geolocator = new Geolocator() { ReportInterval = 2000 };
             // Carry out the operation.

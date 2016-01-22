@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CGPTruck.UWP.Core;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,6 +23,8 @@ namespace CGPTruck.UWP.Views
     /// </summary>
     public sealed partial class Login : Page
     {
+        Settings s = Settings.getInstance();
+
         public Login()
         {
             this.InitializeComponent();
@@ -42,6 +45,11 @@ namespace CGPTruck.UWP.Views
                 Message_TextBlock.Text = "Identifiant erronés !";
                 Connecter_Button.Content = new TextBlock() { Text = "Se connecter" };
             }
+
+            //bool? result = WebApiService.Current.GetIsDriverUser().Result;
+            bool? result = true;
+            if (result != null)
+                s.isDriver = result.Value;
         }
 
 
