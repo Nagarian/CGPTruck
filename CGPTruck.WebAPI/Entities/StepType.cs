@@ -19,8 +19,9 @@ namespace CGPTruck.WebAPI.Entities
         DeliveryProgressing = 3,
         Delivering = 4,
         Returning = 5,
-        Failure = 6,
-        DisasterRecovery = 7,
-        Aborted = 8
+        Finished = 6,
+        Failure = 7,
+        DisasterRecovery = 8,
+        Aborted = 9
     }
 }

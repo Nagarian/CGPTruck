@@ -538,9 +538,10 @@ avertissement 6002: La table/vue 'CGPTruck.dbo.UsersPhones' n'a pas de clé prim
           <Member Name="DeliveryProgressing" Value="3" />
           <Member Name="Delivering" Value="4" />
           <Member Name="Returning" Value="5" />
-          <Member Name="Failure" Value="6" />
-          <Member Name="DisasterRecovery" Value="7" />
-          <Member Name="Aborted" Value="8" />
+          <Member Name="Finished" Value="6" />
+          <Member Name="Failure" Value="7" />
+          <Member Name="DisasterRecovery" Value="8" />
+          <Member Name="Aborted" Value="9" />
         </EnumType>
         <EntityType Name="Attachment">
           <Key>
