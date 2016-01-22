@@ -14,7 +14,9 @@
             <TextBox x:Name="Username_TextBox" Margin="0,0,0,10"></TextBox>
             <TextBlock Foreground="White" Margin="0,0,0,2">Mot de passe :</TextBlock>
             <PasswordBox x:Name="Password_PasswordTextBox" Margin="0,0,0,10" KeyUp="PasswordBox_KeyUp"></PasswordBox>
-            <Button HorizontalAlignment="Stretch" Foreground="White" Background="#598AA60A" FontWeight="Bold" Click="Button_Click" >Se connecter</Button>
+            <Button x:Name="Connecter_Button" HorizontalAlignment="Stretch" Foreground="White" Background="#598AA60A" FontWeight="Bold" Click="Button_Click" >
+                <TextBlock>Se connecter</TextBlock>
+            </Button>
             <TextBlock x:Name="Message_TextBlock" Foreground="#FFE20000"></TextBlock>
         </StackPanel>
     </Grid>

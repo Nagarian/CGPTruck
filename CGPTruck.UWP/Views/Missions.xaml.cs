@@ -24,19 +24,46 @@ namespace CGPTruck.UWP.Views
     /// </summary>
     public sealed partial class Missions : Page
     {
-        List<MissionType> listMission = new List<MissionType>();
+        Entities.Entities.Mission mission;
         MainPage mainP = null;
-        
+
 
         public Missions()
         {
             this.InitializeComponent();
-            List<Entities.Entities.Mission> result = WebApiService.Current.GetMissions().Result;
 
+            //Entities.Entities.Mission result = WebApiService.Current.GetMyMission().Result;
+            Entities.Entities.Mission result = new Entities.Entities.Mission()
+            {
+                Name = "Nestle c'est fort en chocolat",
+                Description = "It's an amazing mission to complete",
+                PickupPlace = new Entities.Entities.Place()
+                {
+                    Name = "Taf",
+                    Position = new Entities.Entities.Position()
+                    {
+                        Latitude = 44.7867,
+                        Longitude = -0.6313
+                    }
+                },
+                DeliveryPlace = new Entities.Entities.Place()
+                {
+                    Name = "Auchan Lac",
+                    Position = new Entities.Entities.Position()
+                    {
+                        Latitude = 44.8807,
+                        Longitude = -0.56578
+                    }
+                },
+                Steps = new List<Entities.Entities.Step>()
+            };
 
-            
+            if (result != null)
+                mission = result;
 
-            listMission.Add(new MissionType() { name = "Livrer Ordinateur", position = new BasicGeoposition() { Latitude = 44.78670251489458, Longitude = -0.6313490867614746 }, description = "Liste des appareils a livrer : \n-HP 12\nHP-13\nDell Mes couilles\n\nFaire signer le bon de livraisons!!", isActive = true });
+            mission.Steps.Add(new Entities.Entities.Step() { Step_Type = Entities.Entities.StepType.PickupProgressing });
+
+            //Latitude = 44.78670251489458, Longitude = -0.6313490867614746
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -48,24 +75,25 @@ namespace CGPTruck.UWP.Views
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            Title.Text = listMission.First(item => item.isActive == true).name + ":";
-            textBlock1.Text = listMission.First(item => item.isActive == true).description;
+            if (mission != null)
+            {
+                Title.Text = mission.Name;
+                textBlock1.Text = mission.Description;
+            }
+            else
+            {
+                Title.Text = "Aucune mission attribuée";
+                textBlock1.Text = "Patientez jusqu'a l'attribution d'une mission par l'administrateur. Faite vous un café en attendant :D";
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Frame.Visibility = Visibility.Collapsed;
-            mainP.setDestination(listMission.First(item => item.isActive == true).position);
+            if (mission.Steps.Last().Step_Type == Entities.Entities.StepType.PickingUp)
+                mainP.setDestination(new BasicGeoposition() { Latitude = mission.PickupPlace.Position.Latitude, Longitude = mission.PickupPlace.Position.Longitude });
+            else
+                mainP.setDestination(new BasicGeoposition() { Latitude = mission.DeliveryPlace.Position.Latitude, Longitude = mission.DeliveryPlace.Position.Longitude });
         }
-    }
-
-    public class MissionType
-    {
-        public string name { get; set; }
-        public string description { get; set; }
-        public BasicGeoposition position { get; set; }
-        public bool isActive { get; set; }
-
-        public MissionType() {}
     }
 }

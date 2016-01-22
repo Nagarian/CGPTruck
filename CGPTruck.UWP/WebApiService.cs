@@ -51,7 +51,7 @@ namespace CGPTruck.UWP
             }
         }
 
-        public async Task<List<Entities.Entities.Mission>> GetMissions()
+        public async Task<Entities.Entities.Mission> GetMyMission()
         {
             using (var client = GetClient())
             {
@@ -59,7 +59,7 @@ namespace CGPTruck.UWP
 
                 if (response.IsSuccessStatusCode)
                 {
-                    List<Entities.Entities.Mission> result = (JsonConvert.DeserializeObject(await response.Content.ReadAsStringAsync()) as List<Entities.Entities.Mission>);
+                    Entities.Entities.Mission result = (JsonConvert.DeserializeObject(await response.Content.ReadAsStringAsync()) as Entities.Entities.Mission);
                     return result;
                 }
 

@@ -35,10 +35,13 @@ namespace CGPTruck.UWP.Views
 
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
+            Connecter_Button.Content = new ProgressRing() { IsActive = true };
             if (await WebApiService.Current.Authenticate(Username_TextBox.Text, Password_PasswordTextBox.Password))
                 Frame.Navigate(typeof(MainPage));
-            else
+            else {
                 Message_TextBlock.Text = "Identifiant erronés !";
+                Connecter_Button.Content = new TextBlock() { Text = "Se connecter" };
+            }
         }
 
 
