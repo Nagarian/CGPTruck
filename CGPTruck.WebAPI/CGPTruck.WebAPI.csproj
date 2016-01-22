@@ -278,6 +278,7 @@
     <Compile Include="AuthContext.cs" />
     <Compile Include="AuthRepository.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\MissionsController.cs" />
     <Compile Include="Entities\AccountType.cs">
       <DependentUpon>EFCGPTruck.tt</DependentUpon>
     </Compile>

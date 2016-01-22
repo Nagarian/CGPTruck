@@ -46,7 +46,7 @@
         </SplitView.Pane>
         <SplitView.Content>
             <Grid>
-                <Frame x:Name="mapFrame" Content="Frame"/>
+                <Maps:MapControl x:Name="map"/>
                 <Frame x:Name="frame" Content="Frame"/>
             </Grid>
         </SplitView.Content>

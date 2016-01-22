@@ -51,6 +51,22 @@ namespace CGPTruck.UWP
             }
         }
 
+        public async Task<List<Entities.Entities.Mission>> GetMissions()
+        {
+            using (var client = GetClient())
+            {
+                HttpResponseMessage response = await client.GetAsync("api/Missions/GetMissions");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    List<Entities.Entities.Mission> result = (JsonConvert.DeserializeObject(await response.Content.ReadAsStringAsync()) as List<Entities.Entities.Mission>);
+                    return result;
+                }
+
+                return null;
+            }
+        }
+
         //static async Task RunAsync()
         //{
         //    using (var client = GetClient())

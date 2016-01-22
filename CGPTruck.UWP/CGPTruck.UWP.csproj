@@ -97,6 +97,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Core\Security.cs" />
     <Compile Include="Entities\AccountType.cs">
       <DependentUpon>EFCGPTruck.tt</DependentUpon>
     </Compile>
@@ -160,6 +161,9 @@
     <Compile Include="Entities\VehiculeType.cs">
       <DependentUpon>EFCGPTruck.tt</DependentUpon>
     </Compile>
+    <Compile Include="Views\Login.xaml.cs">
+      <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Map.xaml.cs">
       <DependentUpon>Map.xaml</DependentUpon>
     </Compile>
@@ -178,6 +182,7 @@
     <None Include="CGPTruck.UWP_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\location41.png" />
     <Content Include="Entities\EFCGPTruck.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>EFCGPTruck.cs</LastGenOutput>
@@ -199,6 +204,10 @@
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Login.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Map.xaml">
       <SubType>Designer</SubType>

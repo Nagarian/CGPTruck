@@ -8,7 +8,9 @@ using Windows.Devices.Geolocation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Services.Maps;
+using Windows.Storage.Streams;
 using Windows.UI;
+using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -28,12 +30,14 @@ namespace CGPTruck.UWP
     /// </summary>
     public sealed partial class MainPage : Page
     {
+
         public MainPage()
         {
             this.InitializeComponent();
+
         }
 
-        
+
 
         private async void button_Click(object sender, RoutedEventArgs e)
         {
@@ -64,19 +68,92 @@ namespace CGPTruck.UWP
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            mapFrame.Navigate(typeof(Map));
+
         }
 
         private void MissionButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
             if (frame.CurrentSourcePageType != typeof(Missions))
-                frame.Navigate(typeof(Missions));
+                frame.Navigate(typeof(Missions), this);
 
             if (frame.Visibility == Visibility.Collapsed)
                 frame.Visibility = Visibility.Visible;
         }
 
-       
+        public async void setDestination(BasicGeoposition geop)
+        {
+            map.TrafficFlowVisible = true;
+            map.Style = MapStyle.Road;
+            MapService.ServiceToken = "vnevem6H-MEWqD795TAckw";
+
+            Geolocator geolocator = new Geolocator() { ReportInterval = 2000 };
+            // Carry out the operation.
+            Geoposition pos = await geolocator.GetGeopositionAsync();
+            geolocator.PositionChanged += Geolocator_PositionChanged;
+
+            BasicGeoposition startLocation = new BasicGeoposition { Latitude = pos.Coordinate.Latitude, Longitude = pos.Coordinate.Longitude };
+
+            // End at the city of Seattle, Washington.
+            BasicGeoposition endLocation = geop;
+
+
+            // Get the route between the points.
+            MapRouteFinderResult routeResult =
+                  await MapRouteFinder.GetDrivingRouteAsync(
+                  new Geopoint(startLocation),
+                  new Geopoint(endLocation),
+                  MapRouteOptimization.TimeWithTraffic);
+
+
+            map.Routes.Clear();
+
+            if (routeResult.Status == MapRouteFinderStatus.Success)
+            {
+                // Use the route to initialize a MapRouteView.
+                MapRouteView viewOfRoute = new MapRouteView(routeResult.Route);
+                viewOfRoute.RouteColor = Colors.Blue;
+                viewOfRoute.OutlineColor = Colors.Black;
+
+                MessageDialog msg = new MessageDialog("Duree du trajet: " + routeResult.Route.EstimatedDuration.TotalMinutes.ToString() + " minutes");
+                await msg.ShowAsync();
+                // Add the new MapRouteView to the Routes collection
+                // of the MapControl.
+                map.Routes.Add(viewOfRoute);
+
+                // Fit the MapControl to the route.
+                await map.TrySetViewBoundsAsync(
+                      routeResult.Route.BoundingBox,
+                      null,
+                      Windows.UI.Xaml.Controls.Maps.MapAnimationKind.None);
+            }
+
+        }
+
+        private async void Geolocator_PositionChanged(Geolocator sender, PositionChangedEventArgs args)
+        {
+            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                Geopoint snPoint = new Geopoint(new BasicGeoposition() { Latitude = args.Position.Coordinate.Latitude, Longitude = args.Position.Coordinate.Longitude });
+
+                MapIcon mapIcon1 = new MapIcon();
+                mapIcon1.Image = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/location41.png"));
+
+
+                mapIcon1.Location = snPoint;
+                mapIcon1.NormalizedAnchorPoint = new Point(0.5, 1.0);
+                mapIcon1.ZIndex = 0;
+
+                // Add the MapIcon to the map.
+                map.MapElements.Clear();
+                map.MapElements.Add(mapIcon1);
+                // Center the map over the POI.
+                map.Center = snPoint;
+            });
+
+            
+        }
+
+
 
         //private async void MissionButton_Tapped(object sender, TappedRoutedEventArgs e)
         // {
