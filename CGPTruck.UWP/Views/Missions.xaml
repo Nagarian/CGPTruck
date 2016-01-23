@@ -5,7 +5,7 @@
     xmlns:local="using:CGPTruck.UWP.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d" Loaded="Page_Loaded">
+    mc:Ignorable="d">
 
     <Grid Background="#BFFFFFFF">
         <TextBlock x:Name="textBlock" HorizontalAlignment="Center" Margin="10,10,0,0" TextWrapping="Wrap" Text="Missions" VerticalAlignment="Top" FontSize="48"/>

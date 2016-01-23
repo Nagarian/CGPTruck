@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CGPTruck.UWP.Entities.Entities;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -27,13 +28,50 @@ namespace CGPTruck.UWP.Views
         Entities.Entities.Mission mission;
         MainPage mainP = null;
 
-
         public Missions()
         {
             this.InitializeComponent();
+        }
 
-            //Entities.Entities.Mission result = WebApiService.Current.GetMyMission().Result;
-            Entities.Entities.Mission result = new Entities.Entities.Mission()
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            mainP = (MainPage)e.Parameter;
+            LoadMission();
+            //Latitude = 44.78670251489458, Longitude = -0.6313490867614746
+        }
+
+        private async void LoadMission()
+        {
+            //GenerateData();
+            var result = await WebApiService.Current.GetMyMissions();
+            mission = result.FirstOrDefault();
+
+            mission?.Steps.Add(new Entities.Entities.Step() { Step_Type = Entities.Entities.StepType.PickupProgressing });
+
+            if (mission != null)
+            {
+                Title.Text = mission.Name;
+                textBlock1.Text = mission.Description;
+            }
+            else
+            {
+                Title.Text = "Aucune mission attribuée";
+                textBlock1.Text = "Patientez jusqu'a l'attribution d'une mission par l'administrateur. Faite vous un café en attendant :D";
+            }
+        }
+        
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Visibility = Visibility.Collapsed;
+            if (mission.Steps.Last().Step_Type == Entities.Entities.StepType.PickingUp)
+                mainP.setDestination(new BasicGeoposition() { Latitude = mission.PickupPlace.Position.Latitude, Longitude = mission.PickupPlace.Position.Longitude });
+            else
+                mainP.setDestination(new BasicGeoposition() { Latitude = mission.DeliveryPlace.Position.Latitude, Longitude = mission.DeliveryPlace.Position.Longitude });
+        }
+
+        private void GenerateData()
+        {
+            mission = new Entities.Entities.Mission()
             {
                 Name = "Nestle c'est fort en chocolat",
                 Description = "It's an amazing mission to complete",
@@ -56,44 +94,7 @@ namespace CGPTruck.UWP.Views
                     }
                 },
                 Steps = new List<Entities.Entities.Step>()
-            };
-
-            if (result != null)
-                mission = result;
-
-            mission.Steps.Add(new Entities.Entities.Step() { Step_Type = Entities.Entities.StepType.PickupProgressing });
-
-            //Latitude = 44.78670251489458, Longitude = -0.6313490867614746
-        }
-
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            mainP = (MainPage)e.Parameter;
-        }
-
-
-
-        private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-            if (mission != null)
-            {
-                Title.Text = mission.Name;
-                textBlock1.Text = mission.Description;
-            }
-            else
-            {
-                Title.Text = "Aucune mission attribuée";
-                textBlock1.Text = "Patientez jusqu'a l'attribution d'une mission par l'administrateur. Faite vous un café en attendant :D";
-            }
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            Frame.Visibility = Visibility.Collapsed;
-            if (mission.Steps.Last().Step_Type == Entities.Entities.StepType.PickingUp)
-                mainP.setDestination(new BasicGeoposition() { Latitude = mission.PickupPlace.Position.Latitude, Longitude = mission.PickupPlace.Position.Longitude });
-            else
-                mainP.setDestination(new BasicGeoposition() { Latitude = mission.DeliveryPlace.Position.Latitude, Longitude = mission.DeliveryPlace.Position.Longitude });
+            }; ;
         }
     }
 }

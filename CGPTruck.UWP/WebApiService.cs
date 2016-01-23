@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using CGPTruck.UWP.Entities.Entities;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,16 +52,15 @@ namespace CGPTruck.UWP
             }
         }
 
-        public async Task<Entities.Entities.Mission> GetMyMission()
+        public async Task<List<Mission>> GetMyMissions()
         {
             using (var client = GetClient())
             {
-                HttpResponseMessage response = await client.GetAsync("api/Missions/GetMissions");
+                HttpResponseMessage response = await client.GetAsync("api/Missions/my");
 
                 if (response.IsSuccessStatusCode)
                 {
-                    Entities.Entities.Mission result = (JsonConvert.DeserializeObject(await response.Content.ReadAsStringAsync()) as Entities.Entities.Mission);
-                    return result;
+                    return await response.Content.ReadAsAsync<List<Mission>>();
                 }
 
                 return null;
