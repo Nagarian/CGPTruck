@@ -18,6 +18,7 @@ namespace CGPTruck.WebAPI.Entities.Entities
         public CGPTruckEntities()
             : base("name=CGPTruckEntities")
         {
+            this.Configuration.LazyLoadingEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

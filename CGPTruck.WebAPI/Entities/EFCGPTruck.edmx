@@ -421,7 +421,7 @@ avertissement 6002: La table/vue 'CGPTruck.dbo.UsersPhones' n'a pas de clé prim
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CGPTruckModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="CGPTruckEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="CGPTruckEntities" annotation:LazyLoadingEnabled="false">
           <EntitySet Name="Attachments" EntityType="CGPTruckModel.Attachment" />
           <EntitySet Name="FailureDetails" EntityType="CGPTruckModel.FailureDetail" />
           <EntitySet Name="Failures" EntityType="CGPTruckModel.Failure" />
@@ -1027,6 +1027,7 @@ avertissement 6002: La table/vue 'CGPTruck.dbo.UsersPhones' n'a pas de clé prim
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+        <DesignerProperty Name="ProcessDependentTemplatesOnSave" Value="False" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->
