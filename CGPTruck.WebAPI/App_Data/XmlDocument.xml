@@ -481,6 +481,19 @@
             </summary>
             <param name="documentPath">The physical path to XML document.</param>
         </member>
+        <member name="M:CGPTruck.WebAPI.BLL.BLLMissions.GetMissionOfDriver(System.Int32)">
+            <summary>
+            Méthode pour obtenir la liste des missions du jour et à venir
+            </summary>
+            <param name="userId">ID du conducteur</param>
+            <returns>Liste des missions disponibles du conducteur</returns>
+        </member>
+        <member name="M:CGPTruck.WebAPI.Controllers.MissionsController.GetMyMission">
+            <summary>
+            Obtiens les missions du jour et celle à venir
+            </summary>
+            <returns>Liste des missions du jours et à venir</returns>
+        </member>
         <member name="M:CGPTruck.WebAPI.Entities.partial.Extension.GetTitle(CGPTruck.WebAPI.Entities.StepType)">
             <summary>
             Permet d'obtenir l'intitulé (en Fr) de l'enumération

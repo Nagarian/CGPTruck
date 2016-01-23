@@ -10,20 +10,44 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using CGPTruck.WebAPI.Entities;
 using CGPTruck.WebAPI.Entities.Entities;
+using CGPTruck.WebAPI.BLL;
 
 namespace CGPTruck.WebAPI.Controllers
 {
-    public class MissionsController : ApiController
+    [Authorize]
+    public class MissionsController : BaseController
     {
         private CGPTruckEntities db = new CGPTruckEntities();
+        private BLLMissions missions = new BLLMissions();
+
+        /// <summary>
+        /// Obtiens les missions du jour et celle à venir
+        /// </summary>
+        /// <returns>Liste des missions du jours et à venir</returns>
+        [Route("api/Missions/my")]
+        [ResponseType(typeof(List<Mission>))]
+        public IHttpActionResult GetMyMission()
+        {            
+            var list = missions.GetMissionOfDriver(CurrentUser.Id);
+            if (list == null)
+            {
+                return BadRequest();
+            }
+
+            return Ok(list);
+        }
+
 
         // GET: api/Missions
-        public IQueryable<Mission> GetMissions()
+        [ResponseType(typeof(List<Mission>))]
+        public IHttpActionResult GetMissions()
         {
-            return from mission in db.Missions.Include( m => m.DeliveryPlace)
+            return Ok((from mission in db.Missions.Include(m => m.DeliveryPlace)
                                               .Include("PickupPlace")
-                   select mission;
+                       select mission).ToList());
         }
+
+
 
         // GET: api/Missions/5
         [ResponseType(typeof(Mission))]
