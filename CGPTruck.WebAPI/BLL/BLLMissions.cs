@@ -11,14 +11,22 @@ using System.Web;
 
 namespace CGPTruck.WebAPI.BLL
 {
+    /// <summary>
+    /// Business Logic Layer des missions
+    /// </summary>
     public class BLLMissions
     {
+        /// <summary>
+        /// Permet d'obtenir une instance rapidement
+        /// </summary>
+        public static BLLMissions Current { get; set; } = new BLLMissions();
+
         /// <summary>
         /// Méthode pour obtenir la liste des missions du jour et à venir
         /// </summary>
         /// <param name="userId">ID du conducteur</param>
         /// <returns>Liste des missions disponibles du conducteur</returns>
-        public List<Mission> GetMissionOfDriver(int userId)
+        public List<Mission> GetMissionsOfDriver(int userId)
         {
             using (CGPTruckEntities context = new CGPTruckEntities())
             {
@@ -33,6 +41,5 @@ namespace CGPTruck.WebAPI.BLL
                         select mission).ToList();
             }
         }
-        
     }
 }

@@ -28,7 +28,7 @@ namespace CGPTruck.WebAPI.Controllers
         [ResponseType(typeof(List<Mission>))]
         public IHttpActionResult GetMyMission()
         {            
-            var list = missions.GetMissionOfDriver(CurrentUser.Id);
+            var list = missions.GetMissionsOfDriver(CurrentUser.Id);
             if (list == null)
             {
                 return BadRequest();
