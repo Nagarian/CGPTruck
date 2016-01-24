@@ -602,6 +602,11 @@
             Coordonnées GPS
             </summary>
         </member>
+        <member name="T:CGPTruck.WebAPI.Entities.Step">
+            <summary>
+            Etapes d'une mission
+            </summary>
+        </member>
         <member name="T:CGPTruck.WebAPI.Entities.Vehicule">
             <summary>
             Objet réprésentant un véhicule

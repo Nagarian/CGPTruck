@@ -70,6 +70,18 @@ namespace CGPTruck.WebAPI.BLL
             }
         }
 
+        public List<Step> GetMissionSteps(int stepId)
+        {
+            using (CGPTruckEntities context = new CGPTruckEntities())
+            {
+                return (from step in context.Steps.Include(s => s.Position)
+                        where step.Mission_Id == stepId
+                        orderby step.StepNumber descending
+                        select step).ToList();
+            }
+        }
+
+
         // La même méthode que GetMissions mais en allégeant la requête pour garder seulement le dernier Step
         // Je ne suis pas sûr que ça soit la manière la plus optimale
         //public List<Mission> GetMissionsLight()
@@ -84,6 +96,7 @@ namespace CGPTruck.WebAPI.BLL
         //                    let step = mission.Steps.OrderByDescending(s => s.StepNumber).FirstOrDefault()
         //                    select new
         //                    {
+        //                        Id = mission.Id,
         //                        Date = mission.Date,
         //                        DeliveryPlace = new
         //                        {
@@ -122,6 +135,7 @@ namespace CGPTruck.WebAPI.BLL
         //        return (from mission in toto
         //                select new Mission
         //                {
+        //                    Id = mission.Id,
         //                    Date = mission.Date,
         //                    DeliveryPlace = new Place
         //                    {

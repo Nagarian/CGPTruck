@@ -21,12 +21,18 @@ namespace CGPTruck.Test
 
         }
 
-
         [TestMethod]
         public void TestGetActiveMissions()
         {
             var m = missions.GetActiveMissions();
 
+        }
+
+        [TestMethod]
+        public void TestGetMissionSteps()
+        {
+            var m = missions.GetMissionSteps(1);
+            var m2 = missions.GetMissionSteps(2);
         }
     }
 }
