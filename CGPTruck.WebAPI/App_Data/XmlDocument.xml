@@ -545,6 +545,29 @@
             <param name="missionId">ID de la mission</param>
             <returns></returns>
         </member>
+        <member name="T:CGPTruck.WebAPI.BLL.BLLPlaces">
+            <summary>
+            Business Logic Layer des places
+            </summary>
+        </member>
+        <member name="P:CGPTruck.WebAPI.BLL.BLLPlaces.Current">
+            <summary>
+            Permet d'obtenir une instance rapidement
+            </summary>
+        </member>
+        <member name="M:CGPTruck.WebAPI.BLL.BLLPlaces.GetPlaces">
+            <summary>
+            Permet d'obtenir toutes les places de la BDD
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CGPTruck.WebAPI.BLL.BLLPlaces.GetPlace(System.Int32)">
+            <summary>
+            Permet d'obtenir les détails d'une place
+            </summary>
+            <param name="placeId">ID de la place</param>
+            <returns></returns>
+        </member>
         <member name="T:CGPTruck.WebAPI.BLL.BLLUsers">
             <summary>
             Business Logic Layer des users
@@ -672,6 +695,24 @@
             </summary>
             <param name="missionId">Id de la mission dont on veut les détails</param>
             <returns>Liste des pannes survenues lors de la mission</returns>
+        </member>
+        <member name="T:CGPTruck.WebAPI.Controllers.PlacesController">
+            <summary>
+            Controller concernant les lieux connus et enregistrés
+            </summary>
+        </member>
+        <member name="M:CGPTruck.WebAPI.Controllers.PlacesController.GetPlaces">
+            <summary>
+            Driver/Administrator/DecisionMaker : Obtient la liste de toutes les places
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CGPTruck.WebAPI.Controllers.PlacesController.GetPlace(System.Int32)">
+            <summary>
+            Driver/Administrator/DecisionMaker : Obtient tout les détails d'un lieu
+            </summary>
+            <param name="placeId">Id de la place dont on veut les détails</param>
+            <returns>Place avec toutes les informations la concernant</returns>
         </member>
         <member name="M:CGPTruck.WebAPI.Entities.partial.Extension.GetTitle(CGPTruck.WebAPI.Entities.StepType)">
             <summary>

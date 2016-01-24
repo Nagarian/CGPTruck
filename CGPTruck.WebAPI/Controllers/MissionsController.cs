@@ -15,7 +15,7 @@ using CGPTruck.WebAPI.BLL;
 namespace CGPTruck.WebAPI.Controllers
 {
     /// <summary>
-    /// Controller concernant les missions, Authentification requise
+    /// Controller concernant les missions. Authentification requise
     /// </summary>
     [Authorize]
     public class MissionsController : BaseController
