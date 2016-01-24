@@ -17,10 +17,10 @@ namespace CGPTruck.WebAPI.BLL
         /// <summary>
         /// Permet d'obtenir une instance rapidement
         /// </summary>
-        public static BLLUsers Current { get; set; } = new BLLUsers();
+        public static BLLPlaces Current { get; set; } = new BLLPlaces();
 
         /// <summary>
-        /// Permet d'obtenir toutes les places de la BDD
+        /// Permet d'obtenir toutes les places active de la BDD
         /// </summary>
         /// <returns></returns>
         public Place GetPlaces()
@@ -28,6 +28,7 @@ namespace CGPTruck.WebAPI.BLL
             using (CGPTruckEntities context = new CGPTruckEntities())
             {
                 return (from place in context.Places.Include(p => p.Position)
+                        where place.Active
                         select place).SingleOrDefault();
             }
         }
