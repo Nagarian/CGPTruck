@@ -34,5 +34,13 @@ namespace CGPTruck.Test
             var m = missions.GetMissionSteps(1);
             var m2 = missions.GetMissionSteps(2);
         }
+
+
+        [TestMethod]
+        public void TestGetMission()
+        {
+            var m = missions.GetMission(1);
+            var m2 = missions.GetMissionFullDetail(2);
+        }
     }
 }

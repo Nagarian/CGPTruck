@@ -41,9 +41,12 @@ namespace CGPTruck.WebAPI.BLL
             }
         }
 
+        /// <summary>
+        /// Permet d'obtenir toutes les missions de la BDD
+        /// </summary>
+        /// <returns></returns>
         public List<Mission> GetMissions()
         {
-
             using (CGPTruckEntities context = new CGPTruckEntities())
             {
                 return (from mission in context.Missions.Include(m => m.DeliveryPlace.Position)
@@ -55,6 +58,10 @@ namespace CGPTruck.WebAPI.BLL
             }
         }
 
+        /// <summary>
+        /// Permet d'obtenir toutes les missions de la BDD du jour et à suivre
+        /// </summary>
+        /// <returns></returns>
         public List<Mission> GetActiveMissions()
         {
             using (CGPTruckEntities context = new CGPTruckEntities())
@@ -62,7 +69,6 @@ namespace CGPTruck.WebAPI.BLL
                 return (from mission in context.Missions.Include(m => m.DeliveryPlace.Position)
                                                         .Include(m => m.PickupPlace.Position)
                                                         .Include(m => m.Steps.Select(s => s.Position))
-                                                        .Include(m => m.Attachments)
                                                         .Include(m => m.Vehicule.Position)
                         where mission.Date >= DateTime.Today && mission.Steps.Count > 0
                         orderby mission.Date ascending
@@ -70,12 +76,74 @@ namespace CGPTruck.WebAPI.BLL
             }
         }
 
-        public List<Step> GetMissionSteps(int stepId)
+        /// <summary>
+        /// Permet d'obtenir les détails d'une mission
+        /// </summary>
+        /// <param name="missionId">ID de la mission</param>
+        /// <returns></returns>
+        public Mission GetMission(int missionId)
+        {
+            using (CGPTruckEntities context = new CGPTruckEntities())
+            {
+                var result = (from mission in context.Missions.Include(m => m.DeliveryPlace)
+                                                        .Include(m => m.PickupPlace)
+                                                        .Include(m => m.Steps.Select(s => s.Position))
+                                                        .Include(m => m.Vehicule)
+                                                        .Include(m => m.Driver)
+                                                        .Include(m => m.Attachments)
+                                                        .Include(m => m.Failures)
+                              where mission.Id == missionId
+                              select mission).SingleOrDefault();
+
+                if (result != null && result.Steps != null)
+                {
+                    result.Steps = result.Steps.OrderByDescending(s => s.StepNumber).ToList();
+                }
+
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// Permet d'obtenir tout les détails d'une mission
+        /// </summary>
+        /// <param name="missionId">ID de la mission</param>
+        public Mission GetMissionFullDetail(int missionId)
+        {
+            using (CGPTruckEntities context = new CGPTruckEntities())
+            {
+                var result = (from mission in context.Missions.Include(m => m.DeliveryPlace.Position)
+                                                        .Include(m => m.PickupPlace.Position)
+                                                        .Include(m => m.Steps.Select(s => s.Position))
+                                                        .Include(m => m.Vehicule.Position)
+                                                        .Include(m => m.Driver)
+                                                        .Include(m => m.Attachments)
+                                                        .Include(m => m.Failures.Select(f => f.Repairer))
+                                                        .Include(m => m.Failures.Select(f => f.RepairerVehicule))
+                                                        .Include(m => m.Failures.Select(f => f.FailureDetail.Attachments))
+                              where mission.Id == missionId
+                              select mission).SingleOrDefault();
+
+                if (result != null && result.Steps != null)
+                {
+                    result.Steps = result.Steps.OrderByDescending(s => s.StepNumber).ToList();
+                }
+
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// Permet d'obtenir toutes les étapes d'une mission
+        /// </summary>
+        /// <param name="missionId">ID de la mission</param>
+        /// <returns></returns>
+        public List<Step> GetMissionSteps(int missionId)
         {
             using (CGPTruckEntities context = new CGPTruckEntities())
             {
                 return (from step in context.Steps.Include(s => s.Position)
-                        where step.Mission_Id == stepId
+                        where step.Mission_Id == missionId
                         orderby step.StepNumber descending
                         select step).ToList();
             }
