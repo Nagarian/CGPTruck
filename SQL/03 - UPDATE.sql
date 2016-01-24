@@ -33,3 +33,17 @@ GO
 INSERT INTO Missions(Name, Description, Date, Vehicule_Id, Driver_Id, Pickup_Place_Id, Delivery_Place_Id)
 VALUES ('Livraison - Lactel Bis', 'Livraison des packs de lait Lactel au client "Auchan - Bordeaux Lac"', '2016-02-24 11:10', 1, 1, 10, 8)
 GO
+
+UPDATE [Steps]
+SET [Mission_Id] = 2
+WHERE [Id] >= 8 AND [Id] <= 17
+GO
+
+UPDATE [Steps]
+SET [StepNumber] = [Id]
+WHERE [Id] < 8
+
+UPDATE [Steps]
+SET [StepNumber] = [Id] - 7
+WHERE [Id] >= 8 AND [Id] <= 17
+GO
