@@ -592,6 +592,16 @@
             <param name="step"></param>
             <returns></returns>
         </member>
+        <member name="T:CGPTruck.WebAPI.Entities.Place">
+            <summary>
+            Lieux
+            </summary>
+        </member>
+        <member name="T:CGPTruck.WebAPI.Entities.Position">
+            <summary>
+            Coordonnées GPS
+            </summary>
+        </member>
         <member name="T:CGPTruck.WebAPI.Entities.Vehicule">
             <summary>
             Objet réprésentant un véhicule

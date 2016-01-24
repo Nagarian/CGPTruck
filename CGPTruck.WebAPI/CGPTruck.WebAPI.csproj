@@ -346,6 +346,9 @@
       <DependentUpon>EFCGPTruck.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\partial\Extension.cs" />
+    <Compile Include="Entities\partial\Mission.cs" />
+    <Compile Include="Entities\partial\Place.cs" />
+    <Compile Include="Entities\partial\Position.cs" />
     <Compile Include="Entities\partial\User.cs" />
     <Compile Include="Entities\partial\Vehicule.cs" />
     <Compile Include="Entities\Phone.cs">
