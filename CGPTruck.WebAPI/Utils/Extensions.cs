@@ -22,7 +22,7 @@ namespace CGPTruck.WebAPI.Utils
                 var val = pr.GetValue(fixMe);
                 var subTypes = properties.Where(s => s.StartsWith(pr.Name)).Select(s => s.Substring(s.IndexOf('.') + 1)).ToArray();
 
-                if (subTypes.Length != 0)
+                if (subTypes.Length != 0 && val != null)
                 {
                     returnClass.Add(pr.Name, val.RemoveProperty(subTypes));
                     continue;

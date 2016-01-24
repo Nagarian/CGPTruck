@@ -517,6 +517,13 @@
             <param name="missionId">ID de la mission</param>
             <returns></returns>
         </member>
+        <member name="M:CGPTruck.WebAPI.BLL.BLLMissions.GetMissionDriver(System.Int32)">
+            <summary>
+            Permet d'obtenir le conducteur assigné à une mission
+            </summary>
+            <param name="missionId">ID de la mission</param>
+            <returns></returns>
+        </member>
         <member name="M:CGPTruck.WebAPI.BLL.BLLMissions.GetMissionFullDetail(System.Int32)">
             <summary>
             Permet d'obtenir tout les détails d'une mission
@@ -533,7 +540,7 @@
         </member>
         <member name="M:CGPTruck.WebAPI.BLL.BLLMissions.GetMissionFailure(System.Int32)">
             <summary>
-            Permet d'obtenir tout les problèmes survenues durant une missions
+            Permet d'obtenir toutes les pannes survenues durant une missions
             </summary>
             <param name="missionId">ID de la mission</param>
             <returns></returns>
@@ -619,11 +626,52 @@
             Temps avant son expiration (en secondes)
             </summary>
         </member>
+        <member name="T:CGPTruck.WebAPI.Controllers.MissionsController">
+            <summary>
+            Controller concernant les missions, Authentification requise
+            </summary>
+        </member>
         <member name="M:CGPTruck.WebAPI.Controllers.MissionsController.GetMyMission">
             <summary>
-            Obtiens les missions du jour et celle à venir
+            Conducteur : Obtiens les missions du jour et celle à venir
             </summary>
             <returns>Liste des missions du jours et à venir</returns>
+        </member>
+        <member name="M:CGPTruck.WebAPI.Controllers.MissionsController.GetMissions">
+            <summary>
+            Administrator/DecisionMaker : Obtient la liste de toutes les missions
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CGPTruck.WebAPI.Controllers.MissionsController.GetActiveMissions">
+            <summary>
+            Administrator/DecisionMaker : Obtient la liste de toutes les missions actives et à venir
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CGPTruck.WebAPI.Controllers.MissionsController.GetMission(System.Int32)">
+            <summary>
+            Obtient tout les détails d'une mission
+            Driver : Ne peux obtenir que les détails des missions qui lui on été assigné
+            </summary>
+            <param name="missionId">Id de la mission dont on veut les détails</param>
+            <returns>Mission avec toutes les informations la concernant</returns>
+        </member>
+        <member name="M:CGPTruck.WebAPI.Controllers.MissionsController.GetMissionSteps(System.Int32)">
+            <summary>
+            Obtient tout les étapes effectuées d'une mission
+            Driver : Ne peux obtenir que les étapes des missions qui lui on été assigné
+            </summary>
+            <param name="missionId">Id de la mission dont on veut les détails</param>
+            <returns>Liste des étapes de la mission</returns>
+        </member>
+        <member name="M:CGPTruck.WebAPI.Controllers.MissionsController.GetMissionFailures(System.Int32)">
+            <summary>
+            Administrator/DecisionMaker : Obtient tout les pannes survenues lors d'une mission
+            Repairer : Ne peux obtenir que les pannes survenues qui lui on été assigné
+            </summary>
+            <param name="missionId">Id de la mission dont on veut les détails</param>
+            <returns>Liste des pannes survenues lors de la mission</returns>
         </member>
         <member name="M:CGPTruck.WebAPI.Entities.partial.Extension.GetTitle(CGPTruck.WebAPI.Entities.StepType)">
             <summary>

@@ -105,6 +105,22 @@ namespace CGPTruck.WebAPI.BLL
         }
 
         /// <summary>
+        /// Permet d'obtenir le conducteur assigné à une mission
+        /// </summary>
+        /// <param name="missionId">ID de la mission</param>
+        /// <returns></returns>
+        public User GetMissionDriver(int missionId)
+        {
+            using (CGPTruckEntities context = new CGPTruckEntities())
+            {
+
+                return (from mission in context.Missions
+                        where mission.Id == missionId
+                        select mission.Driver).SingleOrDefault();
+            }
+        }
+
+        /// <summary>
         /// Permet d'obtenir tout les détails d'une mission
         /// </summary>
         /// <param name="missionId">ID de la mission</param>
