@@ -108,6 +108,7 @@ namespace CGPTruck.WebAPI.BLL
         /// Permet d'obtenir tout les détails d'une mission
         /// </summary>
         /// <param name="missionId">ID de la mission</param>
+        /// <returns></returns>
         public Mission GetMissionFullDetail(int missionId)
         {
             using (CGPTruckEntities context = new CGPTruckEntities())
@@ -146,6 +147,27 @@ namespace CGPTruck.WebAPI.BLL
                         where step.Mission_Id == missionId
                         orderby step.StepNumber descending
                         select step).ToList();
+            }
+        }
+
+        /// <summary>
+        /// Permet d'obtenir toutes les pannes survenues durant une missions
+        /// </summary>
+        /// <param name="missionId">ID de la mission</param>
+        /// <returns></returns>
+        public List<Failure> GetMissionFailure(int missionId)
+        {
+            // TODO : trouver un moyen pour y inclure le step correspondant pour avoir la position de la panne ???
+            using (CGPTruckEntities context = new CGPTruckEntities())
+            {
+                return (from failure in context.Failures.Include(f => f.Vehicule)
+                                                        .Include(f => f.Mission)
+                                                        .Include(f => f.Mission.Driver)
+                                                        .Include(f => f.Repairer)
+                                                        .Include(f => f.RepairerVehicule)
+                                                        .Include(f => f.FailureDetail.Attachments)
+                        where failure.Mission_id == missionId
+                        select failure).ToList();
             }
         }
 

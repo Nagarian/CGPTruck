@@ -42,5 +42,13 @@ namespace CGPTruck.Test
             var m = missions.GetMission(1);
             var m2 = missions.GetMissionFullDetail(2);
         }
+
+
+        [TestMethod]
+        public void TestGetMissionFailure()
+        {
+            var m = missions.GetMissionFailure(1);
+            var m2 = missions.GetMissionFailure(2);
+        }
     }
 }

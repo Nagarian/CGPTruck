@@ -498,6 +498,46 @@
             <param name="userId">ID du conducteur</param>
             <returns>Liste des missions disponibles du conducteur</returns>
         </member>
+        <member name="M:CGPTruck.WebAPI.BLL.BLLMissions.GetMissions">
+            <summary>
+            Permet d'obtenir toutes les missions de la BDD
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CGPTruck.WebAPI.BLL.BLLMissions.GetActiveMissions">
+            <summary>
+            Permet d'obtenir toutes les missions de la BDD du jour et à suivre
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CGPTruck.WebAPI.BLL.BLLMissions.GetMission(System.Int32)">
+            <summary>
+            Permet d'obtenir les détails d'une mission
+            </summary>
+            <param name="missionId">ID de la mission</param>
+            <returns></returns>
+        </member>
+        <member name="M:CGPTruck.WebAPI.BLL.BLLMissions.GetMissionFullDetail(System.Int32)">
+            <summary>
+            Permet d'obtenir tout les détails d'une mission
+            </summary>
+            <param name="missionId">ID de la mission</param>
+            <returns></returns>
+        </member>
+        <member name="M:CGPTruck.WebAPI.BLL.BLLMissions.GetMissionSteps(System.Int32)">
+            <summary>
+            Permet d'obtenir toutes les étapes d'une mission
+            </summary>
+            <param name="missionId">ID de la mission</param>
+            <returns></returns>
+        </member>
+        <member name="M:CGPTruck.WebAPI.BLL.BLLMissions.GetMissionFailure(System.Int32)">
+            <summary>
+            Permet d'obtenir tout les problèmes survenues durant une missions
+            </summary>
+            <param name="missionId">ID de la mission</param>
+            <returns></returns>
+        </member>
         <member name="T:CGPTruck.WebAPI.BLL.BLLUsers">
             <summary>
             Business Logic Layer des users
