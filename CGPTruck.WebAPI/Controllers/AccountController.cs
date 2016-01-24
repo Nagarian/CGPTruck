@@ -1,5 +1,4 @@
-﻿using CGPTruck.BLL;
-using CGPTruck.WebAPI.BLL;
+﻿using CGPTruck.WebAPI.BLL;
 using CGPTruck.WebAPI.Entities;
 using CGPTruck.WebAPI.Entities.Entities;
 using CGPTruck.WebAPI.Models;

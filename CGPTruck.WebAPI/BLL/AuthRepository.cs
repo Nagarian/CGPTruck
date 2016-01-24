@@ -1,4 +1,4 @@
-﻿using CGPTruck.DAL;
+﻿using CGPTruck.WebAPI.DAL;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CGPTruck.BLL
+namespace CGPTruck.WebAPI.BLL
 {
     public class AuthRepository : IDisposable
     {

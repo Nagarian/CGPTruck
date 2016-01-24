@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CGPTruck.DAL
+namespace CGPTruck.WebAPI.DAL
 {
     public class AuthContext : IdentityDbContext<IdentityUser>
     {

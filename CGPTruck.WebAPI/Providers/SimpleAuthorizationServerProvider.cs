@@ -1,4 +1,4 @@
-﻿using CGPTruck.BLL;
+﻿using CGPTruck.WebAPI.BLL;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security.OAuth;
 using System;
