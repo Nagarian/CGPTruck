@@ -78,6 +78,20 @@ namespace CGPTruck.WebAPI.Areas.HelpPage
             //// Uncomment the following to correct the sample response when the action returns an HttpResponseMessage with ObjectContent<string>.
             //// The sample will be generated as if the controller named "Values" and action named "Post" were returning a string.
             //config.SetActualResponseType(typeof(string), "Values", "Post");
+
+            string accountControllerName = nameof(WebAPI.Controllers.AccountController).Replace("Controller", "");
+            string fakeLoginApiHelpPageName = nameof(WebAPI.Controllers.AccountController.FakeLoginForApiHelpPage);
+
+            config.SetSampleRequest("Not available !", new MediaTypeHeaderValue("application/json"), accountControllerName, fakeLoginApiHelpPageName);
+            config.SetSampleRequest("Not available !", new MediaTypeHeaderValue("text/json"), accountControllerName, fakeLoginApiHelpPageName);
+
+#if DEBUG
+            config.SetSampleRequest("grant_type=password&username=hector.robert&password=azerty123", new MediaTypeHeaderValue("application/x-www-form-urlencoded"), accountControllerName, fakeLoginApiHelpPageName);
+#else
+            config.SetSampleRequest("grant_type=password&username=foo&password=bar", new MediaTypeHeaderValue("application/x-www-form-urlencoded"), accountControllerName, fakeLoginApiHelpPageName);
+#endif
+            config.SetSampleResponse("{\"access_token\":\"vGqZg3MQvKfoeLzUhHwrwhOYWAV_JCylwONFt92E1TyJ6nAIeJfmUOmGqxmWRdU51zfDHhoOctDg8oPc6Y3x6L2hsVVn7kRDyOj2yfUH2oFd6ieGSs5COy84I6p8F11joSzFwe3MCBR1EW8baJA7apoRKuUA22VAoAVQPLsAuvIvfs - 7ZeBIM8ANVLFEfQyGtY9mGmipZ - 4RHhe92MI9LPfplElSyK7Q_PNYDhhlAxtL4F5Dxwl6DBWp04DmdiUa4PNTIUVJ83jLvUMiWScF6uPo6UJHSe3 - qRH6REzg2tDBzeX2l1mQ67XCfSosFnKk2tT5NvrO7kLc3Z2L18W5ZTi08PTXgf - 3W0KR_fH9 - uw\",\"token_type\":\"bearer\",\"expires_in\":86399}", new MediaTypeHeaderValue("text/json"), accountControllerName, fakeLoginApiHelpPageName);
+            config.SetSampleResponse("{\"access_token\":\"vGqZg3MQvKfoeLzUhHwrwhOYWAV_JCylwONFt92E1TyJ6nAIeJfmUOmGqxmWRdU51zfDHhoOctDg8oPc6Y3x6L2hsVVn7kRDyOj2yfUH2oFd6ieGSs5COy84I6p8F11joSzFwe3MCBR1EW8baJA7apoRKuUA22VAoAVQPLsAuvIvfs - 7ZeBIM8ANVLFEfQyGtY9mGmipZ - 4RHhe92MI9LPfplElSyK7Q_PNYDhhlAxtL4F5Dxwl6DBWp04DmdiUa4PNTIUVJ83jLvUMiWScF6uPo6UJHSe3 - qRH6REzg2tDBzeX2l1mQ67XCfSosFnKk2tT5NvrO7kLc3Z2L18W5ZTi08PTXgf - 3W0KR_fH9 - uw\",\"token_type\":\"bearer\",\"expires_in\":86399}", new MediaTypeHeaderValue("application/json"), accountControllerName, fakeLoginApiHelpPageName);
         }
 
 #if Handle_PageResultOfT

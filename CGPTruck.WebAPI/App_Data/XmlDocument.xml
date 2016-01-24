@@ -481,12 +481,103 @@
             </summary>
             <param name="documentPath">The physical path to XML document.</param>
         </member>
-        <member name="M:CGPTruck.WebAPI.BLL.BLLMissions.GetMissionOfDriver(System.Int32)">
+        <member name="T:CGPTruck.WebAPI.BLL.BLLMissions">
+            <summary>
+            Business Logic Layer des missions
+            </summary>
+        </member>
+        <member name="P:CGPTruck.WebAPI.BLL.BLLMissions.Current">
+            <summary>
+            Permet d'obtenir une instance rapidement
+            </summary>
+        </member>
+        <member name="M:CGPTruck.WebAPI.BLL.BLLMissions.GetMissionsOfDriver(System.Int32)">
             <summary>
             Méthode pour obtenir la liste des missions du jour et à venir
             </summary>
             <param name="userId">ID du conducteur</param>
             <returns>Liste des missions disponibles du conducteur</returns>
+        </member>
+        <member name="T:CGPTruck.WebAPI.BLL.BLLUsers">
+            <summary>
+            Business Logic Layer des users
+            </summary>
+        </member>
+        <member name="P:CGPTruck.WebAPI.BLL.BLLUsers.Current">
+            <summary>
+            Permet d'obtenir une instance rapidement
+            </summary>
+        </member>
+        <member name="M:CGPTruck.WebAPI.BLL.BLLUsers.GetUserInformations(System.Int32)">
+            <summary>
+            Permet d'obtenir les informations d'un utilisateur
+            </summary>
+            <param name="userId">Id de l'utilisateur</param>
+            <returns>User avec son téléphone</returns>
+        </member>
+        <member name="T:CGPTruck.WebAPI.Controllers.AccountController">
+            <summary>
+            Controller concernant l'authentification et les méthodes spécifiques à l'utilisateur
+            </summary>
+        </member>
+        <member name="M:CGPTruck.WebAPI.Controllers.AccountController.Register(CGPTruck.WebAPI.Models.UserModel)">
+            <summary>
+            Permet de créer un nouveau compte utilisateur
+            </summary>
+            <param name="userModel">Information concernant le nouvel utilisateur</param>
+            <returns></returns>
+        </member>
+        <member name="M:CGPTruck.WebAPI.Controllers.AccountController.FakeLoginForApiHelpPage(CGPTruck.WebAPI.Controllers.AccountController.Credentials)">
+            <summary>
+            Permet d'obtenir un token d'authentification OAuth2 pour l'API
+            </summary>
+            <returns>Token OAuth2</returns>
+        </member>
+        <member name="M:CGPTruck.WebAPI.Controllers.AccountController.Me">
+            <summary>
+            Permet de récupérer ses propres informations
+            </summary>
+            <returns>Information concernant l'utilisateur</returns>
+        </member>
+        <member name="T:CGPTruck.WebAPI.Controllers.AccountController.Credentials">
+            <summary>
+            Credentials pour s'authentifier
+            </summary>
+        </member>
+        <member name="P:CGPTruck.WebAPI.Controllers.AccountController.Credentials.grant_type">
+            <summary>
+            Type de Token à récupéré, spécifié "password"
+            </summary>
+        </member>
+        <member name="P:CGPTruck.WebAPI.Controllers.AccountController.Credentials.username">
+            <summary>
+            Nom d'utilisateur
+            </summary>
+        </member>
+        <member name="P:CGPTruck.WebAPI.Controllers.AccountController.Credentials.password">
+            <summary>
+            Mot de passe de l'utilisateur
+            </summary>
+        </member>
+        <member name="T:CGPTruck.WebAPI.Controllers.AccountController.Token">
+            <summary>
+            Token OAuth2 de réponse
+            </summary>
+        </member>
+        <member name="P:CGPTruck.WebAPI.Controllers.AccountController.Token.access_token">
+            <summary>
+            Token a utilisé
+            </summary>
+        </member>
+        <member name="P:CGPTruck.WebAPI.Controllers.AccountController.Token.token_type">
+            <summary>
+            Type du token
+            </summary>
+        </member>
+        <member name="P:CGPTruck.WebAPI.Controllers.AccountController.Token.expires_in">
+            <summary>
+            Temps avant son expiration (en secondes)
+            </summary>
         </member>
         <member name="M:CGPTruck.WebAPI.Controllers.MissionsController.GetMyMission">
             <summary>
@@ -550,6 +641,34 @@
             <summary>
             Confirmation du mot de passe de l'utilisateur
             </summary>
+        </member>
+        <member name="T:CGPTruck.WebAPI.Utils.IgnorableSerializerContractResolver">
+            <summary>
+            Special JsonConvert resolver that allows you to ignore properties.  See http://stackoverflow.com/a/13588192/1037948
+            </summary>
+        </member>
+        <member name="M:CGPTruck.WebAPI.Utils.IgnorableSerializerContractResolver.Ignore(System.Type,System.String[])">
+            <summary>
+            Explicitly ignore the given property(s) for the given type
+            </summary>
+            <param name="type"></param>
+            <param name="propertyName">one or more properties to ignore.  Leave empty to ignore the type entirely.</param>
+        </member>
+        <member name="M:CGPTruck.WebAPI.Utils.IgnorableSerializerContractResolver.IsIgnored(System.Type,System.String)">
+            <summary>
+            Is the given property for the given type ignored?
+            </summary>
+            <param name="type"></param>
+            <param name="propertyName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CGPTruck.WebAPI.Utils.IgnorableSerializerContractResolver.CreateProperty(System.Reflection.MemberInfo,Newtonsoft.Json.MemberSerialization)">
+            <summary>
+            The decision logic goes here
+            </summary>
+            <param name="member"></param>
+            <param name="memberSerialization"></param>
+            <returns></returns>
         </member>
     </members>
 </doc>
