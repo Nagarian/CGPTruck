@@ -123,7 +123,7 @@ namespace CGPTruck.UWP
                 await map.TrySetViewBoundsAsync(
                       routeResult.Route.BoundingBox,
                       null,
-                      Windows.UI.Xaml.Controls.Maps.MapAnimationKind.None);
+                      Windows.UI.Xaml.Controls.Maps.MapAnimationKind.Bow);
             }
 
         }
