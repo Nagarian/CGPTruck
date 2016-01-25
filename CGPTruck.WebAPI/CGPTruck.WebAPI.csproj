@@ -312,6 +312,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\MissionsController.cs" />
     <Compile Include="Controllers\PlacesController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\VehiculesController.cs" />
     <Compile Include="Entities\AccountType.cs">
       <DependentUpon>EFCGPTruck.tt</DependentUpon>

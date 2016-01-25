@@ -585,6 +585,12 @@
             <param name="userId">Id de l'utilisateur</param>
             <returns>User avec son téléphone</returns>
         </member>
+        <member name="M:CGPTruck.WebAPI.BLL.BLLUsers.GetRepairers">
+            <summary>
+            Permet d'obtenir la liste des réparateurs
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:CGPTruck.WebAPI.BLL.BLLVehicules">
             <summary>
             Business Logic Layer des vehicules
@@ -741,6 +747,17 @@
             </summary>
             <param name="placeId">Id de la place dont on veut les détails</param>
             <returns>Place avec toutes les informations la concernant</returns>
+        </member>
+        <member name="T:CGPTruck.WebAPI.Controllers.UsersController">
+            <summary>
+            Controller concernant les utilisateurs. Authentification requise
+            </summary>
+        </member>
+        <member name="M:CGPTruck.WebAPI.Controllers.UsersController.GetPlaces">
+            <summary>
+            Administrator/DecisionMaker : Obtient la liste de tout les réparateurs
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:CGPTruck.WebAPI.Controllers.VehiculesController">
             <summary>
