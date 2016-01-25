@@ -307,10 +307,12 @@
     <Compile Include="BLL\BLLMissions.cs" />
     <Compile Include="BLL\BLLPlaces.cs" />
     <Compile Include="BLL\BLLUsers.cs" />
+    <Compile Include="BLL\BLLVehicules.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\MissionsController.cs" />
     <Compile Include="Controllers\PlacesController.cs" />
+    <Compile Include="Controllers\VehiculesController.cs" />
     <Compile Include="Entities\AccountType.cs">
       <DependentUpon>EFCGPTruck.tt</DependentUpon>
     </Compile>

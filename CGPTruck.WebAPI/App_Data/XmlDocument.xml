@@ -557,7 +557,7 @@
         </member>
         <member name="M:CGPTruck.WebAPI.BLL.BLLPlaces.GetPlaces">
             <summary>
-            Permet d'obtenir toutes les places de la BDD
+            Permet d'obtenir toutes les places active de la BDD
             </summary>
             <returns></returns>
         </member>
@@ -584,6 +584,29 @@
             </summary>
             <param name="userId">Id de l'utilisateur</param>
             <returns>User avec son téléphone</returns>
+        </member>
+        <member name="T:CGPTruck.WebAPI.BLL.BLLVehicules">
+            <summary>
+            Business Logic Layer des vehicules
+            </summary>
+        </member>
+        <member name="P:CGPTruck.WebAPI.BLL.BLLVehicules.Current">
+            <summary>
+            Permet d'obtenir une instance rapidement
+            </summary>
+        </member>
+        <member name="M:CGPTruck.WebAPI.BLL.BLLVehicules.GetVehicule(System.Int32)">
+            <summary>
+            Permet d'obtenir les détails d'une vehicule
+            </summary>
+            <param name="vehiculeId">ID du vehicule</param>
+            <returns></returns>
+        </member>
+        <member name="M:CGPTruck.WebAPI.BLL.BLLVehicules.GetVehicules">
+            <summary>
+            Permet d'obtenir tout les vehicules de la BDD
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:CGPTruck.WebAPI.Controllers.AccountController">
             <summary>
@@ -649,9 +672,14 @@
             Temps avant son expiration (en secondes)
             </summary>
         </member>
+        <member name="P:CGPTruck.WebAPI.Controllers.BaseController.CurrentUser">
+            <summary>
+            Permet d'obtenir les informations et les droits concernant notre utilisateur actuel
+            </summary>
+        </member>
         <member name="T:CGPTruck.WebAPI.Controllers.MissionsController">
             <summary>
-            Controller concernant les missions, Authentification requise
+            Controller concernant les missions. Authentification requise
             </summary>
         </member>
         <member name="M:CGPTruck.WebAPI.Controllers.MissionsController.GetMyMission">
@@ -698,7 +726,7 @@
         </member>
         <member name="T:CGPTruck.WebAPI.Controllers.PlacesController">
             <summary>
-            Controller concernant les lieux connus et enregistrés
+            Controller concernant les lieux connus et enregistrés. Authentification requise
             </summary>
         </member>
         <member name="M:CGPTruck.WebAPI.Controllers.PlacesController.GetPlaces">
@@ -713,6 +741,24 @@
             </summary>
             <param name="placeId">Id de la place dont on veut les détails</param>
             <returns>Place avec toutes les informations la concernant</returns>
+        </member>
+        <member name="T:CGPTruck.WebAPI.Controllers.VehiculesController">
+            <summary>
+            Controller concernant les vehicules. Authentification requise
+            </summary>
+        </member>
+        <member name="M:CGPTruck.WebAPI.Controllers.VehiculesController.GetVehicules">
+            <summary>
+            Administrator/DecisionMaker : Obtient la liste de tout les vehicules en fonction avec leur assignation actuelle
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CGPTruck.WebAPI.Controllers.VehiculesController.GetVehicule(System.Int32)">
+            <summary>
+            Obtient tout les détails d'un vehicule
+            </summary>
+            <param name="vehiculeId">Id du vehicule dont on veut les détails</param>
+            <returns>Vehicule avec toutes les informations le concernant</returns>
         </member>
         <member name="M:CGPTruck.WebAPI.Entities.partial.Extension.GetTitle(CGPTruck.WebAPI.Entities.StepType)">
             <summary>

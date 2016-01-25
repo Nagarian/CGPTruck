@@ -52,6 +52,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="BLLMissionsTest.cs" />
+    <Compile Include="BLLVehiculesTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
