@@ -1,3 +1,0 @@
-﻿# CGPTruck.Web
-
-
