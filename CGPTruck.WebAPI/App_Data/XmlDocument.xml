@@ -481,6 +481,22 @@
             </summary>
             <param name="documentPath">The physical path to XML document.</param>
         </member>
+        <member name="T:CGPTruck.WebAPI.BLL.BLLFailures">
+            <summary>
+            Business Logic Layer des pannes
+            </summary>
+        </member>
+        <member name="P:CGPTruck.WebAPI.BLL.BLLFailures.Current">
+            <summary>
+            Permet d'obtenir une instance rapidement
+            </summary>
+        </member>
+        <member name="M:CGPTruck.WebAPI.BLL.BLLFailures.GetFailures">
+            <summary>
+            Permet d'obtenir toutes les pannes active de la BDD
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:CGPTruck.WebAPI.BLL.BLLMissions">
             <summary>
             Business Logic Layer des missions
@@ -682,6 +698,17 @@
             <summary>
             Permet d'obtenir les informations et les droits concernant notre utilisateur actuel
             </summary>
+        </member>
+        <member name="T:CGPTruck.WebAPI.Controllers.FailuresController">
+            <summary>
+            Controller concernant les pannes. Authentification requise
+            </summary>
+        </member>
+        <member name="M:CGPTruck.WebAPI.Controllers.FailuresController.GetFailures">
+            <summary>
+            Administrator/DecisionMaker : Obtient la liste de toutes les places
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:CGPTruck.WebAPI.Controllers.MissionsController">
             <summary>
