@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using System.Web.Http.ModelBinding;
 
 namespace CGPTruck.WebAPI
@@ -14,7 +15,8 @@ namespace CGPTruck.WebAPI
 
             // Itinéraires de l'API Web
             config.MapHttpAttributeRoutes();
-
+            var cors = new EnableCorsAttribute("localhost", "*", "*");
+            config.EnableCors(cors);
             config.Formatters.Remove(config.Formatters.XmlFormatter);
             config.Formatters.Remove(config.Formatters.FormUrlEncodedFormatter);
             config.Formatters.Remove(config.Formatters.FindReader(typeof(JQueryMvcFormUrlEncodedFormatter), System.Net.Http.Formatting.FormUrlEncodedMediaTypeFormatter.DefaultMediaType) as JQueryMvcFormUrlEncodedFormatter);
