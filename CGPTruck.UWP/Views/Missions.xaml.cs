@@ -39,15 +39,17 @@ namespace CGPTruck.UWP.Views
         {
             mainP = (MainPage)e.Parameter;
             LoadMission();
-            //Latitude = 44.78670251489458, Longitude = -0.6313490867614746
         }
 
         private void LoadMission()
         {
+            States_Button.IsEnabled = true;
             if (s.actualMission != null)
             {
                 Title.Text = s.actualMission.Name;
                 textBlock1.Text = s.actualMission.Description;
+                if (s.actualMission.Steps.Count != 0 && s.actualMission.Steps.Last().Step_Type == StepType.Finished)
+                    States_Button.IsEnabled = false;
             }
             else
             {
@@ -73,6 +75,14 @@ namespace CGPTruck.UWP.Views
                 message = "Vous allez démarrer la mission.\nContinuer ?";
             else if (s.actualMission.Steps.Last().Step_Type == StepType.PickingUp)
                 message = "Vous allez signaler que vous recuperez le colis.\nContinuer ?";
+            else if (s.actualMission.Steps.Last().Step_Type == StepType.PickupProgressing)
+                message = "Vous allez signaler que vous demarrez la livraison du colis.\nContinuer ?";
+            else if (s.actualMission.Steps.Last().Step_Type == StepType.PickupProgressing)
+                message = "Vous allez signaler que vous deposez le colis.\nContinuer ?";
+            else if (s.actualMission.Steps.Last().Step_Type == StepType.DeliveryProgressing)
+                message = "Vous allez signaler que vous avez terminez la livraison et que vous retournez au garage.\nContinuer ?";
+            else if (s.actualMission.Steps.Last().Step_Type == StepType.Returning)
+                message = "Vous allez signaler que vous êtes revenus au garage.\nContinuer ?";
 
             MessageDialog msg = new MessageDialog(message, "Changement de statut");
             msg.Commands.Add(new UICommand("Annuler", new UICommandInvokedHandler(this.CommandInvokedHandler)));
@@ -98,8 +108,65 @@ namespace CGPTruck.UWP.Views
                     s.actualMission.Steps.Add(_step);
                 }
 
-                else if (true)
-                    ;
+                else if (s.actualMission.Steps.Last().Step_Type == StepType.PickingUp)
+                {
+                    Step _step = new Step();
+                    _step.Date = DateTime.Now;
+                    _step.Step_Type = StepType.PickupProgressing;
+                    _step.StepNumber = 2;
+                    _step.Position = new Position();
+                    _step.Position.Latitude = mainP.actualPosition.Position.Latitude;
+                    _step.Position.Longitude = mainP.actualPosition.Position.Longitude;
+                    s.actualMission.Steps.Add(_step);
+                }
+
+                else if (s.actualMission.Steps.Last().Step_Type == StepType.PickupProgressing)
+                {
+                    Step _step = new Step();
+                    _step.Date = DateTime.Now;
+                    _step.Step_Type = StepType.Delivering;
+                    _step.StepNumber = 3;
+                    _step.Position = new Position();
+                    _step.Position.Latitude = mainP.actualPosition.Position.Latitude;
+                    _step.Position.Longitude = mainP.actualPosition.Position.Longitude;
+                    s.actualMission.Steps.Add(_step);
+                }
+
+                else if (s.actualMission.Steps.Last().Step_Type == StepType.Delivering)
+                {
+                    Step _step = new Step();
+                    _step.Date = DateTime.Now;
+                    _step.Step_Type = StepType.DeliveryProgressing;
+                    _step.StepNumber = 4;
+                    _step.Position = new Position();
+                    _step.Position.Latitude = mainP.actualPosition.Position.Latitude;
+                    _step.Position.Longitude = mainP.actualPosition.Position.Longitude;
+                    s.actualMission.Steps.Add(_step);
+                }
+
+                else if (s.actualMission.Steps.Last().Step_Type == StepType.DeliveryProgressing)
+                {
+                    Step _step = new Step();
+                    _step.Date = DateTime.Now;
+                    _step.Step_Type = StepType.Returning;
+                    _step.StepNumber = 4;
+                    _step.Position = new Position();
+                    _step.Position.Latitude = mainP.actualPosition.Position.Latitude;
+                    _step.Position.Longitude = mainP.actualPosition.Position.Longitude;
+                    s.actualMission.Steps.Add(_step);
+                }
+
+                else if (s.actualMission.Steps.Last().Step_Type == StepType.Returning)
+                {
+                    Step _step = new Step();
+                    _step.Date = DateTime.Now;
+                    _step.Step_Type = StepType.Finished;
+                    _step.StepNumber = 4;
+                    _step.Position = new Position();
+                    _step.Position.Latitude = mainP.actualPosition.Position.Latitude;
+                    _step.Position.Longitude = mainP.actualPosition.Position.Longitude;
+                    s.actualMission.Steps.Add(_step);
+                }
             }
         }
     }

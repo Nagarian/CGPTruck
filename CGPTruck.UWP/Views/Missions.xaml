@@ -19,7 +19,7 @@
                 </ScrollViewer>
                 <StackPanel Height="37" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
                     <Button HorizontalAlignment="Center" Content="Destination" Height="37" Width="100" Click="Button_Click"/>
-                    <Button HorizontalAlignment="Center" Content="Status" Margin="10,0,0,0" Height="37" Width="100" Click="Change_Status"/>
+                    <Button HorizontalAlignment="Center" x:Name="States_Button" Content="Status" Margin="10,0,0,0" Height="37" Width="100" Click="Change_Status"/>
                     <Button Margin="10,0,0,0" Height="37" Content="Annuler" Foreground="Red"  Width="100"/>
     
                 </StackPanel>
