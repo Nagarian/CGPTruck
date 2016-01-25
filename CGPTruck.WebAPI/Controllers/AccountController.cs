@@ -25,13 +25,17 @@ namespace CGPTruck.WebAPI.Controllers
     {
         // POST api/Account/Register
         /// <summary>
-        /// Permet de créer un nouveau compte utilisateur
+        /// Administrator : Permet de créer un nouveau compte utilisateur
         /// </summary>
         /// <param name="userModel">Information concernant le nouvel utilisateur</param>
         /// <returns></returns>
-        [AllowAnonymous]
         public async Task<IHttpActionResult> Register(UserModel userModel)
         {
+            if (CurrentUser.AccountType != AccountType.Administrator)
+            {
+                return Unauthorized();
+            }
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

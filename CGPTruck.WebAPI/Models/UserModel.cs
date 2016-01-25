@@ -7,6 +7,9 @@ using System.Web;
 
 namespace CGPTruck.WebAPI.Models
 {
+    /// <summary>
+    /// Informations du nouvel utilisateur à insérer en BDD
+    /// </summary>
     public class UserModel
     {
         /// <summary>
