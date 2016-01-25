@@ -71,12 +71,12 @@ namespace CGPTruck.UWP
         {
             using (var client = GetClient())
             {
-                HttpResponseMessage response = await client.GetAsync("api/User/GetUser");
+                HttpResponseMessage response = await client.GetAsync("api/Account/Me");
 
                 if (response.IsSuccessStatusCode)
                 {
-                    Entities.Entities.User result = (JsonConvert.DeserializeObject(await response.Content.ReadAsStringAsync()) as Entities.Entities.User);
-                    if (result.AccountType == Entities.Entities.AccountType.Driver)
+                    User result = await response.Content.ReadAsAsync<User>();
+                    if (result.AccountType == AccountType.Driver)
                         return true;
                     else
                         return false;

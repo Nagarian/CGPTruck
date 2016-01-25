@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CGPTruck.UWP.Entities.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,8 @@ namespace CGPTruck.UWP.Core
     {
         private static Settings instance = null;
         private static readonly object myLock = new object(); // Pour éviter, lors de l’utilisation de multiple thread, que plusieurs singleton soit instanciés.
+
+        public Mission actualMission { get; set; }
 
         private Settings() { }
 

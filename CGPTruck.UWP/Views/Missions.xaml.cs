@@ -1,4 +1,5 @@
-﻿using CGPTruck.UWP.Entities.Entities;
+﻿using CGPTruck.UWP.Core;
+using CGPTruck.UWP.Entities.Entities;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,6 +8,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Devices.Geolocation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -25,7 +27,7 @@ namespace CGPTruck.UWP.Views
     /// </summary>
     public sealed partial class Missions : Page
     {
-        Entities.Entities.Mission mission;
+        Settings s = Settings.getInstance();
         MainPage mainP = null;
 
         public Missions()
@@ -40,18 +42,12 @@ namespace CGPTruck.UWP.Views
             //Latitude = 44.78670251489458, Longitude = -0.6313490867614746
         }
 
-        private async void LoadMission()
+        private void LoadMission()
         {
-            //GenerateData();
-            var result = await WebApiService.Current.GetMyMissions();
-            mission = result.FirstOrDefault();
-
-            mission?.Steps.Add(new Entities.Entities.Step() { Step_Type = Entities.Entities.StepType.PickupProgressing });
-
-            if (mission != null)
+            if (s.actualMission != null)
             {
-                Title.Text = mission.Name;
-                textBlock1.Text = mission.Description;
+                Title.Text = s.actualMission.Name;
+                textBlock1.Text = s.actualMission.Description;
             }
             else
             {
@@ -59,42 +55,52 @@ namespace CGPTruck.UWP.Views
                 textBlock1.Text = "Patientez jusqu'a l'attribution d'une mission par l'administrateur. Faite vous un café en attendant :D";
             }
         }
-        
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Frame.Visibility = Visibility.Collapsed;
-            if (mission.Steps.Last().Step_Type == Entities.Entities.StepType.PickingUp)
-                mainP.setDestination(new BasicGeoposition() { Latitude = mission.PickupPlace.Position.Latitude, Longitude = mission.PickupPlace.Position.Longitude });
+            if (s.actualMission.Steps.Count == 0 || s.actualMission.Steps.Last().Step_Type == StepType.PickingUp)
+                mainP.setDestination(new BasicGeoposition() { Latitude = s.actualMission.PickupPlace.Position.Latitude, Longitude = s.actualMission.PickupPlace.Position.Longitude });
             else
-                mainP.setDestination(new BasicGeoposition() { Latitude = mission.DeliveryPlace.Position.Latitude, Longitude = mission.DeliveryPlace.Position.Longitude });
+                mainP.setDestination(new BasicGeoposition() { Latitude = s.actualMission.DeliveryPlace.Position.Latitude, Longitude = s.actualMission.DeliveryPlace.Position.Longitude });
         }
 
-        private void GenerateData()
+        private async void Change_Status(object sender, RoutedEventArgs e)
         {
-            mission = new Entities.Entities.Mission()
+            string message = "";
+
+            if (s.actualMission.Steps.Count == 0)
+                message = "Vous allez démarrer la mission.\nContinuer ?";
+            else if (s.actualMission.Steps.Last().Step_Type == StepType.PickingUp)
+                message = "Vous allez signaler que vous recuperez le colis.\nContinuer ?";
+
+            MessageDialog msg = new MessageDialog(message, "Changement de statut");
+            msg.Commands.Add(new UICommand("Annuler", new UICommandInvokedHandler(this.CommandInvokedHandler)));
+            msg.Commands.Add(new UICommand("Valider", new UICommandInvokedHandler(this.CommandInvokedHandler)));
+
+            await msg.ShowAsync();
+
+        }
+
+        private void CommandInvokedHandler(IUICommand command)
+        {
+            if (command.Label == "Valider")
             {
-                Name = "Nestle c'est fort en chocolat",
-                Description = "It's an amazing mission to complete",
-                PickupPlace = new Entities.Entities.Place()
+                if (s.actualMission.Steps.Count == 0)
                 {
-                    Name = "Taf",
-                    Position = new Entities.Entities.Position()
-                    {
-                        Latitude = 44.7867,
-                        Longitude = -0.6313
-                    }
-                },
-                DeliveryPlace = new Entities.Entities.Place()
-                {
-                    Name = "Auchan Lac",
-                    Position = new Entities.Entities.Position()
-                    {
-                        Latitude = 44.8807,
-                        Longitude = -0.56578
-                    }
-                },
-                Steps = new List<Entities.Entities.Step>()
-            }; ;
+                    Step _step = new Step();
+                    _step.Date = DateTime.Now;
+                    _step.Step_Type = StepType.PickingUp;
+                    _step.StepNumber = 1;
+                    _step.Position = new Position();
+                    _step.Position.Latitude = mainP.actualPosition.Position.Latitude;
+                    _step.Position.Longitude = mainP.actualPosition.Position.Longitude;
+                    s.actualMission.Steps.Add(_step);
+                }
+
+                else if (true)
+                    ;
+            }
         }
     }
 }
