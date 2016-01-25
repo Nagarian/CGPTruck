@@ -1,7 +1,9 @@
 ﻿using CGPTruck.WebAPI.BLL;
 using CGPTruck.WebAPI.Entities;
+using CGPTruck.WebAPI.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -23,7 +25,7 @@ namespace CGPTruck.WebAPI.Controllers
         /// Administrator/DecisionMaker : Obtient la liste de toutes les places
         /// </summary>
         /// <returns></returns>
-        [Route("api/Failures/Declared")]
+        [Route("api/Failures/declared")]
         [HttpGet]
         [ResponseType(typeof(List<Failure>))]
         public IHttpActionResult GetFailures()
@@ -34,6 +36,40 @@ namespace CGPTruck.WebAPI.Controllers
             }
 
             return Ok(failures.GetFailures());
+        }
+
+        // POST : api/Failures/5
+        /// <summary>
+        /// Administrator/DecisionMaker : Assigne un réparateur à une panne
+        /// </summary>
+        /// <param name="failureId">ID de la panne</param>
+        /// <param name="repairerId">ID du réparateur assigné</param>
+        /// <returns></returns>
+        [Route("api/Failures/{failureId}/assign")]
+        [HttpPost]
+        [ResponseType(typeof(void))]
+        public IHttpActionResult PostFailureRepairerAssigned(int failureId, [FromBody] AssignedRepairerModel repairer)
+        {
+            if (CurrentUser.AccountType != AccountType.Administrator || CurrentUser.AccountType != AccountType.DecisionMaker)
+            {
+                return Unauthorized();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                failures.AssignRepairerToFailure(failureId, repairer.RepairerId);
+            }
+            catch (ObjectNotFoundException)
+            {
+                return NotFound();
+            }
+
+            return Ok();
         }
     }
 }

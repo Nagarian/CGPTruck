@@ -497,6 +497,13 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:CGPTruck.WebAPI.BLL.BLLFailures.AssignRepairerToFailure(System.Int32,System.Int32)">
+            <summary>
+            Permet d'assigner un réparateur à une panne
+            </summary>
+            <param name="failureId">ID de la panne</param>
+            <param name="repairedId">ID du réparateur</param>
+        </member>
         <member name="T:CGPTruck.WebAPI.BLL.BLLMissions">
             <summary>
             Business Logic Layer des missions
@@ -637,7 +644,7 @@
         </member>
         <member name="M:CGPTruck.WebAPI.Controllers.AccountController.Register(CGPTruck.WebAPI.Models.UserModel)">
             <summary>
-            Permet de créer un nouveau compte utilisateur
+            Administrator : Permet de créer un nouveau compte utilisateur
             </summary>
             <param name="userModel">Information concernant le nouvel utilisateur</param>
             <returns></returns>
@@ -708,6 +715,14 @@
             <summary>
             Administrator/DecisionMaker : Obtient la liste de toutes les places
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CGPTruck.WebAPI.Controllers.FailuresController.PostFailureRepairerAssigned(System.Int32,CGPTruck.WebAPI.Models.AssignedRepairerModel)">
+            <summary>
+            Administrator/DecisionMaker : Assigne un réparateur à une panne
+            </summary>
+            <param name="failureId">ID de la panne</param>
+            <param name="repairerId">ID du réparateur assigné</param>
             <returns></returns>
         </member>
         <member name="T:CGPTruck.WebAPI.Controllers.MissionsController">
@@ -829,6 +844,21 @@
         <member name="T:CGPTruck.WebAPI.Entities.Vehicule">
             <summary>
             Objet réprésentant un véhicule
+            </summary>
+        </member>
+        <member name="T:CGPTruck.WebAPI.Models.AssignedRepairerModel">
+            <summary>
+            Informations de l'assignation
+            </summary>
+        </member>
+        <member name="P:CGPTruck.WebAPI.Models.AssignedRepairerModel.RepairerId">
+            <summary>
+            ID du réparateur assigné
+            </summary>
+        </member>
+        <member name="T:CGPTruck.WebAPI.Models.UserModel">
+            <summary>
+            Informations du nouvel utilisateur à insérer en BDD
             </summary>
         </member>
         <member name="P:CGPTruck.WebAPI.Models.UserModel.UserName">
