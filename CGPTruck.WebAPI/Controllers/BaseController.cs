@@ -13,10 +13,13 @@ using System.Web.Http;
 namespace CGPTruck.WebAPI.Controllers
 {
     [Authorize]
-    public class BaseController : ApiController
+    public abstract class BaseController : ApiController
     {
         private User currentUser;
 
+        /// <summary>
+        /// Permet d'obtenir les informations et les droits concernant notre utilisateur actuel
+        /// </summary>
         public User CurrentUser
         {
             get
