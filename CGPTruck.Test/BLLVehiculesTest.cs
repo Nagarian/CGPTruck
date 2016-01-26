@@ -23,5 +23,11 @@ namespace CGPTruck.Test
         {
             var v = vehicules.GetVehicules();
         }
+
+        [TestMethod]
+        public void TestGetVehiculeCurrentDriver()
+        {
+            var v = vehicules.GetVehiculeCurrentDriver(1);
+        }
     }
 }

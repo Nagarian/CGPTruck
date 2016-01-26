@@ -1,5 +1,6 @@
 ﻿using CGPTruck.WebAPI.BLL;
 using CGPTruck.WebAPI.Entities;
+using CGPTruck.WebAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,7 +33,7 @@ namespace CGPTruck.WebAPI.Controllers
             {
                 return Unauthorized();
             }
-            
+
             return Ok(vehicules.GetVehicules());
         }
 
@@ -68,5 +69,37 @@ namespace CGPTruck.WebAPI.Controllers
             return Ok(vehicule);
         }
 
+        // POST: api/Vehicules/5/Position
+        /// <summary>
+        /// Driver : Met à jour la position du vehicule actuel
+        /// </summary>
+        /// <param name="vehiculeId">ID du vehicule</param>
+        /// <param name="position">Nouvelle position</param>
+        /// <returns></returns>
+        [Route("api/Vehicules/{vehiculeId}/Position")]
+        [HttpPost]
+        [ResponseType(typeof(void))]
+        public IHttpActionResult PostVehiculePosition(int vehiculeId, [FromBody] PositionModel position)
+        {
+            if (CurrentUser.AccountType != AccountType.Driver)
+            {
+                return Unauthorized();
+            }
+
+            var driver = vehicules.GetVehiculeCurrentDriver(vehiculeId);
+            if (CurrentUser.Id != driver.Id)
+            {
+                return Unauthorized();
+            }
+
+            if (vehicules.UpdateVehiculePosition(vehiculeId, new Position { Latitude = position.Latitude, Longitude = position.Longitude }))
+            {
+                return StatusCode(HttpStatusCode.NoContent);
+            }
+            else
+            {
+                return InternalServerError();
+            }
+        }
     }
 }

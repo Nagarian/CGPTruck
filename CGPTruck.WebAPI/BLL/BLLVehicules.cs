@@ -70,5 +70,56 @@ namespace CGPTruck.WebAPI.BLL
             }
         }
 
+        /// <summary>
+        /// Permet d'obtenir le conducteur actuel d'un vehicule
+        /// </summary>
+        /// <param name="vehiculeId">ID du véhicule</param>
+        /// <returns></returns>
+        public User GetVehiculeCurrentDriver(int vehiculeId)
+        {
+            using (CGPTruckEntities context = new CGPTruckEntities())
+            {
+                var driver = (from vehicule in context.Vehicules
+                              where vehicule.Id == vehiculeId
+                              from mission in vehicule.Missions
+                              let lastStep = mission.Steps.OrderByDescending(s => s.StepNumber).FirstOrDefault()
+                              where mission.Date == DateTime.Today && mission.Steps.Count > 0 && lastStep.Step_Type != StepType.Aborted && lastStep.Step_Type != StepType.Failure
+                              select mission.Driver).SingleOrDefault();
+                return driver;
+            }
+        }
+
+        /// <summary>
+        /// Permet de mettre à jour la position d'un vehicule
+        /// </summary>
+        /// <param name="vehiculeId">ID du vehicule</param>
+        /// <param name="position">Nouvelle position</param>
+        /// <returns>Indique si la mise à jour à réussi</returns>
+        public bool UpdateVehiculePosition(int vehiculeId, Position position)
+        {
+            using (CGPTruckEntities context = new CGPTruckEntities())
+            {
+                var veh = (from vehicule in context.Vehicules.Include(v => v.Position)
+                           where vehicule.Id == vehiculeId
+                           select vehicule).SingleOrDefault();
+                if (veh == null)
+                {
+                    return false;
+                }
+
+                if (veh.Position == null)
+                {
+                    veh.Position = new Position { Latitude = position.Latitude, Longitude = position.Longitude };
+                }
+                else
+                {
+                    veh.Position.Latitude = position.Latitude;
+                    veh.Position.Longitude = position.Longitude;
+                }
+
+                context.SaveChanges();
+                return true;
+            }
+        }
     }
 }

@@ -644,6 +644,21 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:CGPTruck.WebAPI.BLL.BLLVehicules.GetVehiculeCurrentDriver(System.Int32)">
+            <summary>
+            Permet d'obtenir le conducteur actuel d'un vehicule
+            </summary>
+            <param name="vehiculeId">ID du véhicule</param>
+            <returns></returns>
+        </member>
+        <member name="M:CGPTruck.WebAPI.BLL.BLLVehicules.UpdateVehiculePosition(System.Int32,CGPTruck.WebAPI.Entities.Position)">
+            <summary>
+            Permet de mettre à jour la position d'un vehicule
+            </summary>
+            <param name="vehiculeId">ID du vehicule</param>
+            <param name="position">Nouvelle position</param>
+            <returns>Indique si la mise à jour à réussi</returns>
+        </member>
         <member name="T:CGPTruck.WebAPI.Controllers.AccountController">
             <summary>
             Controller concernant l'authentification et les méthodes spécifiques à l'utilisateur
@@ -837,6 +852,14 @@
             </summary>
             <param name="vehiculeId">Id du vehicule dont on veut les détails</param>
             <returns>Vehicule avec toutes les informations le concernant</returns>
+        </member>
+        <member name="M:CGPTruck.WebAPI.Controllers.VehiculesController.PostVehiculePosition(System.Int32,CGPTruck.WebAPI.Models.PositionModel)">
+            <summary>
+            Driver : Met à jour la position du vehicule actuel
+            </summary>
+            <param name="vehiculeId">ID du vehicule</param>
+            <param name="position">Nouvelle position</param>
+            <returns></returns>
         </member>
         <member name="M:CGPTruck.WebAPI.Entities.partial.Extension.GetTitle(CGPTruck.WebAPI.Entities.StepType)">
             <summary>
