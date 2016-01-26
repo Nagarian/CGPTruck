@@ -20,7 +20,11 @@ namespace CGPTruck.UWP
         {
             return new HttpClient()
             {
+#if DEBUG
+                BaseAddress = new Uri("http://localhost:8692/"),
+#else
                 BaseAddress = new Uri("http://cgptruck.azurewebsites.net/"),
+#endif
                 DefaultRequestHeaders =
                 {
                     Accept =

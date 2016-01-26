@@ -187,6 +187,25 @@ namespace CGPTruck.WebAPI.BLL
             }
         }
 
+        /// <summary>
+        /// Permet d'ajouter un step à une mission
+        /// </summary>
+        /// <param name="missionId">ID de la mission</param>
+        /// <param name="step">Etape à ajouter</param>
+        public void AddStepToMission(int missionId, Step step)
+        {
+            if (missionId != step.Mission_Id)
+            {
+                step.Mission_Id = missionId;
+            }
+
+            using (CGPTruckEntities context = new CGPTruckEntities())
+            {
+                context.Steps.Add(step);
+                context.SaveChanges();
+            }
+        }
+
 
         // La même méthode que GetMissions mais en allégeant la requête pour garder seulement le dernier Step
         // Je ne suis pas sûr que ça soit la manière la plus optimale
