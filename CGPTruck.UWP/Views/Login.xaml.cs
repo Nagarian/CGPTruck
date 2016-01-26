@@ -40,18 +40,22 @@ namespace CGPTruck.UWP.Views
         {
             Connecter_Button.Content = new ProgressRing() { IsActive = true };
             if (await WebApiService.Current.Authenticate(Username_TextBox.Text, Password_PasswordTextBox.Password))
-                Frame.Navigate(typeof(MainPage));
+            {
+                bool? result = await WebApiService.Current.GetIsDriverUser();
+                if (result != null)
+                {
+                    s.isDriver = result.Value;
+                    Frame.Navigate(typeof(MainPage));
+                }
+                else {
+                    Message_TextBlock.Text = "Vous n'avez pas les droits !";
+                    Connecter_Button.Content = new TextBlock() { Text = "Se connecter" };
+                }
+            }
             else {
                 Message_TextBlock.Text = "Identifiant erronés !";
                 Connecter_Button.Content = new TextBlock() { Text = "Se connecter" };
             }
-
-            //bool? result = WebApiService.Current.GetIsDriverUser().Result;
-            bool? result = true;
-            if (result != null)
-                s.isDriver = result.Value;
         }
-
-
     }
 }

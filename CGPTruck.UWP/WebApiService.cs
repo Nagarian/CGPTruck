@@ -20,7 +20,7 @@ namespace CGPTruck.UWP
         {
             return new HttpClient()
             {
-                BaseAddress = new Uri("http://localhost:8692/"),
+                BaseAddress = new Uri("http://cgptruck.azurewebsites.net/"),
                 DefaultRequestHeaders =
                 {
                     Accept =
@@ -52,6 +52,28 @@ namespace CGPTruck.UWP
             }
         }
 
+
+
+        public async Task<bool> PushStepsMission(List<Step> listSteps, Mission mission)
+        {
+            using (var client = GetClient())
+            {
+                HttpResponseMessage response = await client.PostAsync("/api/Missions/Steps", new System.Net.Http.FormUrlEncodedContent(new Dictionary<string, string>
+                {
+                    ["grant_type"] = "password",
+                    ["username"] = username,
+                    ["password"] = password
+                }));
+
+                if (response.IsSuccessStatusCode)
+                {
+                    this.token = (JsonConvert.DeserializeObject(await response.Content.ReadAsStringAsync()) as dynamic).access_token.ToString();
+                }
+
+                return response.IsSuccessStatusCode;
+            }
+        }
+
         public async Task<List<Mission>> GetMyMissions()
         {
             using (var client = GetClient())
@@ -67,16 +89,31 @@ namespace CGPTruck.UWP
             }
         }
 
+        public async Task<User> GetUser()
+        {
+            using (var client = GetClient())
+            {
+                HttpResponseMessage response = await client.GetAsync("api/Account/Me");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return await response.Content.ReadAsAsync<User>();
+                }
+
+                return null;
+            }
+        }
+
         public async Task<bool?> GetIsDriverUser()
         {
             using (var client = GetClient())
             {
-                HttpResponseMessage response = await client.GetAsync("api/User/GetUser");
+                HttpResponseMessage response = await client.GetAsync("api/Account/Me");
 
                 if (response.IsSuccessStatusCode)
                 {
-                    Entities.Entities.User result = (JsonConvert.DeserializeObject(await response.Content.ReadAsStringAsync()) as Entities.Entities.User);
-                    if (result.AccountType == Entities.Entities.AccountType.Driver)
+                    User result = await response.Content.ReadAsAsync<User>();
+                    if (result.AccountType == AccountType.Driver)
                         return true;
                     else
                         return false;
