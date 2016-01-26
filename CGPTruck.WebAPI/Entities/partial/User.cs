@@ -5,8 +5,14 @@ using System.Web;
 
 namespace CGPTruck.WebAPI.Entities
 {
+    /// <summary>
+    /// Utilisateur
+    /// </summary>
     public partial class User
     {
+        /// <summary>
+        /// Téléphone de l'utilisateur
+        /// </summary>
         public Phone RealPhone
         {
             get

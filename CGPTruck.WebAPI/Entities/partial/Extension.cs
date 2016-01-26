@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace CGPTruck.WebAPI.Entities.partial
+namespace CGPTruck.WebAPI.Entities
 {
+    /// <summary>
+    /// Méthode d'extension du StepType
+    /// </summary>
     public static class Extension
     {
         /// <summary>
@@ -12,7 +15,7 @@ namespace CGPTruck.WebAPI.Entities.partial
         /// </summary>
         /// <param name="step"></param>
         /// <returns></returns>
-        public static string GetTitle(this StepType step)
+        public static string GetName(this StepType step)
         {
             switch (step)
             {

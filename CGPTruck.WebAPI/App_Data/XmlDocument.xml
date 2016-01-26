@@ -861,7 +861,17 @@
             <param name="position">Nouvelle position</param>
             <returns></returns>
         </member>
-        <member name="M:CGPTruck.WebAPI.Entities.partial.Extension.GetTitle(CGPTruck.WebAPI.Entities.StepType)">
+        <member name="T:CGPTruck.WebAPI.Entities.Mission">
+            <summary>
+            Mission
+            </summary>
+        </member>
+        <member name="T:CGPTruck.WebAPI.Entities.Extension">
+            <summary>
+            Méthode d'extension du StepType
+            </summary>
+        </member>
+        <member name="M:CGPTruck.WebAPI.Entities.Extension.GetName(CGPTruck.WebAPI.Entities.StepType)">
             <summary>
             Permet d'obtenir l'intitulé (en Fr) de l'enumération
             </summary>
@@ -881,6 +891,42 @@
         <member name="T:CGPTruck.WebAPI.Entities.Step">
             <summary>
             Etapes d'une mission
+            </summary>
+        </member>
+        <member name="P:CGPTruck.WebAPI.Entities.Step.StepTypeDetail">
+            <summary>
+            Obtient les détails d'un StepType
+            </summary>
+        </member>
+        <member name="T:CGPTruck.WebAPI.Entities.StepTypeDetail">
+            <summary>
+            Version Littéraire des StepType
+            </summary>
+        </member>
+        <member name="M:CGPTruck.WebAPI.Entities.StepTypeDetail.#ctor(CGPTruck.WebAPI.Entities.StepType)">
+            <summary>
+            Créer les détails d'un StepType donné
+            </summary>
+            <param name="stepType"></param>
+        </member>
+        <member name="P:CGPTruck.WebAPI.Entities.StepTypeDetail.Name">
+            <summary>
+            Obtient le nom de l'étape
+            </summary>
+        </member>
+        <member name="P:CGPTruck.WebAPI.Entities.StepTypeDetail.Description">
+            <summary>
+            Obtient la description de l'étape
+            </summary>
+        </member>
+        <member name="T:CGPTruck.WebAPI.Entities.User">
+            <summary>
+            Utilisateur
+            </summary>
+        </member>
+        <member name="P:CGPTruck.WebAPI.Entities.User.RealPhone">
+            <summary>
+            Téléphone de l'utilisateur
             </summary>
         </member>
         <member name="T:CGPTruck.WebAPI.Entities.Vehicule">

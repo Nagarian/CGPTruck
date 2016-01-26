@@ -11,5 +11,16 @@ namespace CGPTruck.WebAPI.Entities
     [System.Diagnostics.DebuggerDisplay("{" + nameof(Id) + "} : {" + nameof(Step_Type) + "} ({" + nameof(Position) + ".Latitude}, {" + nameof(Position) + ".Longitude})")]
     public partial class Step
     {
+        /// <summary>
+        /// Obtient les détails d'un StepType
+        /// </summary>
+        public StepTypeDetail StepTypeDetail
+        {
+            get
+            {
+                return new StepTypeDetail(this.Step_Type);
+            }
+        }
+
     }
 }
