@@ -53,6 +53,7 @@ namespace CGPTruck.WebAPI.BLL
                                                         .Include(m => m.PickupPlace.Position)
                                                         .Include(m => m.Steps.Select(s => s.Position))
                                                         .Include(m => m.Vehicule.Position)
+                                                        .Include(m => m.Driver)
                         orderby mission.Date ascending
                         select mission).ToList();
             }
