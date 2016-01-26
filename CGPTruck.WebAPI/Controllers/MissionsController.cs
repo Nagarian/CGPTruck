@@ -214,7 +214,7 @@ namespace CGPTruck.WebAPI.Controllers
 
             if (lastStep != null)
             {
-                if (lastStep.StepNumber < step.StepNumber)
+                if (lastStep.StepNumber > step.StepNumber)
                 {
                     return BadRequest("Bad StepNumber");
                 }
