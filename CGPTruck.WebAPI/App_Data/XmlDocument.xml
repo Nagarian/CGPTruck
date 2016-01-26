@@ -597,6 +597,12 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:CGPTruck.WebAPI.BLL.BLLPlaces.GetPlacesOfType(CGPTruck.WebAPI.Entities.PlaceType)">
+            <summary>
+            Permet d'obtenir toutes les places du type spécifié
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:CGPTruck.WebAPI.BLL.BLLPlaces.GetPlace(System.Int32)">
             <summary>
             Permet d'obtenir les détails d'une place
@@ -831,6 +837,18 @@
             </summary>
         </member>
         <member name="M:CGPTruck.WebAPI.Controllers.PlacesController.GetPlaces">
+            <summary>
+            Driver/Administrator/DecisionMaker : Obtient la liste de toutes les places
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CGPTruck.WebAPI.Controllers.PlacesController.GetWarehouses">
+            <summary>
+            Driver/Administrator/DecisionMaker : Obtient la liste de toutes les places
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CGPTruck.WebAPI.Controllers.PlacesController.GetClients">
             <summary>
             Driver/Administrator/DecisionMaker : Obtient la liste de toutes les places
             </summary>

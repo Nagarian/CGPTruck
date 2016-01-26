@@ -33,6 +33,20 @@ namespace CGPTruck.WebAPI.BLL
             }
         }
 
+        /// <summary>
+        /// Permet d'obtenir toutes les places du type spécifié
+        /// </summary>
+        /// <returns></returns>
+        public Place GetPlacesOfType(PlaceType placeType)
+        {
+            using (CGPTruckEntities context = new CGPTruckEntities())
+            {
+                return (from place in context.Places.Include(p => p.Position)
+                        where place.Active && place.Place_Type == placeType
+                        select place).SingleOrDefault();
+            }
+        }
+
 
         /// <summary>
         /// Permet d'obtenir les détails d'une place

@@ -18,13 +18,12 @@ namespace CGPTruck.WebAPI.Controllers
     {
         private BLLPlaces places = new BLLPlaces();
 
-
         // GET: api/Places
         /// <summary>
         /// Driver/Administrator/DecisionMaker : Obtient la liste de toutes les places
         /// </summary>
         /// <returns></returns>
-        [Route("api/Places/")]
+        [Route("api/Places")]
         [HttpGet]
         [ResponseType(typeof(List<Mission>))]
         public IHttpActionResult GetPlaces()
@@ -37,7 +36,41 @@ namespace CGPTruck.WebAPI.Controllers
             return Ok(places.GetPlaces());
         }
 
+        // GET: api/Places
+        /// <summary>
+        /// Driver/Administrator/DecisionMaker : Obtient la liste de toutes les entrepôts
+        /// </summary>
+        /// <returns></returns>
+        [Route("api/Places/warehouses")]
+        [HttpGet]
+        [ResponseType(typeof(List<Mission>))]
+        public IHttpActionResult GetWarehouses()
+        {
+            if (CurrentUser.AccountType == AccountType.Repairer)
+            {
+                return Unauthorized();
+            }
 
+            return Ok(places.GetPlacesOfType(PlaceType.Warehouse));
+        }
+
+        // GET: api/Places
+        /// <summary>
+        /// Driver/Administrator/DecisionMaker : Obtient la liste de tout les lieux de livraisons
+        /// </summary>
+        /// <returns></returns>
+        [Route("api/Places/clients")]
+        [HttpGet]
+        [ResponseType(typeof(List<Mission>))]
+        public IHttpActionResult GetClients()
+        {
+            if (CurrentUser.AccountType == AccountType.Repairer)
+            {
+                return Unauthorized();
+            }
+
+            return Ok(places.GetPlacesOfType(PlaceType.Client));
+        }
 
         // GET: api/Places/5
         /// <summary>
@@ -63,6 +96,5 @@ namespace CGPTruck.WebAPI.Controllers
 
             return Ok(place);
         }
-
     }
 }
