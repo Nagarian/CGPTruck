@@ -36,15 +36,15 @@ namespace CGPTruck.WebAPI.BLL
         }
 
         /// <summary>
-        /// Permet d'obtenir la liste des réparateurs
+        /// Permet d'obtenir la liste du type de personne
         /// </summary>
         /// <returns></returns>
-        public List<User> GetRepairers()
+        public List<User> GetUsersOfType(AccountType accountType)
         {
             using (CGPTruckEntities context = new CGPTruckEntities())
             {
                 return (from user in context.Users.Include(u => u.Phones)
-                        where user.AccountType == AccountType.Repairer
+                        where user.AccountType == accountType
                         select user).ToList();
             }
         }

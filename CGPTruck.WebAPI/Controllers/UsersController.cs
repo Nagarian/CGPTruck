@@ -24,17 +24,35 @@ namespace CGPTruck.WebAPI.Controllers
         /// Administrator/DecisionMaker : Obtient la liste de tout les réparateurs
         /// </summary>
         /// <returns></returns>
-        [Route("api/Users/Repairers/")]
+        [Route("api/Users/repairers")]
         [HttpGet]
         [ResponseType(typeof(List<User>))]
-        public IHttpActionResult GetPlaces()
+        public IHttpActionResult GetRepairers()
         {
             if (CurrentUser.AccountType == AccountType.Repairer || CurrentUser.AccountType == AccountType.Driver)
             {
                 return Unauthorized();
             }
 
-            return Ok(users.GetRepairers().Select(u => u.RemoveProperty("AspNetId", "Phones", "RealPhone.Users")));
+            return Ok(users.GetUsersOfType(AccountType.Repairer).Select(u => u.RemoveProperty("AspNetId", "Phones", "RealPhone.Users")));
+        }
+
+        // GET: api/Users/drivers
+        /// <summary>
+        /// Administrator/DecisionMaker : Obtient la liste de tout les chauffeurs
+        /// </summary>
+        /// <returns></returns>
+        [Route("api/Users/drivers")]
+        [HttpGet]
+        [ResponseType(typeof(List<User>))]
+        public IHttpActionResult GetDrivers()
+        {
+            if (CurrentUser.AccountType == AccountType.Repairer || CurrentUser.AccountType == AccountType.Driver)
+            {
+                return Unauthorized();
+            }
+
+            return Ok(users.GetUsersOfType(AccountType.Driver).Select(u => u.RemoveProperty("AspNetId", "Phones", "RealPhone.Users")));
         }
     }
 }

@@ -621,9 +621,9 @@
             <param name="userId">Id de l'utilisateur</param>
             <returns>User avec son téléphone</returns>
         </member>
-        <member name="M:CGPTruck.WebAPI.BLL.BLLUsers.GetRepairers">
+        <member name="M:CGPTruck.WebAPI.BLL.BLLUsers.GetUsersOfType(CGPTruck.WebAPI.Entities.AccountType)">
             <summary>
-            Permet d'obtenir la liste des réparateurs
+            Permet d'obtenir la liste du type de personne
             </summary>
             <returns></returns>
         </member>
@@ -842,9 +842,15 @@
             Controller concernant les utilisateurs. Authentification requise
             </summary>
         </member>
-        <member name="M:CGPTruck.WebAPI.Controllers.UsersController.GetPlaces">
+        <member name="M:CGPTruck.WebAPI.Controllers.UsersController.GetRepairers">
             <summary>
             Administrator/DecisionMaker : Obtient la liste de tout les réparateurs
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CGPTruck.WebAPI.Controllers.UsersController.GetDrivers">
+            <summary>
+            Administrator/DecisionMaker : Obtient la liste de tout les chauffeurs
             </summary>
             <returns></returns>
         </member>
