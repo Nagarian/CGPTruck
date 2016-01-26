@@ -54,16 +54,11 @@ namespace CGPTruck.UWP
 
 
 
-        public async Task<bool> PushStepsMission(List<Step> listSteps, Mission mission)
+        public async Task<bool> PushStepsMission(Step step, Mission mission)
         {
             using (var client = GetClient())
             {
-                HttpResponseMessage response = await client.PostAsync("/api/Missions/Steps", new System.Net.Http.FormUrlEncodedContent(new Dictionary<string, string>
-                {
-                    ["grant_type"] = "password",
-                    ["username"] = username,
-                    ["password"] = password
-                }));
+                HttpResponseMessage response = await client.PutAsJsonAsync("api/Missions/" + mission.Id + "/steps", step);
 
                 if (response.IsSuccessStatusCode)
                 {
