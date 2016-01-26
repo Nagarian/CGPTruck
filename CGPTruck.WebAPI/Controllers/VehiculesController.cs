@@ -77,9 +77,9 @@ namespace CGPTruck.WebAPI.Controllers
         /// <param name="position">Nouvelle position</param>
         /// <returns></returns>
         [Route("api/Vehicules/{vehiculeId}/Position")]
-        [HttpPost]
+        [HttpPut]
         [ResponseType(typeof(void))]
-        public IHttpActionResult PostVehiculePosition(int vehiculeId, [FromBody] PositionModel position)
+        public IHttpActionResult PutVehiculePosition(int vehiculeId, [FromBody] PositionModel position)
         {
             if (CurrentUser.AccountType != AccountType.Driver)
             {
