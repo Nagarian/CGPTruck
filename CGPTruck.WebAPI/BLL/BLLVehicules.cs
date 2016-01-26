@@ -65,8 +65,23 @@ namespace CGPTruck.WebAPI.BLL
                         v.Missions = v.Missions.Where(m => !m.Steps.Any(s => s.Step_Type == StepType.Aborted || s.Step_Type == StepType.Finished)).ToList();
                     }
                 }
-                
+
                 return result;
+            }
+        }
+
+
+        /// <summary>
+        /// Permet d'obtenir tout les vehicules du type spécifié fonctionnel
+        /// </summary>
+        /// <returns></returns>
+        public List<Vehicule> GetVehiculesOfType(VehiculeType vehiculeType)
+        {
+            using (CGPTruckEntities context = new CGPTruckEntities())
+            {
+                return (from vehicule in context.Vehicules
+                        where vehicule.Vehicule_State != VehiculeState.Running && vehicule.Vehicule_Type == vehiculeType
+                        select vehicule).ToList();
             }
         }
 

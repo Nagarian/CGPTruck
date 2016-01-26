@@ -650,6 +650,12 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:CGPTruck.WebAPI.BLL.BLLVehicules.GetVehiculesOfType(CGPTruck.WebAPI.Entities.VehiculeType)">
+            <summary>
+            Permet d'obtenir tout les vehicules du type spécifié fonctionnel
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:CGPTruck.WebAPI.BLL.BLLVehicules.GetVehiculeCurrentDriver(System.Int32)">
             <summary>
             Permet d'obtenir le conducteur actuel d'un vehicule
@@ -862,6 +868,18 @@
         <member name="M:CGPTruck.WebAPI.Controllers.VehiculesController.GetVehicules">
             <summary>
             Administrator/DecisionMaker : Obtient la liste de tout les vehicules en fonction avec leur assignation actuelle
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CGPTruck.WebAPI.Controllers.VehiculesController.GetTrucks">
+            <summary>
+            Administrator/DecisionMaker : Obtient la liste de tout les camions disponible
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CGPTruck.WebAPI.Controllers.VehiculesController.GetRepairtrucks">
+            <summary>
+            Administrator/DecisionMaker : Obtient la liste de tout les camions de réparateurs disponible
             </summary>
             <returns></returns>
         </member>

@@ -24,7 +24,7 @@ namespace CGPTruck.WebAPI.Controllers
         /// Administrator/DecisionMaker : Obtient la liste de tout les vehicules en fonction avec leur assignation actuelle
         /// </summary>
         /// <returns></returns>
-        [Route("api/Vehicules/")]
+        [Route("api/Vehicules")]
         [HttpGet]
         [ResponseType(typeof(List<Vehicule>))]
         public IHttpActionResult GetVehicules()
@@ -35,6 +35,42 @@ namespace CGPTruck.WebAPI.Controllers
             }
 
             return Ok(vehicules.GetVehicules());
+        }
+
+        // GET: api/Vehicules/truck
+        /// <summary>
+        /// Administrator/DecisionMaker : Obtient la liste de tout les camions disponible
+        /// </summary>
+        /// <returns></returns>
+        [Route("api/Vehicules/truck")]
+        [HttpGet]
+        [ResponseType(typeof(List<Vehicule>))]
+        public IHttpActionResult GetTrucks()
+        {
+            if (CurrentUser.AccountType == AccountType.Driver || CurrentUser.AccountType == AccountType.Repairer)
+            {
+                return Unauthorized();
+            }
+
+            return Ok(vehicules.GetVehiculesOfType(VehiculeType.Truck));
+        }
+
+        // GET: api/Vehicules/repairtruck
+        /// <summary>
+        /// Administrator/DecisionMaker : Obtient la liste de tout les camions de réparateurs disponible
+        /// </summary>
+        /// <returns></returns>
+        [Route("api/Vehicules/repairtruck")]
+        [HttpGet]
+        [ResponseType(typeof(List<Vehicule>))]
+        public IHttpActionResult GetRepairtrucks()
+        {
+            if (CurrentUser.AccountType == AccountType.Driver || CurrentUser.AccountType == AccountType.Repairer)
+            {
+                return Unauthorized();
+            }
+
+            return Ok(vehicules.GetVehiculesOfType(VehiculeType.RepairTruck));
         }
 
         // GET: api/Vehicules/5
@@ -76,7 +112,7 @@ namespace CGPTruck.WebAPI.Controllers
         /// <param name="vehiculeId">ID du vehicule</param>
         /// <param name="position">Nouvelle position</param>
         /// <returns></returns>
-        [Route("api/Vehicules/{vehiculeId}/Position")]
+        [Route("api/Vehicules/{vehiculeId}/position")]
         [HttpPut]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutVehiculePosition(int vehiculeId, [FromBody] PositionModel position)
