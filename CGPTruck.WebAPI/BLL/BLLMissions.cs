@@ -207,6 +207,20 @@ namespace CGPTruck.WebAPI.BLL
             }
         }
 
+        /// <summary>
+        /// Permet d'ajouter une mission
+        /// </summary>
+        /// <param name="mission"></param>
+        public Mission AddMission(Mission mission)
+        {
+            using (CGPTruckEntities context = new CGPTruckEntities())
+            {
+                context.Missions.Add(mission);
+                context.SaveChanges();
+
+                return GetMissionFullDetail(mission.Id);
+            }
+        }
 
         // La même méthode que GetMissions mais en allégeant la requête pour garder seulement le dernier Step
         // Je ne suis pas sûr que ça soit la manière la plus optimale

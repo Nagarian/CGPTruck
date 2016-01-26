@@ -53,7 +53,7 @@ namespace CGPTruck.WebAPI.Controllers
         /// Administrator/DecisionMaker : Obtient la liste de toutes les missions
         /// </summary>
         /// <returns></returns>
-        [Route("api/Missions/")]
+        [Route("api/Missions")]
         [HttpGet]
         [ResponseType(typeof(List<Mission>))]
         public IHttpActionResult GetMissions()
@@ -91,7 +91,7 @@ namespace CGPTruck.WebAPI.Controllers
         /// </summary>
         /// <param name="missionId">Id de la mission dont on veut les détails</param>
         /// <returns>Mission avec toutes les informations la concernant</returns>
-        [Route("api/Missions/{missionId}")]
+        [Route("api/Missions/{missionId}", Name = "GetMission")]
         [HttpGet]
         [ResponseType(typeof(Mission))]
         public IHttpActionResult GetMission(int missionId)
@@ -181,6 +181,89 @@ namespace CGPTruck.WebAPI.Controllers
             return Ok(failures);
         }
 
+        // POST: api/Missions
+        /// <summary>
+        /// Administrator/DecisionMaker : Ajoute une nouvelle mission
+        /// </summary>
+        /// <param name="mission"></param>
+        /// <returns></returns>
+        [Route("api/Missions")]
+        [HttpPost]
+        [ResponseType(typeof(Mission))]
+        public IHttpActionResult PostMission([FromBody] MissionModel mission)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (mission.Date < DateTime.Today)
+            {
+                ModelState.AddModelError("Date", "It's not a valid date");
+            }
+
+            var vehicule = BLLVehicules.Current.GetVehicule(mission.Vehicule_Id);
+
+            if (vehicule.Vehicule_Type != VehiculeType.Truck)
+            {
+                ModelState.AddModelError("Vehicule_Id", "It's not a valid vehicule");
+            }
+
+            var driver = BLLUsers.Current.GetUserInformations(mission.Driver_Id);
+
+            if (driver.AccountType != AccountType.Driver)
+            {
+                ModelState.AddModelError("Driver_Id", "It's not a valid driver");
+            }
+
+            var pickuplace = BLLPlaces.Current.GetPlace(mission.Pickup_Place_Id);
+
+            if (pickuplace.Place_Type != PlaceType.Warehouse)
+            {
+                ModelState.AddModelError("Pickup_Place_Id", "It's not a valid warehouse");
+            }
+
+            var deliveryPlace = BLLPlaces.Current.GetPlace(mission.Delivery_Place_Id);
+
+            if (deliveryPlace.Place_Type != PlaceType.Client)
+            {
+                ModelState.AddModelError("Delivery_Place_Id", "It's not a valid client");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var newMission = missions.AddMission(new Mission
+            {
+                Attachments = null,
+                Date = mission.Date,
+                Delivery_Place_Id = mission.Delivery_Place_Id,
+                Description = mission.Description,
+                Driver_Id = mission.Driver_Id,
+                Name = mission.Name,
+                Pickup_Place_Id = mission.Pickup_Place_Id,
+                Steps = new List<Step>
+                {
+                    new Step
+                    {
+                        Date = DateTime.Now,
+                        Informations = "RAS",
+                        Position = new Position
+                        {
+                            Latitude = vehicule.Position.Latitude,
+                            Longitude = vehicule.Position.Longitude
+                        },
+                        StepNumber = 0,
+                        Step_Type = StepType.Waiting
+                    },
+                },
+                Vehicule_Id = mission.Vehicule_Id
+            });
+
+            return CreatedAtRoute("GetMission", new { missionId = newMission.Id }, newMission);
+        }
 
         // PUT: api/Missions/5/steps
         /// <summary>
@@ -243,7 +326,6 @@ namespace CGPTruck.WebAPI.Controllers
 
             return StatusCode(HttpStatusCode.NoContent);
         }
-
         //// PUT: api/Missions/5
         //[ResponseType(typeof(void))]
         //public IHttpActionResult PutMission(int id, Mission mission)
@@ -277,21 +359,6 @@ namespace CGPTruck.WebAPI.Controllers
         //    }
 
         //    return StatusCode(HttpStatusCode.NoContent);
-        //}
-
-        //// POST: api/Missions
-        //[ResponseType(typeof(Mission))]
-        //public IHttpActionResult PostMission(Mission mission)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-
-        //    db.Missions.Add(mission);
-        //    db.SaveChanges();
-
-        //    return CreatedAtRoute("DefaultApi", new { id = mission.Id }, mission);
         //}
 
         //// DELETE: api/Missions/5

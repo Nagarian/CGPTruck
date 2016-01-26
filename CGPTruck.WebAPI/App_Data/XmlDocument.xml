@@ -575,6 +575,12 @@
             <param name="missionId">ID de la mission</param>
             <param name="step">Etape à ajouter</param>
         </member>
+        <member name="M:CGPTruck.WebAPI.BLL.BLLMissions.AddMission(CGPTruck.WebAPI.Entities.Mission)">
+            <summary>
+            Permet d'ajouter une mission
+            </summary>
+            <param name="mission"></param>
+        </member>
         <member name="T:CGPTruck.WebAPI.BLL.BLLPlaces">
             <summary>
             Business Logic Layer des places
@@ -799,6 +805,13 @@
             <param name="missionId">Id de la mission dont on veut les détails</param>
             <returns>Liste des pannes survenues lors de la mission</returns>
         </member>
+        <member name="M:CGPTruck.WebAPI.Controllers.MissionsController.PostMission(CGPTruck.WebAPI.Models.MissionModel)">
+            <summary>
+            Administrator/DecisionMaker : Ajoute une nouvelle mission
+            </summary>
+            <param name="mission"></param>
+            <returns></returns>
+        </member>
         <member name="M:CGPTruck.WebAPI.Controllers.MissionsController.PutStep(System.Int32,CGPTruck.WebAPI.Models.StepModel)">
             <summary>
             Driver : Ajoute une étape à une mission qui est en cours
@@ -853,7 +866,7 @@
             <param name="vehiculeId">Id du vehicule dont on veut les détails</param>
             <returns>Vehicule avec toutes les informations le concernant</returns>
         </member>
-        <member name="M:CGPTruck.WebAPI.Controllers.VehiculesController.PostVehiculePosition(System.Int32,CGPTruck.WebAPI.Models.PositionModel)">
+        <member name="M:CGPTruck.WebAPI.Controllers.VehiculesController.PutVehiculePosition(System.Int32,CGPTruck.WebAPI.Models.PositionModel)">
             <summary>
             Driver : Met à jour la position du vehicule actuel
             </summary>
@@ -942,6 +955,71 @@
         <member name="P:CGPTruck.WebAPI.Models.AssignedRepairerModel.RepairerId">
             <summary>
             ID du réparateur assigné
+            </summary>
+        </member>
+        <member name="T:CGPTruck.WebAPI.Models.AttachmentMissionModel">
+            <summary>
+            Informations composant une pièce jointe à une mission
+            </summary>
+        </member>
+        <member name="P:CGPTruck.WebAPI.Models.AttachmentMissionModel.Name">
+            <summary>
+            Nom de la pièce jointe
+            </summary>
+        </member>
+        <member name="P:CGPTruck.WebAPI.Models.AttachmentMissionModel.Description">
+            <summary>
+            Description de la pièces jointes
+            </summary>
+        </member>
+        <member name="P:CGPTruck.WebAPI.Models.AttachmentMissionModel.Path">
+            <summary>
+            Chemin
+            </summary>
+        </member>
+        <member name="T:CGPTruck.WebAPI.Models.MissionModel">
+            <summary>
+            Informations pour ajouter une nouvelle mission
+            </summary>
+        </member>
+        <member name="P:CGPTruck.WebAPI.Models.MissionModel.Name">
+            <summary>
+            Nom de la mission
+            </summary>
+        </member>
+        <member name="P:CGPTruck.WebAPI.Models.MissionModel.Description">
+            <summary>
+            Description de la mission
+            </summary>
+        </member>
+        <member name="P:CGPTruck.WebAPI.Models.MissionModel.Date">
+            <summary>
+            Date de la mission
+            </summary>
+        </member>
+        <member name="P:CGPTruck.WebAPI.Models.MissionModel.Vehicule_Id">
+            <summary>
+            ID du vehicule assigné à la mission
+            </summary>
+        </member>
+        <member name="P:CGPTruck.WebAPI.Models.MissionModel.Driver_Id">
+            <summary>
+            ID du conducteur assigné à la mission
+            </summary>
+        </member>
+        <member name="P:CGPTruck.WebAPI.Models.MissionModel.Pickup_Place_Id">
+            <summary>
+            ID du lieu où prendre la marchandise
+            </summary>
+        </member>
+        <member name="P:CGPTruck.WebAPI.Models.MissionModel.Delivery_Place_Id">
+            <summary>
+            ID de la destination de la marchandise
+            </summary>
+        </member>
+        <member name="P:CGPTruck.WebAPI.Models.MissionModel.Attachments">
+            <summary>
+            Liste contenant tout les documents annexes à la mission
             </summary>
         </member>
         <member name="T:CGPTruck.WebAPI.Models.PositionModel">

@@ -455,6 +455,8 @@
       <DependentUpon>EFCGPTruck.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AssignedRepairerModel.cs" />
+    <Compile Include="Models\AttachmentMissionModel.cs" />
+    <Compile Include="Models\MissionModel.cs" />
     <Compile Include="Models\PositionModel.cs" />
     <Compile Include="Models\StepModel.cs" />
     <Compile Include="Models\UserModel.cs" />
