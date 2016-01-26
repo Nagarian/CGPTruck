@@ -102,7 +102,7 @@ namespace CGPTruck.UWP.Views
 
         }
 
-        private void CommandInvokedHandler(IUICommand command)
+        private async void CommandInvokedHandler(IUICommand command)
         {
             if (command.Label == "Valider")
             {
@@ -115,6 +115,7 @@ namespace CGPTruck.UWP.Views
                     _step.Position = new Position();
                     _step.Position.Latitude = mainP.actualPosition.Position.Latitude;
                     _step.Position.Longitude = mainP.actualPosition.Position.Longitude;
+                    await WebApiService.Current.PushStepsMission(_step, s.actualMission);
                     s.actualMission.Steps.Add(_step);
                 }
 
@@ -127,6 +128,7 @@ namespace CGPTruck.UWP.Views
                     _step.Position = new Position();
                     _step.Position.Latitude = mainP.actualPosition.Position.Latitude;
                     _step.Position.Longitude = mainP.actualPosition.Position.Longitude;
+                    await WebApiService.Current.PushStepsMission(_step, s.actualMission);
                     s.actualMission.Steps.Add(_step);
                 }
 
@@ -139,6 +141,7 @@ namespace CGPTruck.UWP.Views
                     _step.Position = new Position();
                     _step.Position.Latitude = mainP.actualPosition.Position.Latitude;
                     _step.Position.Longitude = mainP.actualPosition.Position.Longitude;
+                    await WebApiService.Current.PushStepsMission(_step, s.actualMission);
                     s.actualMission.Steps.Add(_step);
                 }
 
@@ -151,6 +154,7 @@ namespace CGPTruck.UWP.Views
                     _step.Position = new Position();
                     _step.Position.Latitude = mainP.actualPosition.Position.Latitude;
                     _step.Position.Longitude = mainP.actualPosition.Position.Longitude;
+                    await WebApiService.Current.PushStepsMission(_step, s.actualMission);
                     s.actualMission.Steps.Add(_step);
                 }
 
@@ -163,6 +167,7 @@ namespace CGPTruck.UWP.Views
                     _step.Position = new Position();
                     _step.Position.Latitude = mainP.actualPosition.Position.Latitude;
                     _step.Position.Longitude = mainP.actualPosition.Position.Longitude;
+                    await WebApiService.Current.PushStepsMission(_step, s.actualMission);
                     s.actualMission.Steps.Add(_step);
                 }
 
@@ -175,6 +180,7 @@ namespace CGPTruck.UWP.Views
                     _step.Position = new Position();
                     _step.Position.Latitude = mainP.actualPosition.Position.Latitude;
                     _step.Position.Longitude = mainP.actualPosition.Position.Longitude;
+                    await WebApiService.Current.PushStepsMission(_step, s.actualMission);
                     s.actualMission.Steps.Add(_step);
                 }
             }
