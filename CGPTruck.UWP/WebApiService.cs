@@ -20,7 +20,11 @@ namespace CGPTruck.UWP
         {
             return new HttpClient()
             {
-                BaseAddress = new Uri("http://cgptruck.azurewebsites.net/"),
+#if DEBUG
+                BaseAddress = new Uri("http://localhost:8692/"),
+#else
+                BaseAddress = new Uri("http://cgptruck.azurewebsites.net/"), 
+#endif
                 DefaultRequestHeaders =
                 {
                     Accept =
@@ -61,8 +65,8 @@ namespace CGPTruck.UWP
                 HttpResponseMessage response = await client.PostAsync("/api/Missions/Steps", new System.Net.Http.FormUrlEncodedContent(new Dictionary<string, string>
                 {
                     ["grant_type"] = "password",
-                    ["username"] = username,
-                    ["password"] = password
+                    //["username"] = username,
+                    //["password"] = password
                 }));
 
                 if (response.IsSuccessStatusCode)
