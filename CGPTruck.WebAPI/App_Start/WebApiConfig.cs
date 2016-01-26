@@ -15,7 +15,7 @@ namespace CGPTruck.WebAPI
 
             // Itinéraires de l'API Web
             config.MapHttpAttributeRoutes();
-            var cors = new EnableCorsAttribute("localhost", "*", "*");
+            var cors = new EnableCorsAttribute("http://localhost:8692,http://localhost:4000,http://cgptruck.azurewebsites.net", "*", "*");
             config.EnableCors(cors);
             config.Formatters.Remove(config.Formatters.XmlFormatter);
             config.Formatters.Remove(config.Formatters.FormUrlEncodedFormatter);
