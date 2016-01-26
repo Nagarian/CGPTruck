@@ -568,6 +568,13 @@
             <param name="missionId">ID de la mission</param>
             <returns></returns>
         </member>
+        <member name="M:CGPTruck.WebAPI.BLL.BLLMissions.AddStepToMission(System.Int32,CGPTruck.WebAPI.Entities.Step)">
+            <summary>
+            Permet d'ajouter un step à une mission
+            </summary>
+            <param name="missionId">ID de la mission</param>
+            <param name="step">Etape à ajouter</param>
+        </member>
         <member name="T:CGPTruck.WebAPI.BLL.BLLPlaces">
             <summary>
             Business Logic Layer des places
@@ -772,6 +779,12 @@
             <param name="missionId">Id de la mission dont on veut les détails</param>
             <returns>Liste des pannes survenues lors de la mission</returns>
         </member>
+        <member name="M:CGPTruck.WebAPI.Controllers.MissionsController.PutStep(System.Int32,CGPTruck.WebAPI.Models.StepModel)">
+            <summary>
+            Driver : Ajoute une étape à une mission qui est en cours
+            </summary>
+            <param name="missionId">Id de la mission dont on veut rajouter une étape</param>
+        </member>
         <member name="T:CGPTruck.WebAPI.Controllers.PlacesController">
             <summary>
             Controller concernant les lieux connus et enregistrés. Authentification requise
@@ -854,6 +867,51 @@
         <member name="P:CGPTruck.WebAPI.Models.AssignedRepairerModel.RepairerId">
             <summary>
             ID du réparateur assigné
+            </summary>
+        </member>
+        <member name="T:CGPTruck.WebAPI.Models.PositionModel">
+            <summary>
+            Coordonnées GPS
+            </summary>
+        </member>
+        <member name="P:CGPTruck.WebAPI.Models.PositionModel.Latitude">
+            <summary>
+            Latitude
+            </summary>
+        </member>
+        <member name="P:CGPTruck.WebAPI.Models.PositionModel.Longitude">
+            <summary>
+            Longitude
+            </summary>
+        </member>
+        <member name="T:CGPTruck.WebAPI.Models.StepModel">
+            <summary>
+            Détail de l'étape
+            </summary>
+        </member>
+        <member name="P:CGPTruck.WebAPI.Models.StepModel.Date">
+            <summary>
+            Date et heure de l'étape
+            </summary>
+        </member>
+        <member name="P:CGPTruck.WebAPI.Models.StepModel.Informations">
+            <summary>
+            Détails de l'étape
+            </summary>
+        </member>
+        <member name="P:CGPTruck.WebAPI.Models.StepModel.Position">
+            <summary>
+            Coordonnées GPS de l'étape
+            </summary>
+        </member>
+        <member name="P:CGPTruck.WebAPI.Models.StepModel.StepNumber">
+            <summary>
+            Numéro de l'étape
+            </summary>
+        </member>
+        <member name="P:CGPTruck.WebAPI.Models.StepModel.Step_Type">
+            <summary>
+            Type d'étape
             </summary>
         </member>
         <member name="T:CGPTruck.WebAPI.Models.UserModel">

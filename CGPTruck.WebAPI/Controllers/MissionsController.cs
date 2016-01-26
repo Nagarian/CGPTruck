@@ -11,6 +11,7 @@ using System.Web.Http.Description;
 using CGPTruck.WebAPI.Entities;
 using CGPTruck.WebAPI.Entities.Entities;
 using CGPTruck.WebAPI.BLL;
+using CGPTruck.WebAPI.Models;
 
 namespace CGPTruck.WebAPI.Controllers
 {
@@ -178,6 +179,68 @@ namespace CGPTruck.WebAPI.Controllers
             }
 
             return Ok(failures);
+        }
+
+
+        // PUT: api/Missions/5/steps
+        /// <summary>
+        /// Driver : Ajoute une étape à une mission qui est en cours
+        /// </summary>
+        /// <param name="missionId">Id de la mission dont on veut rajouter une étape</param>
+        [Route("api/Missions/{missionId}/steps")]
+        [HttpPut]
+        [ResponseType(typeof(void))]
+        public IHttpActionResult PutStep(int missionId, StepModel step)
+        {
+            if (CurrentUser.AccountType != AccountType.Driver)
+            {
+                return Unauthorized();
+            }
+
+            Mission mission = missions.GetMission(missionId);
+
+            if (mission.Driver_Id != CurrentUser.Id)
+            {
+                return Unauthorized();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            Step lastStep = mission.Steps.OrderByDescending(s => s.StepNumber).FirstOrDefault();
+
+            if (lastStep != null)
+            {
+                if (lastStep.StepNumber < step.StepNumber)
+                {
+                    return BadRequest("Bad StepNumber");
+                }
+
+                if (lastStep.Step_Type == StepType.Aborted || lastStep.Step_Type == StepType.Finished)
+                {
+                    return BadRequest("Mission was over");
+                }
+            }
+
+            Step newStep = new Step
+            {
+                Date = step.Date,
+                Informations = string.IsNullOrEmpty(step.Informations) ? "RAS" : step.Informations,
+                Mission_Id = missionId,
+                Position = new Position
+                {
+                    Latitude = step.Position.Latitude,
+                    Longitude = step.Position.Longitude
+                },
+                StepNumber = step.StepNumber,
+                Step_Type = step.Step_Type
+            };
+
+            missions.AddStepToMission(missionId, newStep);
+
+            return StatusCode(HttpStatusCode.NoContent);
         }
 
         //// PUT: api/Missions/5
