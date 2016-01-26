@@ -5,10 +5,10 @@
     xmlns:local="using:CGPTruck.UWP.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    mc:Ignorable="d" Loaded="Page_Loaded">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Background="#CCFFFFFF">
         <Image x:Name="image" HorizontalAlignment="Left" Height="100" Margin="10,10,0,0" VerticalAlignment="Top" Width="100" Source="ms-appx:///Assets/Square150x150Logo.png"/>
-        <TextBlock x:Name="titleProfile" HorizontalAlignment="Left" Margin="115,53,0,0" TextWrapping="Wrap" Text="Obi Wan Kenobi" VerticalAlignment="Top" FontSize="42.667"/>
+        <TextBlock x:Name="titleProfile" Margin="115,10,10,0" TextWrapping="Wrap" Text="Obi Wan Kenobi" VerticalAlignment="Top" FontSize="42.667"/>
     </Grid>
 </Page>

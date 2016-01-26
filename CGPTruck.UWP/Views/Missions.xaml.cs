@@ -43,6 +43,7 @@ namespace CGPTruck.UWP.Views
 
         private void LoadMission()
         {
+            Destination_Button.IsEnabled = false;
             States_Button.IsEnabled = true;
             if (s.actualMission != null)
             {
@@ -50,6 +51,10 @@ namespace CGPTruck.UWP.Views
                 textBlock1.Text = s.actualMission.Description;
                 if (s.actualMission.Steps.Count != 0 && s.actualMission.Steps.Last().Step_Type == StepType.Finished)
                     States_Button.IsEnabled = false;
+
+                if (s.actualMission.Steps.Count != 0 &&( s.actualMission.Steps.Last().Step_Type == StepType.Delivering ||
+                    s.actualMission.Steps.Last().Step_Type == StepType.PickingUp))
+                    Destination_Button.IsEnabled = true;
             }
             else
             {
@@ -77,7 +82,7 @@ namespace CGPTruck.UWP.Views
                 message = "Vous allez signaler que vous recuperez le colis.\nContinuer ?";
             else if (s.actualMission.Steps.Last().Step_Type == StepType.PickupProgressing)
                 message = "Vous allez signaler que vous demarrez la livraison du colis.\nContinuer ?";
-            else if (s.actualMission.Steps.Last().Step_Type == StepType.PickupProgressing)
+            else if (s.actualMission.Steps.Last().Step_Type == StepType.Delivering)
                 message = "Vous allez signaler que vous deposez le colis.\nContinuer ?";
             else if (s.actualMission.Steps.Last().Step_Type == StepType.DeliveryProgressing)
                 message = "Vous allez signaler que vous avez terminez la livraison et que vous retournez au garage.\nContinuer ?";
@@ -89,6 +94,11 @@ namespace CGPTruck.UWP.Views
             msg.Commands.Add(new UICommand("Valider", new UICommandInvokedHandler(this.CommandInvokedHandler)));
 
             await msg.ShowAsync();
+
+        }
+
+        public void pushStepsMissionsOnServer()
+        {
 
         }
 

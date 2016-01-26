@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CGPTruck.UWP.Core;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,9 +23,15 @@ namespace CGPTruck.UWP.Views
     /// </summary>
     public sealed partial class Profile : Page
     {
+        Settings s = Settings.getInstance();
         public Profile()
         {
             this.InitializeComponent();
+        }
+
+        private async void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            titleProfile.Text = (await WebApiService.Current.GetUser()).FirstName;
         }
     }
 }

@@ -53,7 +53,7 @@ namespace CGPTruck.UWP
         private void ProfileButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
             if (frame.CurrentSourcePageType != typeof(Profile))
-                frame.Navigate(typeof(Profile));
+                frame.Navigate(typeof(Profile), this);
 
             if (frame.Visibility == Visibility.Collapsed)
                 frame.Visibility = Visibility.Visible;
