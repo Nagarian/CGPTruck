@@ -21,7 +21,7 @@ namespace CGPTruck.WebAPI.Entities
         /// <param name="stepType"></param>
         public StepTypeDetail(StepType stepType)
         {
-
+            this.stepType = stepType;
         }
 
         /// <summary>
