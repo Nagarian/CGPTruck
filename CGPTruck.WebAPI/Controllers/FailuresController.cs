@@ -43,7 +43,7 @@ namespace CGPTruck.WebAPI.Controllers
         /// Administrator/DecisionMaker : Assigne un réparateur à une panne
         /// </summary>
         /// <param name="failureId">ID de la panne</param>
-        /// <param name="repairerId">ID du réparateur assigné</param>
+        /// <param name="repairer">Réparateur assigné</param>
         /// <returns></returns>
         [Route("api/Failures/{failureId}/assign")]
         [HttpPost]

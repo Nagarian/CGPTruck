@@ -708,6 +708,11 @@
             Temps avant son expiration (en secondes)
             </summary>
         </member>
+        <member name="T:CGPTruck.WebAPI.Controllers.BaseController">
+            <summary>
+            Controller de base permettant d'avoir le CurrentUser
+            </summary>
+        </member>
         <member name="P:CGPTruck.WebAPI.Controllers.BaseController.CurrentUser">
             <summary>
             Permet d'obtenir les informations et les droits concernant notre utilisateur actuel
@@ -729,7 +734,7 @@
             Administrator/DecisionMaker : Assigne un réparateur à une panne
             </summary>
             <param name="failureId">ID de la panne</param>
-            <param name="repairerId">ID du réparateur assigné</param>
+            <param name="repairer">Réparateur assigné</param>
             <returns></returns>
         </member>
         <member name="T:CGPTruck.WebAPI.Controllers.MissionsController">
@@ -784,6 +789,7 @@
             Driver : Ajoute une étape à une mission qui est en cours
             </summary>
             <param name="missionId">Id de la mission dont on veut rajouter une étape</param>
+            <param name="step">Etape à insérer</param>
         </member>
         <member name="T:CGPTruck.WebAPI.Controllers.PlacesController">
             <summary>

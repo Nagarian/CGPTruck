@@ -187,6 +187,7 @@ namespace CGPTruck.WebAPI.Controllers
         /// Driver : Ajoute une étape à une mission qui est en cours
         /// </summary>
         /// <param name="missionId">Id de la mission dont on veut rajouter une étape</param>
+        /// <param name="step">Etape à insérer</param>
         [Route("api/Missions/{missionId}/steps")]
         [HttpPut]
         [ResponseType(typeof(void))]
