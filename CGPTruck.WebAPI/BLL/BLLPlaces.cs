@@ -23,13 +23,13 @@ namespace CGPTruck.WebAPI.BLL
         /// Permet d'obtenir toutes les places active de la BDD
         /// </summary>
         /// <returns></returns>
-        public Place GetPlaces()
+        public List<Place> GetPlaces()
         {
             using (CGPTruckEntities context = new CGPTruckEntities())
             {
                 return (from place in context.Places.Include(p => p.Position)
                         where place.Active
-                        select place).SingleOrDefault();
+                        select place).ToList();
             }
         }
 
