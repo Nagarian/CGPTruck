@@ -22,7 +22,7 @@ namespace CGPTruck.WebAPI.Controllers
 
         // GET: api/Places
         /// <summary>
-        /// Administrator/DecisionMaker : Obtient la liste de toutes les places
+        /// Administrator/DecisionMaker : Obtient la liste de toutes les pannes
         /// </summary>
         /// <returns></returns>
         [Route("api/Failures/declared")]

@@ -25,7 +25,7 @@ namespace CGPTruck.WebAPI.Controllers
         /// <returns></returns>
         [Route("api/Places")]
         [HttpGet]
-        [ResponseType(typeof(List<Mission>))]
+        [ResponseType(typeof(List<Place>))]
         public IHttpActionResult GetPlaces()
         {
             if (CurrentUser.AccountType == AccountType.Repairer)
@@ -43,7 +43,7 @@ namespace CGPTruck.WebAPI.Controllers
         /// <returns></returns>
         [Route("api/Places/warehouses")]
         [HttpGet]
-        [ResponseType(typeof(List<Mission>))]
+        [ResponseType(typeof(List<Place>))]
         public IHttpActionResult GetWarehouses()
         {
             if (CurrentUser.AccountType == AccountType.Repairer)
@@ -61,7 +61,7 @@ namespace CGPTruck.WebAPI.Controllers
         /// <returns></returns>
         [Route("api/Places/clients")]
         [HttpGet]
-        [ResponseType(typeof(List<Mission>))]
+        [ResponseType(typeof(List<Place>))]
         public IHttpActionResult GetClients()
         {
             if (CurrentUser.AccountType == AccountType.Repairer)
