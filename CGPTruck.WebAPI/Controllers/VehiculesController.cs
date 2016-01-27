@@ -123,6 +123,13 @@ namespace CGPTruck.WebAPI.Controllers
             }
 
             var driver = vehicules.GetVehiculeCurrentDriver(vehiculeId);
+
+            if (driver == null)
+            {
+                ModelState.AddModelError("vehiculeId", "You can't update position of an unaffected vehicule.");
+                return BadRequest(ModelState);
+            }
+
             if (CurrentUser.Id != driver.Id)
             {
                 return Unauthorized();
