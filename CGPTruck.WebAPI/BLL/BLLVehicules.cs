@@ -80,7 +80,7 @@ namespace CGPTruck.WebAPI.BLL
             using (CGPTruckEntities context = new CGPTruckEntities())
             {
                 return (from vehicule in context.Vehicules
-                        where vehicule.Vehicule_State != VehiculeState.Running && vehicule.Vehicule_Type == vehiculeType
+                        where vehicule.Vehicule_State == VehiculeState.Running && vehicule.Vehicule_Type == vehiculeType
                         select vehicule).ToList();
             }
         }
