@@ -37,6 +37,26 @@ namespace CGPTruck.WebAPI.Controllers
             return Ok(vehicules.GetVehicules());
         }
 
+
+        // GET: api/Vehicules/grouped
+        /// <summary>
+        /// Administrator/DecisionMaker : Obtient la liste de tout les vehicules groupé par leur assignation actuelle
+        /// </summary>
+        /// <returns></returns>
+        [Route("api/Vehicules/grouped")]
+        [HttpGet]
+        [ResponseType(typeof(GroupedVehiculesModel))]
+        public IHttpActionResult GetGroupedVehicules()
+        {
+            if (CurrentUser.AccountType == AccountType.Driver || CurrentUser.AccountType == AccountType.Repairer)
+            {
+                return Unauthorized();
+            }
+
+            return Ok(vehicules.GetVehiculeGrouped());
+        }
+
+
         // GET: api/Vehicules/truck
         /// <summary>
         /// Administrator/DecisionMaker : Obtient la liste de tout les camions disponible
@@ -107,7 +127,7 @@ namespace CGPTruck.WebAPI.Controllers
 
         // POST: api/Vehicules/5/Position
         /// <summary>
-        /// Driver : Met à jour la position du vehicule actuel
+        /// Driver/Repairer : Met à jour la position du vehicule actuel
         /// </summary>
         /// <param name="vehiculeId">ID du vehicule</param>
         /// <param name="position">Nouvelle position</param>
@@ -117,10 +137,13 @@ namespace CGPTruck.WebAPI.Controllers
         [ResponseType(typeof(void))]
         public IHttpActionResult PutVehiculePosition(int vehiculeId, [FromBody] PositionModel position)
         {
-            if (CurrentUser.AccountType != AccountType.Driver)
+            if (CurrentUser.AccountType != AccountType.Driver || CurrentUser.AccountType != AccountType.Repairer)
             {
                 return Unauthorized();
             }
+
+            Utils.QueueManager.Current.SendPosition(vehiculeId, new Position { Latitude = position.Latitude, Longitude = position.Longitude });
+            return Ok();
 
             var driver = vehicules.GetVehiculeCurrentDriver(vehiculeId);
 

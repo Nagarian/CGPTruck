@@ -1,5 +1,6 @@
 ﻿using CGPTruck.WebAPI.Entities;
 using CGPTruck.WebAPI.Entities.Entities;
+using CGPTruck.WebAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -82,6 +83,44 @@ namespace CGPTruck.WebAPI.BLL
                 return (from vehicule in context.Vehicules
                         where vehicule.Vehicule_State == VehiculeState.Running && vehicule.Vehicule_Type == vehiculeType
                         select vehicule).ToList();
+            }
+        }
+
+        /// <summary>
+        /// Permet de récupéré l'ensemble des véhicules triés
+        /// </summary>
+        /// <returns></returns>
+        public GroupedVehiculesModel GetVehiculeGrouped()
+        {
+            using (CGPTruckEntities context = new CGPTruckEntities())
+            {
+                var repairerActif = (from failure in context.Failures
+                                     where failure.State != FailureState.Resolved
+                                     select failure.RepairerVehicule).Distinct().Include(v => v.Position).ToList();
+                var vehiculeFailed = (from failure in context.Failures
+                                      where failure.State != FailureState.Resolved
+                                      select failure.Vehicule).Include(v => v.Position).ToList();
+
+                var repairerInactif = (from vehicule in context.Vehicules
+                                      where vehicule.Vehicule_Type == VehiculeType.RepairTruck && (vehicule.Reparations.Count() == 0 || !vehicule.Reparations.Any(f => f.State != FailureState.Resolved))
+                                      select vehicule).Include(v => v.Position).ToList();
+
+                var vehiculeInactif = (from vehicule in context.Vehicules
+                                       where vehicule.Active && vehicule.Vehicule_Type == VehiculeType.Truck && (vehicule.Missions.Count() == 0 || !vehicule.Missions.Any(m => !m.Steps.Any(s => s.Step_Type == StepType.Aborted || s.Step_Type == StepType.Finished || s.Step_Type == StepType.Waiting)))
+                                       select vehicule).Include(v => v.Position).ToList();
+
+                var vehiculeEnMission = (from vehicule in context.Vehicules
+                                       where vehicule.Active && vehicule.Vehicule_Type == VehiculeType.Truck && (vehicule.Missions.Count() == 0 || vehicule.Missions.Any(m => !m.Steps.Any(s => s.Step_Type == StepType.Aborted || s.Step_Type == StepType.Finished || s.Step_Type == StepType.Waiting)))
+                                       select vehicule).Include(v => v.Position).ToList();
+
+                return new GroupedVehiculesModel
+                {
+                    RepairTruck = repairerInactif,
+                    RepairTruckInMission = repairerActif,
+                    TruckInFailure = vehiculeFailed,
+                    TruckInGarage = vehiculeInactif,
+                    TruckInMission = vehiculeEnMission
+                };
             }
         }
 
