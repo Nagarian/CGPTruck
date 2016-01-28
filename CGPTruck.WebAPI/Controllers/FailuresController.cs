@@ -50,7 +50,7 @@ namespace CGPTruck.WebAPI.Controllers
         [ResponseType(typeof(void))]
         public IHttpActionResult PostFailureRepairerAssigned(int failureId, [FromBody] AssignedRepairerModel repairer)
         {
-            if (CurrentUser.AccountType != AccountType.Administrator || CurrentUser.AccountType != AccountType.DecisionMaker)
+            if (CurrentUser.AccountType != AccountType.Administrator && CurrentUser.AccountType != AccountType.DecisionMaker)
             {
                 return Unauthorized();
             }
@@ -77,14 +77,14 @@ namespace CGPTruck.WebAPI.Controllers
         /// Repairer/Administrator/DecisionMaker : Met à jour le status d'une panne
         /// </summary>
         /// <param name="failureId">ID de la panne</param>
-        /// <param name="repairer">Réparateur assigné</param>
+        /// <param name="failure">Détail de la panne</param>
         /// <returns></returns>
         [Route("api/Failures/{failureId}")]
         [HttpPost]
         [ResponseType(typeof(void))]
         public IHttpActionResult PostFailure(int failureId, [FromBody] FailureModel failure)
         {
-            if (CurrentUser.AccountType != AccountType.Administrator || CurrentUser.AccountType != AccountType.DecisionMaker || CurrentUser.AccountType != AccountType.Repairer)
+            if (CurrentUser.AccountType != AccountType.Administrator && CurrentUser.AccountType != AccountType.DecisionMaker && CurrentUser.AccountType != AccountType.Repairer)
             {
                 return Unauthorized();
             }
