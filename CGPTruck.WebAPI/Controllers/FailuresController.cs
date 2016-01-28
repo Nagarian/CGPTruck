@@ -20,7 +20,7 @@ namespace CGPTruck.WebAPI.Controllers
     {
         private BLLFailures failures = new BLLFailures();
 
-        // GET: api/Places
+        // GET: api/Failures
         /// <summary>
         /// Administrator/DecisionMaker : Obtient la liste de toutes les pannes
         /// </summary>
@@ -68,6 +68,33 @@ namespace CGPTruck.WebAPI.Controllers
             {
                 return NotFound();
             }
+
+            return Ok();
+        }
+
+        // POST : api/Failures
+        /// <summary>
+        /// Repairer/Administrator/DecisionMaker : Met à jour le status d'une panne
+        /// </summary>
+        /// <param name="failureId">ID de la panne</param>
+        /// <param name="repairer">Réparateur assigné</param>
+        /// <returns></returns>
+        [Route("api/Failures/{failureId}")]
+        [HttpPost]
+        [ResponseType(typeof(void))]
+        public IHttpActionResult PostFailure(int failureId, [FromBody] FailureModel failure)
+        {
+            if (CurrentUser.AccountType != AccountType.Administrator || CurrentUser.AccountType != AccountType.DecisionMaker || CurrentUser.AccountType != AccountType.Repairer)
+            {
+                return Unauthorized();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+                        
+            failures.UpdateFailure(failureId, failure);
 
             return Ok();
         }
