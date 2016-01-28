@@ -23,6 +23,7 @@ namespace CGPTruck.WebAPI.Controllers
         // GET: api/Failures
         /// <summary>
         /// Administrator/DecisionMaker : Obtient la liste de toutes les pannes
+        /// Repairer : Obtient la liste des pannes qui lui ont été assigné 
         /// </summary>
         /// <returns></returns>
         [Route("api/Failures/declared")]
@@ -30,9 +31,13 @@ namespace CGPTruck.WebAPI.Controllers
         [ResponseType(typeof(List<Failure>))]
         public IHttpActionResult GetFailures()
         {
-            if (CurrentUser.AccountType == AccountType.Repairer || CurrentUser.AccountType == AccountType.Driver)
+            if (CurrentUser.AccountType == AccountType.Driver)
             {
                 return Unauthorized();
+            }
+            else if (CurrentUser.AccountType == AccountType.Repairer)
+            {
+                return Ok(failures.GetRepairerDeclaredFailures(CurrentUser.Id));
             }
 
             return Ok(failures.GetFailures());

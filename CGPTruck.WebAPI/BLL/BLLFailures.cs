@@ -55,6 +55,23 @@ namespace CGPTruck.WebAPI.BLL
             }
         }
 
+
+        /// <summary>
+        /// Permet d'obtenir toutes les pannes déclaré assigné à un réparateur
+        /// </summary>
+        /// <param name="repairerId">ID du réparateur</param>
+        /// <returns></returns>
+        public List<Failure> GetRepairerDeclaredFailures(int repairerId)
+        {
+            using (CGPTruckEntities context = new CGPTruckEntities())
+            {
+                return (from failure in context.Failures.Include(f => f.Mission.Driver.Phones)
+                                                        .Include(f => f.Vehicule)
+                        where failure.State != FailureState.Resolved && failure.Repairer_Id == repairerId
+                        select failure).ToList();
+            }
+        }
+
         /// <summary>
         /// Permet d'assigner un réparateur à une panne
         /// </summary>
@@ -94,6 +111,7 @@ namespace CGPTruck.WebAPI.BLL
         /// <summary>
         /// Met à jour une panne
         /// </summary>
+        /// <param name="failureId">ID de la panne</param>
         /// <param name="failure">Détail de la panne</param>
         public void UpdateFailure(int failureId, FailureModel failure)
         {
