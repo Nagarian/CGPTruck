@@ -929,6 +929,12 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:CGPTruck.WebAPI.Controllers.VehiculesController.GetGroupedVehicules">
+            <summary>
+            Administrator/DecisionMaker : Obtient la liste de tout les vehicules groupé par leur assignation actuelle
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:CGPTruck.WebAPI.Controllers.VehiculesController.GetTrucks">
             <summary>
             Administrator/DecisionMaker : Obtient la liste de tout les camions disponible
@@ -1074,27 +1080,27 @@
             Detail supplémentaire concernant la panne
             </summary>
         </member>
-        <member name="P:CGPTruck.WebAPI.Models.FilteredVehiculeModel.TruckInMission">
+        <member name="P:CGPTruck.WebAPI.Models.GroupedVehiculesModel.TruckInMission">
             <summary>
             Camions en missions
             </summary>
         </member>
-        <member name="P:CGPTruck.WebAPI.Models.FilteredVehiculeModel.TruckInFailure">
+        <member name="P:CGPTruck.WebAPI.Models.GroupedVehiculesModel.TruckInFailure">
             <summary>
             Camions en missions - En panne
             </summary>
         </member>
-        <member name="P:CGPTruck.WebAPI.Models.FilteredVehiculeModel.TruckInGarage">
+        <member name="P:CGPTruck.WebAPI.Models.GroupedVehiculesModel.TruckInGarage">
             <summary>
             Camions au garage
             </summary>
         </member>
-        <member name="P:CGPTruck.WebAPI.Models.FilteredVehiculeModel.RepairTruck">
+        <member name="P:CGPTruck.WebAPI.Models.GroupedVehiculesModel.RepairTruck">
             <summary>
             Voitures de réparations
             </summary>
         </member>
-        <member name="P:CGPTruck.WebAPI.Models.FilteredVehiculeModel.RepairTruckInMission">
+        <member name="P:CGPTruck.WebAPI.Models.GroupedVehiculesModel.RepairTruckInMission">
             <summary>
             Voiture de réparations - Missions
             </summary>

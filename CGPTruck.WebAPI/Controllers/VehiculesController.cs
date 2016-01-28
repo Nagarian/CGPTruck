@@ -142,8 +142,8 @@ namespace CGPTruck.WebAPI.Controllers
                 return Unauthorized();
             }
 
-            Utils.QueueManager.Current.SendPosition(vehiculeId, new Position { Latitude = position.Latitude, Longitude = position.Longitude });
-            return Ok();
+            //Utils.QueueManager.Current.SendPosition(vehiculeId, new Position { Latitude = position.Latitude, Longitude = position.Longitude });
+            //return Ok();
 
             var driver = vehicules.GetVehiculeCurrentDriver(vehiculeId);
 
