@@ -491,6 +491,13 @@
             Permet d'obtenir une instance rapidement
             </summary>
         </member>
+        <member name="M:CGPTruck.WebAPI.BLL.BLLFailures.GetFailure(System.Int32)">
+            <summary>
+            Permet d'obtenir une panne
+            </summary>
+            <param name="failureId">ID de la panne a récupéré</param>
+            <returns></returns>
+        </member>
         <member name="M:CGPTruck.WebAPI.BLL.BLLFailures.GetFailures">
             <summary>
             Permet d'obtenir toutes les pannes active de la BDD
@@ -503,6 +510,18 @@
             </summary>
             <param name="failureId">ID de la panne</param>
             <param name="repairedId">ID du réparateur</param>
+        </member>
+        <member name="M:CGPTruck.WebAPI.BLL.BLLFailures.AddFailure(CGPTruck.WebAPI.Entities.Failure)">
+            <summary>
+            Ajoute une panne
+            </summary>
+            <param name="failure"></param>
+        </member>
+        <member name="M:CGPTruck.WebAPI.BLL.BLLFailures.UpdateFailure(System.Int32,CGPTruck.WebAPI.Models.FailureModel)">
+            <summary>
+            Met à jour une panne
+            </summary>
+            <param name="failure">Détail de la panne</param>
         </member>
         <member name="T:CGPTruck.WebAPI.BLL.BLLMissions">
             <summary>
@@ -662,6 +681,12 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:CGPTruck.WebAPI.BLL.BLLVehicules.GetVehiculeGrouped">
+            <summary>
+            Permet de récupéré l'ensemble des véhicules triés
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:CGPTruck.WebAPI.BLL.BLLVehicules.GetVehiculeCurrentDriver(System.Int32)">
             <summary>
             Permet d'obtenir le conducteur actuel d'un vehicule
@@ -758,7 +783,7 @@
         </member>
         <member name="M:CGPTruck.WebAPI.Controllers.FailuresController.GetFailures">
             <summary>
-            Administrator/DecisionMaker : Obtient la liste de toutes les places
+            Administrator/DecisionMaker : Obtient la liste de toutes les pannes
             </summary>
             <returns></returns>
         </member>
@@ -768,6 +793,14 @@
             </summary>
             <param name="failureId">ID de la panne</param>
             <param name="repairer">Réparateur assigné</param>
+            <returns></returns>
+        </member>
+        <member name="M:CGPTruck.WebAPI.Controllers.FailuresController.PostFailure(System.Int32,CGPTruck.WebAPI.Models.FailureModel)">
+            <summary>
+            Repairer/Administrator/DecisionMaker : Met à jour le status d'une panne
+            </summary>
+            <param name="failureId">ID de la panne</param>
+            <param name="failure">Détail de la panne</param>
             <returns></returns>
         </member>
         <member name="T:CGPTruck.WebAPI.Controllers.MissionsController">
@@ -831,6 +864,13 @@
             <param name="missionId">Id de la mission dont on veut rajouter une étape</param>
             <param name="step">Etape à insérer</param>
         </member>
+        <member name="M:CGPTruck.WebAPI.Controllers.MissionsController.PutStep(System.Int32,CGPTruck.WebAPI.Models.PositionModel)">
+            <summary>
+            Driver : Déclare une panne
+            </summary>
+            <param name="missionId">Id de la mission</param>
+            <param name="position">Position actuelle</param>
+        </member>
         <member name="T:CGPTruck.WebAPI.Controllers.PlacesController">
             <summary>
             Controller concernant les lieux connus et enregistrés. Authentification requise
@@ -844,13 +884,13 @@
         </member>
         <member name="M:CGPTruck.WebAPI.Controllers.PlacesController.GetWarehouses">
             <summary>
-            Driver/Administrator/DecisionMaker : Obtient la liste de toutes les places
+            Driver/Administrator/DecisionMaker : Obtient la liste de toutes les entrepôts
             </summary>
             <returns></returns>
         </member>
         <member name="M:CGPTruck.WebAPI.Controllers.PlacesController.GetClients">
             <summary>
-            Driver/Administrator/DecisionMaker : Obtient la liste de toutes les places
+            Driver/Administrator/DecisionMaker : Obtient la liste de tout les lieux de livraisons
             </summary>
             <returns></returns>
         </member>
@@ -910,7 +950,7 @@
         </member>
         <member name="M:CGPTruck.WebAPI.Controllers.VehiculesController.PutVehiculePosition(System.Int32,CGPTruck.WebAPI.Models.PositionModel)">
             <summary>
-            Driver : Met à jour la position du vehicule actuel
+            Driver/Repairer : Met à jour la position du vehicule actuel
             </summary>
             <param name="vehiculeId">ID du vehicule</param>
             <param name="position">Nouvelle position</param>
@@ -1019,6 +1059,46 @@
             Chemin
             </summary>
         </member>
+        <member name="T:CGPTruck.WebAPI.Models.FailureModel">
+            <summary>
+            Informations pour ajouter une nouvelle panne
+            </summary>
+        </member>
+        <member name="P:CGPTruck.WebAPI.Models.FailureModel.State">
+            <summary>
+            Etat de la panne
+            </summary>
+        </member>
+        <member name="P:CGPTruck.WebAPI.Models.FailureModel.FailureDetail">
+            <summary>
+            Detail supplémentaire concernant la panne
+            </summary>
+        </member>
+        <member name="P:CGPTruck.WebAPI.Models.FilteredVehiculeModel.TruckInMission">
+            <summary>
+            Camions en missions
+            </summary>
+        </member>
+        <member name="P:CGPTruck.WebAPI.Models.FilteredVehiculeModel.TruckInFailure">
+            <summary>
+            Camions en missions - En panne
+            </summary>
+        </member>
+        <member name="P:CGPTruck.WebAPI.Models.FilteredVehiculeModel.TruckInGarage">
+            <summary>
+            Camions au garage
+            </summary>
+        </member>
+        <member name="P:CGPTruck.WebAPI.Models.FilteredVehiculeModel.RepairTruck">
+            <summary>
+            Voitures de réparations
+            </summary>
+        </member>
+        <member name="P:CGPTruck.WebAPI.Models.FilteredVehiculeModel.RepairTruckInMission">
+            <summary>
+            Voiture de réparations - Missions
+            </summary>
+        </member>
         <member name="T:CGPTruck.WebAPI.Models.MissionModel">
             <summary>
             Informations pour ajouter une nouvelle mission
@@ -1097,11 +1177,6 @@
         <member name="P:CGPTruck.WebAPI.Models.StepModel.Position">
             <summary>
             Coordonnées GPS de l'étape
-            </summary>
-        </member>
-        <member name="P:CGPTruck.WebAPI.Models.StepModel.StepNumber">
-            <summary>
-            Numéro de l'étape
             </summary>
         </member>
         <member name="P:CGPTruck.WebAPI.Models.StepModel.Step_Type">
