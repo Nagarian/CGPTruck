@@ -30,14 +30,7 @@ namespace CGPTruck.WebAPI.Models
         /// </summary>
         [Required]
         public PositionModel Position { get; set; }
-
-        /// <summary>
-        /// Numéro de l'étape
-        /// </summary>
-        [Required]
-        [Range(typeof(int), "0", "20")]
-        public int StepNumber { get; set; }
-
+        
         /// <summary>
         /// Type d'étape
         /// </summary>

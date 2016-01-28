@@ -274,7 +274,7 @@ namespace CGPTruck.WebAPI.Controllers
         [Route("api/Missions/{missionId}/steps")]
         [HttpPut]
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutStep(int missionId, StepModel step)
+        public IHttpActionResult PutStep(int missionId, [FromBody] StepModel step)
         {
             if (CurrentUser.AccountType != AccountType.Driver)
             {
@@ -297,11 +297,6 @@ namespace CGPTruck.WebAPI.Controllers
 
             if (lastStep != null)
             {
-                if (lastStep.StepNumber > step.StepNumber)
-                {
-                    return BadRequest("Bad StepNumber");
-                }
-
                 if (lastStep.Step_Type == StepType.Aborted || lastStep.Step_Type == StepType.Finished)
                 {
                     return BadRequest("Mission was over");
@@ -318,7 +313,7 @@ namespace CGPTruck.WebAPI.Controllers
                     Latitude = step.Position.Latitude,
                     Longitude = step.Position.Longitude
                 },
-                StepNumber = step.StepNumber,
+                StepNumber = (lastStep?.StepNumber + 1) ?? 1,
                 Step_Type = step.Step_Type
             };
 
@@ -326,6 +321,67 @@ namespace CGPTruck.WebAPI.Controllers
 
             return StatusCode(HttpStatusCode.NoContent);
         }
+
+
+        // PUT: api/Missions/5/help
+        /// <summary>
+        /// Driver : Déclare une panne
+        /// </summary>
+        /// <param name="missionId">Id de la mission</param>
+        /// <param name="position">Position actuelle</param>
+        [Route("api/Missions/{missionId}/help")]
+        [HttpPut]
+        [ResponseType(typeof(void))]
+        public IHttpActionResult PutStep(int missionId, PositionModel position)
+        {
+            if (CurrentUser.AccountType != AccountType.Driver)
+            {
+                return Unauthorized();
+            }
+
+            Mission mission = missions.GetMission(missionId);
+
+            if (mission.Driver_Id != CurrentUser.Id)
+            {
+                return Unauthorized();
+            }
+
+            Step lastStep = mission.Steps.OrderByDescending(s => s.StepNumber).FirstOrDefault();
+
+            if (lastStep != null && lastStep.Step_Type == StepType.Aborted || lastStep.Step_Type == StepType.Finished)
+            {
+                return BadRequest("Mission was over");
+            }
+
+            Step newStep = new Step
+            {
+                Date = DateTime.Now,
+                Informations = "RAS",
+                Mission_Id = missionId,
+                Position = new Position
+                {
+                    Latitude = position.Latitude,
+                    Longitude = position.Longitude
+                },
+                StepNumber = (lastStep?.StepNumber + 1) ?? 1,
+                Step_Type = StepType.Failure,
+            };
+
+            missions.AddStepToMission(missionId, newStep);
+
+            Failure failure = new Failure
+            {
+                Date = newStep.Date,
+                Mission_id = missionId,
+                State = FailureState.Declared,
+                Vehicule_Id = mission.Vehicule_Id
+            };
+
+            BLLFailures.Current.AddFailure(failure);
+
+            return StatusCode(HttpStatusCode.NoContent);
+        }
+
         //// PUT: api/Missions/5
         //[ResponseType(typeof(void))]
         //public IHttpActionResult PutMission(int id, Mission mission)

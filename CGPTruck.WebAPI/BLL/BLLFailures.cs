@@ -58,5 +58,18 @@ namespace CGPTruck.WebAPI.BLL
                 context.SaveChanges();
             }
         }
+
+        /// <summary>
+        /// Ajoute une panne
+        /// </summary>
+        /// <param name="failure"></param>
+        internal void AddFailure(Failure failure)
+        {
+            using (CGPTruckEntities context = new CGPTruckEntities())
+            {
+                context.Failures.Add(failure);
+                context.SaveChanges();
+            }
+        }
     }
 }
