@@ -48,7 +48,7 @@
             <Grid>
                 <Maps:MapControl x:Name="map" MapServiceToken="vnevem6H-MEWqD795TAckw" />
                 <Frame x:Name="frame" Content="Frame"/>
-                <Button VerticalAlignment="Bottom" Height="55" Content="Panne !" HorizontalAlignment="Stretch" Background="#D8C50A0A" FontSize="34.667" Foreground="White" />
+                <Button Click="PannePush" VerticalAlignment="Bottom" Height="55" Content="Panne !" HorizontalAlignment="Stretch" Background="#D8C50A0A" FontSize="34.667" Foreground="White" />
             </Grid>
         </SplitView.Content>
 

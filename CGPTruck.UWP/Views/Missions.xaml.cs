@@ -106,7 +106,7 @@ namespace CGPTruck.UWP.Views
         {
             if (command.Label == "Valider")
             {
-                if (s.actualMission.Steps.Count == 0)
+                if (s.actualMission.Steps.Count == 0 || s.actualMission.Steps.Last().Step_Type == StepType.Waiting)
                 {
                     Step _step = new Step();
                     _step.Date = DateTime.Now;
@@ -183,6 +183,8 @@ namespace CGPTruck.UWP.Views
                     await WebApiService.Current.PushStepsMission(_step, s.actualMission);
                     s.actualMission.Steps.Add(_step);
                 }
+
+                LoadMission();
             }
         }
     }

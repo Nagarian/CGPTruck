@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Devices.Geolocation;
 
 namespace CGPTruck.UWP
 {
@@ -21,10 +22,11 @@ namespace CGPTruck.UWP
             return new HttpClient()
             {
 #if DEBUG
-                BaseAddress = new Uri("http://localhost:8692/"),
+                //BaseAddress = new Uri("http://192.168.1.15:8692/"),
 #else
-                BaseAddress = new Uri("http://cgptruck.azurewebsites.net/"),
+                //BaseAddress = new Uri("http://cgptruck.azurewebsites.net/"),
 #endif
+                BaseAddress = new Uri("http://cgptruck.azurewebsites.net/"),
                 DefaultRequestHeaders =
                 {
                     Accept =
@@ -34,6 +36,15 @@ namespace CGPTruck.UWP
                     Authorization = string.IsNullOrEmpty(token)? null : new AuthenticationHeaderValue("Bearer", token)
                 }
             };
+        }
+
+        public async Task<bool> PushFailure(Geopoint pos, Mission mis)
+        {
+            using (var client = GetClient())
+            {
+                HttpResponseMessage response = await client.PutAsJsonAsync("api/Missions/" + mis.Id + "/help", new Position() { Latitude = 1.1, Longitude = 2.1 });
+                return response.IsSuccessStatusCode;
+            }
         }
 
         public async Task<bool> Authenticate(string username, string password)
@@ -56,6 +67,16 @@ namespace CGPTruck.UWP
             }
         }
 
+        public async Task<bool> pushVehiculePosition(int _vehiculeId, Position _pos)
+        {
+            using (var client = GetClient())
+            {
+                HttpResponseMessage response = await client.PutAsJsonAsync("api/Vehicules/" + _vehiculeId + "/position", _pos);
+
+                return response.IsSuccessStatusCode;
+            }
+        }
+
 
 
         public async Task<bool> PushStepsMission(Step step, Mission mission)
@@ -63,12 +84,7 @@ namespace CGPTruck.UWP
             using (var client = GetClient())
             {
                 HttpResponseMessage response = await client.PutAsJsonAsync("api/Missions/" + mission.Id + "/steps", step);
-
-                if (response.IsSuccessStatusCode)
-                {
-                    this.token = (JsonConvert.DeserializeObject(await response.Content.ReadAsStringAsync()) as dynamic).access_token.ToString();
-                }
-
+                var result = "01";
                 return response.IsSuccessStatusCode;
             }
         }
@@ -121,6 +137,8 @@ namespace CGPTruck.UWP
                 return null;
             }
         }
+
+        
 
         //static async Task RunAsync()
         //{

@@ -33,6 +33,7 @@ namespace CGPTruck.UWP
     {
         Geolocator geolocator = new Geolocator() { DesiredAccuracyInMeters = 1, DesiredAccuracy = PositionAccuracy.High, MovementThreshold = 1 };
         Settings s = Settings.getInstance();
+        DispatcherTimer dispatcherTimer;
         public Geopoint actualPosition = null;
 
         public MainPage()
@@ -47,31 +48,41 @@ namespace CGPTruck.UWP
 
         private void HomeButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            frame.Visibility = Visibility.Collapsed;
+            if (s.actualMission.Steps.Last().Step_Type != Entities.Entities.StepType.Failure)
+                frame.Visibility = Visibility.Collapsed;
         }
 
         private void ProfileButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            if (frame.CurrentSourcePageType != typeof(Profile))
-                frame.Navigate(typeof(Profile), this);
+            if (s.actualMission.Steps.Last().Step_Type != Entities.Entities.StepType.Failure)
+            {
+                if (frame.CurrentSourcePageType != typeof(Profile))
+                    frame.Navigate(typeof(Profile), this);
 
-            if (frame.Visibility == Visibility.Collapsed)
-                frame.Visibility = Visibility.Visible;
+                if (frame.Visibility == Visibility.Collapsed)
+                    frame.Visibility = Visibility.Visible;
+            }
         }
 
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            s.actualMission = (await WebApiService.Current.GetMyMissions()).FirstOrDefault();
+            List<Entities.Entities.Mission> missions = (await WebApiService.Current.GetMyMissions());
+            s.actualMission = missions.FirstOrDefault();
+            if (s.actualMission.Steps.Last().Step_Type == Entities.Entities.StepType.Failure)
+                setPanneScreen();
             geolocator.PositionChanged += Geolocator_PositionChanged;
         }
 
         private void MissionButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            if (frame.CurrentSourcePageType != typeof(Missions))
-                frame.Navigate(typeof(Missions), this);
+            if (s.actualMission.Steps.Last().Step_Type != Entities.Entities.StepType.Failure)
+            {
+                if (frame.CurrentSourcePageType != typeof(Missions))
+                    frame.Navigate(typeof(Missions), this);
 
-            if (frame.Visibility == Visibility.Collapsed)
-                frame.Visibility = Visibility.Visible;
+                if (frame.Visibility == Visibility.Collapsed)
+                    frame.Visibility = Visibility.Visible;
+            }
         }
 
         public async void setDestination(BasicGeoposition geop)
@@ -111,22 +122,69 @@ namespace CGPTruck.UWP
 
         private async void Geolocator_PositionChanged(Geolocator sender, PositionChangedEventArgs args)
         {
-            await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            if (s.actualMission != null)
             {
-                Geopoint snPoint = new Geopoint(new BasicGeoposition() { Latitude = args.Position.Coordinate.Latitude, Longitude = args.Position.Coordinate.Longitude });
-                actualPosition = snPoint;
+                await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
+                {
+                    Geopoint snPoint = new Geopoint(new BasicGeoposition() { Latitude = args.Position.Coordinate.Latitude, Longitude = args.Position.Coordinate.Longitude });
+                    actualPosition = snPoint;
 
-                MapIcon mapIcon1 = new MapIcon();
-                mapIcon1.Image = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/location41.png"));
+                    MapIcon mapIcon1 = new MapIcon();
+                    mapIcon1.Image = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/location41.png"));
 
-                mapIcon1.Location = snPoint;
-                mapIcon1.NormalizedAnchorPoint = new Point(0.5, 1.0);
-                mapIcon1.ZIndex = 0;
+                    mapIcon1.Location = snPoint;
+                    mapIcon1.NormalizedAnchorPoint = new Point(0.5, 1.0);
+                    mapIcon1.ZIndex = 0;
 
-                map.MapElements.Clear();
-                map.MapElements.Add(mapIcon1);
-            });
+                    map.MapElements.Clear();
+                    map.MapElements.Add(mapIcon1);
+
+                    bool result = (await WebApiService.Current.pushVehiculePosition(s.actualMission.Vehicule_Id, new Entities.Entities.Position() { Latitude = args.Position.Coordinate.Latitude, Longitude = args.Position.Coordinate.Longitude }));
+                    var test = result;
+                });
+            }
         }
+
+        private async void PannePush(object sender, RoutedEventArgs e)
+        {
+            if (s.actualMission.Steps.Last().Step_Type != Entities.Entities.StepType.Failure)
+            {
+                if (await WebApiService.Current.PushFailure(actualPosition, s.actualMission))
+                {
+                    setPanneScreen();
+                }
+            }
+        }
+
+        public void setPanneScreen()
+        {
+            dispatcherTimer = new DispatcherTimer();
+            dispatcherTimer.Tick += dispatcherTimer_Tick;
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 5);
+            dispatcherTimer.Start();
+
+            frame.Navigate(typeof(FailBlockScreen));
+            frame.BackStack.Clear();
+        }
+
+        private async void dispatcherTimer_Tick(object sender, object e)
+        {
+            List<Entities.Entities.Mission> missions = (await WebApiService.Current.GetMyMissions());
+            s.actualMission = missions.FirstOrDefault();
+
+            if (s.actualMission.Steps.Last().Step_Type != Entities.Entities.StepType.Failure)
+            {
+                frame.Visibility = Visibility.Collapsed;
+                dispatcherTimer.Stop();
+            }
+        }
+
+        public void refreshView()
+        {
+            
+        }
+
+
 
 
 
