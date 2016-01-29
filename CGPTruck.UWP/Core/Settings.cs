@@ -13,6 +13,7 @@ namespace CGPTruck.UWP.Core
         private static readonly object myLock = new object(); // Pour éviter, lors de l’utilisation de multiple thread, que plusieurs singleton soit instanciés.
 
         public Mission actualMission { get; set; }
+        public Failure actualFailure { get; set; }
 
         private Settings() { }
 

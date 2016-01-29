@@ -48,13 +48,31 @@ namespace CGPTruck.UWP
 
         private void HomeButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            if (s.actualMission.Steps.Last().Step_Type != Entities.Entities.StepType.Failure)
+            if (s.isDriver)
+            {
+                if (s.actualMission.Steps.Last().Step_Type != Entities.Entities.StepType.Failure)
+                    frame.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
                 frame.Visibility = Visibility.Collapsed;
+            }
         }
 
         private void ProfileButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            if (s.actualMission.Steps.Last().Step_Type != Entities.Entities.StepType.Failure)
+            if (s.isDriver)
+            {
+                if (s.actualMission.Steps.Last().Step_Type != Entities.Entities.StepType.Failure)
+                {
+                    if (frame.CurrentSourcePageType != typeof(Profile))
+                        frame.Navigate(typeof(Profile), this);
+
+                    if (frame.Visibility == Visibility.Collapsed)
+                        frame.Visibility = Visibility.Visible;
+                }
+            }
+            else
             {
                 if (frame.CurrentSourcePageType != typeof(Profile))
                     frame.Navigate(typeof(Profile), this);
@@ -66,19 +84,44 @@ namespace CGPTruck.UWP
 
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            List<Entities.Entities.Mission> missions = (await WebApiService.Current.GetMyMissions());
-            s.actualMission = missions.FirstOrDefault();
-            if (s.actualMission.Steps.Last().Step_Type == Entities.Entities.StepType.Failure)
-                setPanneScreen();
+            if (s.isDriver)
+            {
+                List<Entities.Entities.Mission> missions = (await WebApiService.Current.GetMyMissions());
+                s.actualMission = missions.FirstOrDefault();
+                Panne_Button.Visibility = Visibility.Visible;
+                missionButton.Text = "Mes Missions";
+                if (s.actualMission.Steps.Last().Step_Type == Entities.Entities.StepType.Failure)
+                    setPanneScreen();
+            }
+            else
+            {
+                List<Entities.Entities.Failure> fails = (await WebApiService.Current.GetMyFailures());
+                s.actualFailure = fails.FirstOrDefault();
+                Panne_Button.Visibility = Visibility.Collapsed;
+                missionButton.Text = "Mes Pannes";
+            }
+
+            
             geolocator.PositionChanged += Geolocator_PositionChanged;
         }
 
         private void MissionButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            if (s.actualMission.Steps.Last().Step_Type != Entities.Entities.StepType.Failure)
+            if (s.isDriver)
             {
-                if (frame.CurrentSourcePageType != typeof(Missions))
-                    frame.Navigate(typeof(Missions), this);
+                if (s.actualMission.Steps.Last().Step_Type != Entities.Entities.StepType.Failure)
+                {
+                    if (frame.CurrentSourcePageType != typeof(Missions))
+                        frame.Navigate(typeof(Missions), this);
+
+                    if (frame.Visibility == Visibility.Collapsed)
+                        frame.Visibility = Visibility.Visible;
+                }
+            }
+            else
+            {
+                if (frame.CurrentSourcePageType != typeof(PannesViews))
+                    frame.Navigate(typeof(PannesViews), this);
 
                 if (frame.Visibility == Visibility.Collapsed)
                     frame.Visibility = Visibility.Visible;
@@ -122,7 +165,7 @@ namespace CGPTruck.UWP
 
         private async void Geolocator_PositionChanged(Geolocator sender, PositionChangedEventArgs args)
         {
-            if (s.actualMission != null)
+            if ((s.actualMission != null && s.isDriver) /*|| (s.actualFailure != null && !s.isDriver)*/)
             {
                 await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
                 {
@@ -139,8 +182,14 @@ namespace CGPTruck.UWP
                     map.MapElements.Clear();
                     map.MapElements.Add(mapIcon1);
 
-                    bool result = (await WebApiService.Current.pushVehiculePosition(s.actualMission.Vehicule_Id, new Entities.Entities.Position() { Latitude = args.Position.Coordinate.Latitude, Longitude = args.Position.Coordinate.Longitude }));
-                    var test = result;
+                    int vehiculeId;
+
+                    if (s.isDriver)
+                        vehiculeId = s.actualMission.Vehicule_Id;
+                    else
+                        vehiculeId = s.actualFailure.Repairer_Vehicule_Id.Value;
+
+                    bool result = (await WebApiService.Current.pushVehiculePosition(vehiculeId, new Entities.Entities.Position() { Latitude = args.Position.Coordinate.Latitude, Longitude = args.Position.Coordinate.Longitude }));
                 });
             }
         }

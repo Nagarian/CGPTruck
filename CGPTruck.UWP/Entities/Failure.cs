@@ -28,5 +28,10 @@ namespace CGPTruck.UWP.Entities.Entities
         public virtual User Repairer { get; set; }
         public virtual Vehicule RepairerVehicule { get; set; }
         public virtual Vehicule Vehicule { get; set; }
+
+        public override string ToString()
+        {
+            return Mission.Name + " (" + Mission.Date.ToString() + ")";
+        }
     }
 }

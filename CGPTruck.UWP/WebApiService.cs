@@ -104,6 +104,21 @@ namespace CGPTruck.UWP
             }
         }
 
+        public async Task<List<Failure>> GetMyFailures()
+        {
+            using (var client = GetClient())
+            {
+                HttpResponseMessage response = await client.GetAsync("api/Failures/declared");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return await response.Content.ReadAsAsync<List<Failure>>();
+                }
+
+                return null;
+            }
+        }
+
         public async Task<User> GetUser()
         {
             using (var client = GetClient())
