@@ -36,18 +36,18 @@
                         <TextBlock Text="Mes Missions" FontSize="18" VerticalAlignment="Center" Foreground="White"/>
                     </StackPanel>
                 </Button>
-                <Button Height="50" Width="200" Background="#00000000" VerticalAlignment="Center">
+                <!--<Button Height="50" Width="200" Background="#00000000" VerticalAlignment="Center">
                     <StackPanel IsHitTestVisible="False" Margin="-15,-7" Height="50" Width="200" Orientation="Horizontal">
                         <Button x:Name="MenuButtonListEtablissement" FontFamily="Segoe MDL2 Assets" FontSize="28" Content="" Width="50" Height="50" Background="Transparent" Foreground="White"/>
                         <TextBlock Text="Etablissements" FontSize="18" VerticalAlignment="Center" Foreground="White"/>
                     </StackPanel>
-                </Button>
+                </Button>-->
             </StackPanel>
         </SplitView.Pane>
         <SplitView.Content>
             <Grid>
                 <Maps:MapControl x:Name="map" MapServiceToken="vnevem6H-MEWqD795TAckw" />
-                <Frame x:Name="frame" Content="Frame"/>
+                <Frame x:Name="frame" Content=""/>
                 <Button Click="PannePush" VerticalAlignment="Bottom" Height="55" Content="Panne !" HorizontalAlignment="Stretch" Background="#D8C50A0A" FontSize="34.667" Foreground="White" />
             </Grid>
         </SplitView.Content>

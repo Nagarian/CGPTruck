@@ -162,6 +162,9 @@
     <Compile Include="Entities\VehiculeType.cs">
       <DependentUpon>EFCGPTruck.tt</DependentUpon>
     </Compile>
+    <Compile Include="Views\FailBlockScreen.xaml.cs">
+      <DependentUpon>FailBlockScreen.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
@@ -203,6 +206,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="MainPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\FailBlockScreen.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

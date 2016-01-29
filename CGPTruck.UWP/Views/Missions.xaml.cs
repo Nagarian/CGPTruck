@@ -29,6 +29,7 @@ namespace CGPTruck.UWP.Views
     {
         Settings s = Settings.getInstance();
         MainPage mainP = null;
+        DispatcherTimer dt;
 
         public Missions()
         {
@@ -60,6 +61,23 @@ namespace CGPTruck.UWP.Views
             {
                 Title.Text = "Aucune mission attribuée";
                 textBlock1.Text = "Patientez jusqu'a l'attribution d'une mission par l'administrateur. Faite vous un café en attendant :D";
+
+                dt = new DispatcherTimer();
+                dt.Interval = new TimeSpan(0, 0, 5);
+                dt.Tick += Dt_Tick;
+                dt.Start();
+            }
+        }
+
+        private async void Dt_Tick(object sender, object e)
+        {
+            List<Entities.Entities.Mission> missions = (await WebApiService.Current.GetMyMissions());
+            s.actualMission = missions.FirstOrDefault();
+
+            if(s.actualMission != null)
+            {
+                LoadMission();
+                dt.Stop();
             }
         }
 
