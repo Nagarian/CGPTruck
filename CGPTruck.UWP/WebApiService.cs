@@ -89,6 +89,16 @@ namespace CGPTruck.UWP
             }
         }
 
+        public async Task<bool> PushFailureUpdate(Failure fail)
+        {
+            using (var client = GetClient())
+            {
+                HttpResponseMessage response = await client.PostAsJsonAsync("api/Failures/"+fail.Id, fail.State);
+                
+                return response.IsSuccessStatusCode;
+            }
+        }
+
         public async Task<List<Mission>> GetMyMissions()
         {
             using (var client = GetClient())

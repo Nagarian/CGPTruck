@@ -9,6 +9,13 @@
 
     <Grid Background="#BFFFFFFF">
         <TextBlock x:Name="textBlock" HorizontalAlignment="Center" Margin="10,10,0,0" TextWrapping="Wrap" Text="Pannes" VerticalAlignment="Top" FontSize="48"/>
-        <ComboBox x:Name="List_ComboBox" Width="220" HorizontalAlignment="Center" Margin="0,80,0,0" PlaceholderText="Choisir la mission"/>
+        <ComboBox x:Name="List_ComboBox" Width="220" HorizontalAlignment="Center" Margin="0,80,0,0" PlaceholderText="Choisir la mission" SelectionChanged="List_ComboBox_SelectionChanged"/>
+        <TextBlock x:Name="Title_TextBlock" Text="Nom de la mission" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,150,0,0" FontSize="26.667"/>
+        <TextBlock x:Name="Date_TextBlock" Text="Date de la mission" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15,180,0,0" FontSize="16"/>
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,15" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+            <Button  x:Name="Choose_Button" Margin="0,0,5,0" Click="Choose_Button_Click">Choisir</Button>
+            <Button x:Name="Itineraire_Button" Margin="0,0,5,0" Click="Itineraire_Button_Click" >Itinéraire</Button>
+            <Button  x:Name="Cancel_Button" Foreground="#FFFD0000" Click="Cancel_Button_Click" >Valider</Button>
+        </StackPanel>
     </Grid>
 </Page>
