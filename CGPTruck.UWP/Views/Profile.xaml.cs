@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 // Pour plus d'informations sur le modèle d'élément Page vierge, voir la page http://go.microsoft.com/fwlink/?LinkId=234238
@@ -32,6 +33,10 @@ namespace CGPTruck.UWP.Views
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
             titleProfile.Text = (await WebApiService.Current.GetUser()).FirstName;
+            int id = (await WebApiService.Current.GetUser()).Id;
+            image.Source = new BitmapImage(new Uri("http://syfher15.fr/Downloads/Ingesup/" + id + ".jpg", UriKind.Absolute));
+            desc.Text = (await WebApiService.Current.GetUser()).FirstName + " " + (await WebApiService.Current.GetUser()).LastName + " (" + (await WebApiService.Current.GetUser()).Birthday.Date + ") \n";
+            //desc.Text+= (await WebApiService.Current.GetUser()).
         }
     }
 }

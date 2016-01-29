@@ -10,5 +10,6 @@
     <Grid Background="#CCFFFFFF">
         <Image x:Name="image" HorizontalAlignment="Left" Height="100" Margin="10,10,0,0" VerticalAlignment="Top" Width="100" Source="ms-appx:///Assets/Square150x150Logo.png"/>
         <TextBlock x:Name="titleProfile" Margin="115,10,10,0" TextWrapping="Wrap" Text="Obi Wan Kenobi" VerticalAlignment="Top" FontSize="42.667"/>
+        <TextBlock x:Name="desc" Margin="10,129,10,10"></TextBlock>
     </Grid>
 </Page>
